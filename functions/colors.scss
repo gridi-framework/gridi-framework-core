@@ -1,0 +1,20 @@
+/**
+ * Retrieves a color value from the $map-colors sass map
+ *
+ * @function
+ * @param {string} color-name             - lower-case color name (e.g. 'red', 'blue')
+ * @param {string} [color-variant='500']  - lowercase color variant (e.g. '100', 'a100')
+ * @param {map} [colors-map=$map-colors]  - sass colors map
+ */
+@function get-color($color-name, $color-variant: 500, $colors-map: $map-colors) {
+    $color-map: map-get($colors-map, $color-name);
+    @if $color-map == null {
+        @error "=> ERROR: COLOR MAP NOT FOUND! <= | Color name: #{$color-name}, Color variant: #{$color-variant}";
+    }
+    $color: map-get($color-map, $color-variant);
+    @if $color {
+         @return $color;
+    } @else {
+        @error "=> ERROR: COLOR NOT FOUND! <= | Color name: #{$color-name}, Color variant: #{$color-variant}";
+    }
+}

@@ -1,0 +1,41 @@
+//Primary color
+$primary-color: get-color(blue);
+$hover-primary-color: get-color(blue, 400);
+//Text colors for usage primary color like a background for element
+$primary-color-background-text-color: get-color(white);
+$hover-primary-color-background-text-color: get-color(white);
+
+//Secondary color
+$secondary-color: get-color(grey);
+$hover-secondary-color: get-color(grey, 400);
+//Text colors for usage secondary color like a background for element
+$secondary-color-background-text-color: get-color(white);
+$hover-secondary-color-background-text-color: get-color(white);
+
+//Info color
+$info-color: get-color(light blue);
+$hover-info-color: get-color(light blue, 400);
+//Text colors for usage info color like a background for element
+$info-color-background-text-color: get-color(white);
+$hover-info-color-background-text-color: get-color(white);
+
+//Success color
+$success-color: get-color(green);
+$hover-success-color: get-color(green, 400);
+//Text colors for usage success color like a background for element
+$success-color-background-text-color: get-color(white);
+$hover-success-color-background-text-color: get-color(white);
+
+//Warning color
+$warning-color: get-color(amber);
+$hover-warning-color: get-color(amber, 400);
+//Text colors for usage warning color like a background for element
+$warning-color-background-text-color: get-color(white);
+$hover-warning-color-background-text-color: get-color(white);
+
+//Error color
+$error-color: get-color(red);
+$hover-error-color: get-color(red, 400);
+//Text colors for usage error color like a background for element
+$error-color-background-text-color: get-color(white);
+$hover-error-color-background-text-color: get-color(white);
