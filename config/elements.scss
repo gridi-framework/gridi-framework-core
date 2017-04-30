@@ -1,7 +1,7 @@
 //Elements
-$elements-margin-vertical: 20px;
-$elements-margin-horizontal: 0;
-$elements-margin: $elements-margin-vertical $elements-margin-horizontal;
+$elements-margin-vertical: 20px !default;
+$elements-margin-horizontal: 0 !default;
+$elements-margin: $elements-margin-vertical $elements-margin-horizontal !default;
 
 //Inline backgrounds
-$inline-background-elements-padding: 2px 4px;
+$inline-background-elements-padding: 2px 4px !default;
