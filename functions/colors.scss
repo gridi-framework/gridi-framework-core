@@ -33,12 +33,24 @@
         $generate-palette: map-merge($generate-palette, $local-extra-colors-palette);
     }
 
-    @if type-of($skip-palette-colors) == string or type-of($skip-palette-colors) == list {
+    @if type-of($skip-palette-colors) == string {
         $generate-palette: map-remove($generate-palette, $skip-palette-colors);
     }
 
-    @if type-of($local-skip-palette-colors) == string or type-of($local-skip-palette-colors) == list {
+    @if type-of($skip-palette-colors) == list {
+        @each $palete-color-prefix in $skip-palette-colors {
+            $generate-palette: map-remove($generate-palette, $palete-color-prefix);
+        }
+    }
+
+    @if type-of($local-skip-palette-colors) == string {
         $generate-palette: map-remove($generate-palette, $local-skip-palette-colors);
+    }
+
+    @if type-of($local-skip-palette-colors) == list {
+        @each $palete-color-prefix in $local-skip-palette-colors {
+            $generate-palette: map-remove($generate-palette, $palete-color-prefix);
+        }
     }
 
     @return $generate-palette;
