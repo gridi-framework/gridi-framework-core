@@ -1,0 +1,5 @@
+@mixin generate-colors-palette-extensions($local-extra-colors-palette: null, $local-skip-palette-colors: null) {
+    @each $palette-color-prefix, $palette-color-variables in get-colors-palette($local-extra-colors-palette, $local-skip-palette-colors) {
+        @content;
+    }
+}
