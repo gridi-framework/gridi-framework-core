@@ -29,7 +29,7 @@
 @function get-colors-palette($local-extra-colors-palette: null, $local-skip-palette-colors: null) {
     $generate-palette: map-merge($extra-colors-palette, $colors-palette);
 
-    @if type-of($skip-palette-colors) == map {
+    @if type-of($local-extra-colors-palette) == map {
         $generate-palette: map-merge($generate-palette, $local-extra-colors-palette);
     }
 
