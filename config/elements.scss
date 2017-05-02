@@ -2,7 +2,7 @@
 $elements-margin-vertical: 20px !default;
 $elements-margin-horizontal: 0 !default;
 $elements-margin: $elements-margin-vertical $elements-margin-horizontal !default;
-$elements-transition: transition(all 0.2s linear);
+$elements-transition: all 0.2s linear;
 
 //Inline backgrounds
 $inline-background-elements-padding: 2px 4px !default;
