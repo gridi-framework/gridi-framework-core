@@ -27,6 +27,45 @@
  * @param {string|list} [local-skip-palette-colors=null]  - extension of the skip standard colors when generate palete
  */
 @function get-colors-palette($local-extra-colors-palette: null, $local-skip-palette-colors: null) {
+    $colors-palette: (
+        primary: (
+            color: $primary-color,
+            hover-color: $hover-primary-color,
+            background-inner-color: $primary-color-background-inner-color,
+            hover-background-inner-color: $hover-primary-color-background-inner-color
+        ),
+        secondary: (
+            color: $secondary-color,
+            hover-color: $hover-secondary-color,
+            background-inner-color: $secondary-color-background-inner-color,
+            hover-background-inner-color: $hover-secondary-color-background-inner-color
+        ),
+        info: (
+            color: $info-color,
+            hover-color: $hover-info-color,
+            background-inner-color: $info-color-background-inner-color,
+            hover-background-inner-color: $hover-info-color-background-inner-color
+        ),
+        success: (
+            color: $success-color,
+            hover-color: $hover-success-color,
+            background-inner-color: $success-color-background-inner-color,
+            hover-background-inner-color: $hover-success-color-background-inner-color
+        ),
+        warning: (
+            color: $warning-color,
+            hover-color: $hover-warning-color,
+            background-inner-color: $warning-color-background-inner-color,
+            hover-background-inner-color: $hover-warning-color-background-inner-color
+        ),
+        error: (
+            color: $error-color,
+            hover-color: $hover-error-color,
+            background-inner-color: $error-color-background-inner-color,
+            hover-background-inner-color: $hover-error-color-background-inner-color
+        )
+    );
+    
     $generate-palette: map-merge($extra-colors-palette, $colors-palette);
 
     @if type-of($local-extra-colors-palette) == map {

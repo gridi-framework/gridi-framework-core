@@ -40,6 +40,8 @@ $hover-error-color: get-color(red, 400) !default;
 $error-color-background-inner-color: get-color(white) !default;
 $hover-error-color-background-inner-color: get-color(white) !default;
 
+/*
+Fro get color palete use function "get-colors-palette". Default looks like this:
 $colors-palette: (
     primary: (
         color: $primary-color,
@@ -78,6 +80,7 @@ $colors-palette: (
         hover-background-inner-color: $hover-error-color-background-inner-color
     )
 );
+*/
 
 $extra-colors-palette: () !default;
 $skip-palette-colors: null !default; //list: success, error
