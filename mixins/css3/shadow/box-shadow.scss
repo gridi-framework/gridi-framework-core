@@ -1,3 +1,0 @@
-@mixin box-shadow($value: none) {
-    @include css3-property(box-shadow, $value);
-}

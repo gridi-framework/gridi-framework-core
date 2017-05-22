@@ -1,3 +1,0 @@
-@mixin transition-property($value) {
-    @include css3-property(transition-property, $value);
-}

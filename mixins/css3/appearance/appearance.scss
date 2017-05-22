@@ -1,5 +1,0 @@
-@mixin appearance($value: normal) {
-    @include css3-webkit-property(appearance, $value);
-    @include css3-moz-property(appearance, $value);
-    appearance: #{$value};
-}

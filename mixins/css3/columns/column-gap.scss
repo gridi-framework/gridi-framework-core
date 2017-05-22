@@ -1,3 +1,0 @@
-@mixin column-gap($value: normal) {
-    @include css3-property(column-gap, $value);
-}

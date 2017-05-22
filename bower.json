@@ -21,5 +21,8 @@
         "**/*.json",
         "node_modules",
         "bower_components"
-    ]
+    ],
+    "dependencies": {
+        "gridi-framework-css3-mixins": "*"
+    }
 }
