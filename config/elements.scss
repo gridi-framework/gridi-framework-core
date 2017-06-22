@@ -1,10 +1,27 @@
-//Elements
-$elements-margin-vertical: 20px !default;
-$elements-margin-horizontal: 0 !default;
-$elements-margin: $elements-margin-vertical $elements-margin-horizontal !default;
-$elements-transition-duration: 0.2s !default;
-$elements-transition-function: linear !default;
-$elements-transition: all $elements-transition-duration $elements-transition-function !default;
+//Margin
+$elements-margin-top: 20px !default;
+$elements-margin-bottom: $elements-margin-top !default;
+$elements-margin-left: 0 !default;
+$elements-margin-right: $elements-margin-left !default;
+//Defined margins for each screens.
+$elements-margin-for-screens: () !default;
+/*$elements-margin-for-screens: (
+    s1: (
+        top: 20px, //Not required. Define only the margins values you want to change. Example - s2: ( top: 20px ) - change only top margin for screens greater than s2
+        bottom: 20px,
+        left: 20px,
+        right: 20px,
+    ),
+    ...
+) !default;*/
+
+
+//Bold elements
+$bold-elements-font-weight: 600 !default;
 
 //Inline backgrounds
-$inline-background-elements-padding: 2px 4px !default;
+$inline-background-elements-padding: 0.15em 0.35em !default;
+
+//Transitions
+$elements-transition-duration: 0.2s !default;
+$elements-transition-function: linear !default;

@@ -1,3 +1,7 @@
+@function is-map($map){
+    @return type-of($map) == 'map';
+}
+
 @function map-reverse($map) {
     $result: null;
 

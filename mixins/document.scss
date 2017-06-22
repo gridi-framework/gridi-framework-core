@@ -1,12 +1,7 @@
 @mixin include-document-font-size() {
-    font-size: $document-font-size;
-    @if variable-exists(document-font-size-for-screens) {
-        @each $screen-prefix, $sizes in get-screens-map() {
-            @if map-has-key($document-font-size-for-screens, $screen-prefix) {
-                @media(min-width: get-screen-size($screen-prefix, min)) {
-                    font-size: map-get($document-font-size-for-screens, $screen-prefix);
-                }
-            }
-        }
-    }
+    @include include-single-property-with-screens-support(font-size, $document-font-size, $document-font-size-for-screens);
+}
+
+@mixin include-document-line-height() {
+    @include include-single-property-with-screens-support(line-height, $document-line-height, $document-line-height-for-screens);
 }
