@@ -2,18 +2,31 @@
  * return screens map
  *
  * @function
+ * @param {string|list} [skip-screens-prefixes=null]  - extension of the skip standard screens prefixes when generate map
  */
-@function get-screens-map() {
-    @return $screens-sizes;
+@function get-screens-map($skip-screens-prefixes: null) {
+    $screens-sizes-map: $screens-sizes;
+
+    @if type-of($skip-screens-prefixes) == string {
+        $screens-sizes-map: map-remove($screens-sizes-map, $skip-screens-prefixes);
+    }
+
+    @if type-of($skip-screens-prefixes) == list {
+        @each $screen-prefix in $skip-screens-prefixes {
+            $screens-sizes-map: map-remove($screens-sizes-map, $screen-prefix);
+        }
+    }
+    @return $screens-sizes-map;
 }
 
 /**
  * return screens prefixes list
  *
  * @function
+ * @param {string|list} [skip-screens-prefixes=null]  - extension of the skip standard screens prefixes when generate map
  */
-@function get-screens-prefixes() {
-    @return map-keys($screens-sizes);
+@function get-screens-prefixes($skip-screens-prefixes: null) {
+    @return map-keys(get-screens-map($skip-screens-prefixes));
 }
 
 /**
