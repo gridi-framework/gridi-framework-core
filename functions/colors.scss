@@ -5,6 +5,7 @@
  * @param {string} color-name             - lower-case color name (e.g. 'red', 'blue')
  * @param {string} [color-variant='500']  - lowercase color variant (e.g. '100', 'a100')
  * @param {map} [colors-map=$map-colors]  - sass colors map
+ * @return map
  */
 @function get-color($color-name, $color-variant: 500, $colors-map: $map-colors) {
     $color-map: map-get($colors-map, $color-name);
@@ -25,6 +26,7 @@
  * @function
  * @param {map} [local-extra-colors-palette=null]         - extension of the standard colors palette to new ones
  * @param {string|list} [local-skip-palette-colors=null]  - extension of the skip standard colors when generate palete
+ * @return map
  */
 @function get-colors-palette($local-extra-colors-palette: null, $local-skip-palette-colors: null) {
     $colors-palette: (
@@ -65,7 +67,7 @@
             hover-background-inner-color: $hover-error-color-background-inner-color
         )
     );
-    
+
     $generate-palette: map-merge($extra-colors-palette, $colors-palette);
 
     @if type-of($local-extra-colors-palette) == map {

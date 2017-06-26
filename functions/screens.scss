@@ -3,6 +3,7 @@
  *
  * @function
  * @param {string|list} [skip-screens-prefixes=null]  - extension of the skip standard screens prefixes when generate map
+ * @return map
  */
 @function get-screens-map($skip-screens-prefixes: null) {
     $screens-sizes-map: $screens-sizes;
@@ -24,6 +25,7 @@
  *
  * @function
  * @param {string|list} [skip-screens-prefixes=null]  - extension of the skip standard screens prefixes when generate map
+ * @return map
  */
 @function get-screens-prefixes($skip-screens-prefixes: null) {
     @return map-keys(get-screens-map($skip-screens-prefixes));
@@ -36,6 +38,7 @@
  * @param {string} size prefix         - lower-case size prefix
  * @param {string} [size-variant=min]  - lowercase size variant
  * @param {map} [size-map=$screens]  - sass size map
+ * @return string
  */
 @function get-screen-size($size-prefix, $size-variant: min, $sizes-map: $screens-sizes) {
     $size-map: map-get($sizes-map, $size-prefix);
