@@ -41,7 +41,7 @@
     }
 }
 
-@mixin include-element-margin($margin-top: $elements-margin-top, $margin-bottom: $elements-margin-bottom, $margin-left: $elements-margin-left, $margin-right: $elements-margin-right, $margin-for-screens: $elements-margin-for-screens) {
+@mixin include-element-margin($margin-top: null, $margin-bottom: null, $margin-left: null, $margin-right: null, $margin-for-screens: null) {
     @include include-margin($margin-top, $margin-bottom, $margin-left, $margin-right);
 
     @if is-map($margin-for-screens) {
