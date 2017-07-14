@@ -12,14 +12,32 @@
 }
 
 @mixin include-margin($margin-top, $margin-bottom, $margin-left, $margin-right) {
-    @if ($margin-top == $margin-bottom and $margin-top == $margin-left and $margin-top == $margin-right) {
-        margin: $margin-top;
-    } @else if ($margin-top == $margin-bottom and  $margin-left == $margin-right) {
-        margin: $margin-top $margin-left;
-    } @else if ($margin-top != $margin-bottom and  $margin-left == $margin-right) {
-        margin: $margin-top $margin-left $margin-bottom;
+    @if $margin-top and $margin-bottom and $margin-left and $margin-right {
+        @if ($margin-top == $margin-bottom and $margin-top == $margin-left and $margin-top == $margin-right) {
+            margin: $margin-top;
+        } @else if ($margin-top == $margin-bottom and  $margin-left == $margin-right) {
+            margin: $margin-top $margin-left;
+        } @else if ($margin-top != $margin-bottom and  $margin-left == $margin-right) {
+            margin: $margin-top $margin-left $margin-bottom;
+        } @else {
+            margin: $margin-top $margin-right $margin-bottom $margin-left;
+        }
     } @else {
-        margin: $margin-top $margin-right $margin-bottom $margin-left;
+        @if $margin-top {
+            margin-top: $margin-top;
+        }
+
+        @if $margin-bottom {
+            margin-bottom: $margin-bottom;
+        }
+
+        @if $margin-left {
+            margin-left: $margin-left;
+        }
+
+        @if $margin-right {
+            margin-right: $margin-right;
+        }
     }
 }
 
@@ -30,26 +48,7 @@
         @if map-has-key($margin-for-screens, $screen-prefix) {
             @media(min-width: get-screen-size($screen-prefix, min)) {
                 $screen-margins: map-get($margin-for-screens, $screen-prefix);
-
-                @if map-has-key($screen-margins, top) and map-has-key($screen-margins, bottom) and map-has-key($screen-margins, left) and map-has-key($screen-margins, right) {
-                    @include include-margin(map-get($screen-margins, top), map-get($screen-margins, bottom), map-get($screen-margins, left), map-get($screen-margins, right));
-                } @else {
-                    @if map-has-key($screen-margins, top) {
-                        margin-top: map-get($screen-margins, top);
-                    }
-
-                    @if map-has-key($screen-margins, bottom) {
-                        margin-bottom: map-get($screen-margins, bottom);
-                    }
-
-                    @if map-has-key($screen-margins, left) {
-                        margin-left: map-get($screen-margins, left);
-                    }
-
-                    @if map-has-key($screen-margins, right) {
-                        margin-right: map-get($screen-margins, right);
-                    }
-                }
+                @include include-margin(map-get($screen-margins, top), map-get($screen-margins, bottom), map-get($screen-margins, left), map-get($screen-margins, right));
             }
         }
     }
