@@ -55,3 +55,48 @@
         }
     }
 }
+
+@mixin include-padding($padding-top, $padding-bottom, $padding-left, $padding-right) {
+    @if $padding-top and $padding-bottom and $padding-left and $padding-right {
+        @if ($padding-top == $padding-bottom and $padding-top == $padding-left and $padding-top == $padding-right) {
+            padding: $padding-top;
+        } @else if ($padding-top == $padding-bottom and  $padding-left == $padding-right) {
+            padding: $padding-top $padding-left;
+        } @else if ($padding-top != $padding-bottom and  $padding-left == $padding-right) {
+            padding: $padding-top $padding-left $padding-bottom;
+        } @else {
+            padding: $padding-top $padding-right $padding-bottom $padding-left;
+        }
+    } @else {
+        @if $padding-top {
+            padding-top: $padding-top;
+        }
+
+        @if $padding-bottom {
+            padding-bottom: $padding-bottom;
+        }
+
+        @if $padding-left {
+            padding-left: $padding-left;
+        }
+
+        @if $padding-right {
+            padding-right: $padding-right;
+        }
+    }
+}
+
+@mixin include-element-padding($padding-top: null, $padding-bottom: null, $padding-left: null, $padding-right: null, $padding-for-screens: null) {
+    @include include-padding($padding-top, $padding-bottom, $padding-left, $padding-right);
+
+    @if is-map($padding-for-screens) {
+        @each $screen-prefix, $sizes in get-screens-map() {
+            @if map-has-key($padding-for-screens, $screen-prefix) {
+                @media(min-width: get-screen-size($screen-prefix, min)) {
+                    $screen-paddings: map-get($padding-for-screens, $screen-prefix);
+                    @include include-padding(map-get($screen-paddings, top), map-get($screen-paddings, bottom), map-get($screen-paddings, left), map-get($screen-paddings, right));
+                }
+            }
+        }
+    }
+}
