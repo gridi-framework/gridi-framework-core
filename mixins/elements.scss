@@ -44,11 +44,13 @@
 @mixin include-element-margin($margin-top: $elements-margin-top, $margin-bottom: $elements-margin-bottom, $margin-left: $elements-margin-left, $margin-right: $elements-margin-right, $margin-for-screens: $elements-margin-for-screens) {
     @include include-margin($margin-top, $margin-bottom, $margin-left, $margin-right);
 
-    @each $screen-prefix, $sizes in get-screens-map() {
-        @if map-has-key($margin-for-screens, $screen-prefix) {
-            @media(min-width: get-screen-size($screen-prefix, min)) {
-                $screen-margins: map-get($margin-for-screens, $screen-prefix);
-                @include include-margin(map-get($screen-margins, top), map-get($screen-margins, bottom), map-get($screen-margins, left), map-get($screen-margins, right));
+    @if is-map($margin-for-screens) {
+        @each $screen-prefix, $sizes in get-screens-map() {
+            @if map-has-key($margin-for-screens, $screen-prefix) {
+                @media(min-width: get-screen-size($screen-prefix, min)) {
+                    $screen-margins: map-get($margin-for-screens, $screen-prefix);
+                    @include include-margin(map-get($screen-margins, top), map-get($screen-margins, bottom), map-get($screen-margins, left), map-get($screen-margins, right));
+                }
             }
         }
     }
