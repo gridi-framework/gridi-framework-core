@@ -6,13 +6,13 @@ $document-font-weight: normal !default;
 $document-line-height: 1.6em !default;
 $document-color: get-color(black) !default;
 //Defined font size for each screens.
-$document-font-size-for-screens: ();
+$document-font-size-for-screens: () !default;
 /*$document-font-size-for-screens: (
     s1: 16px,
     ...
 ) !default;*/
 //Defined line height for each screens.
-$document-line-height-for-screens: ();
+$document-line-height-for-screens: () !default;
 /*$document-line-height-for-screens: (
     s1: 1.6em,
     ...
