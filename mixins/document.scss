@@ -1,16 +1,3 @@
-@mixin clearfix() {
-    &:before,
-    &:after {
-        content: " ";
-        display: table;
-        width: 100%;
-    }
-
-    &:after {
-        clear: both;
-    }
-}
-
 @mixin include-document-font-size() {
     @include include-single-property-with-screens-support(font-size, $document-font-size, $document-font-size-for-screens);
 }
