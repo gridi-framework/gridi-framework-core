@@ -15,6 +15,16 @@ $elements-margin-for-screens: () !default;
     ...
 ) !default;*/
 
+//Gutter
+$elements-gutter: 30px !default;
+$elements-gutter-for-screens: () !default;
+//Defined gutter for each screens.
+/*
+$elements-gutter-for-screens: (
+    s1: 40px,
+    ...
+) !default;
+*/
 
 //Bold elements
 $bold-elements-font-weight: 600 !default;
