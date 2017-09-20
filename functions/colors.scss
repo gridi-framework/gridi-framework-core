@@ -60,11 +60,11 @@
             background-inner-color: $warning-color-background-inner-color,
             hover-background-inner-color: $hover-warning-color-background-inner-color
         ),
-        error: (
-            color: $error-color,
-            hover-color: $hover-error-color,
-            background-inner-color: $error-color-background-inner-color,
-            hover-background-inner-color: $hover-error-color-background-inner-color
+        danger: (
+            color: $danger-color,
+            hover-color: $hover-danger-color,
+            background-inner-color: $danger-color-background-inner-color,
+            hover-background-inner-color: $hover-danger-color-background-inner-color
         )
     );
 
