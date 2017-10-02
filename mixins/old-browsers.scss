@@ -1,0 +1,7 @@
+@mixin old-browsers-style($support: $support-old-browsers) {
+    @if $support {
+        .#{$old-browser-container-class} {
+            @content;
+        }
+    }
+}
