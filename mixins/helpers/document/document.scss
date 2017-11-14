@@ -1,3 +1,31 @@
+@mixin document-font() {
+    $font-sizes-for-screens: ();
+
+    @each $screen, $size in $document-font-size-for-screens {
+        $font-sizes-for-screens: nested-map-set($font-sizes-for-screens, $screen, (
+            size: $size
+        ));
+    }
+
+    $line-heights-for-screens: ();
+    
+    @each $screen, $height in $document-line-height-for-screens {
+        $line-heights-for-screens: nested-map-set($line-heights-for-screens, $screen, (
+            line-height: $height
+        ));
+    }
+
+    @include font-shorthand-with-screens-support((
+        style: $document-font-style,
+        variant: $document-font-variant,
+        weight: $document-font-weight,
+        size: $document-font-size,
+        line-height: $document-line-height,
+        family: $document-font-family,
+        make-shorthand: true
+    ), map-extend($document-font-for-screens, $font-sizes-for-screens, $line-heights-for-screens, true));
+}
+
 @mixin document-font-size() {
     @include single-property-with-screens-support(font-size, $document-font-size, $document-font-size-for-screens);
 }
