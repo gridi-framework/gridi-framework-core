@@ -1,4 +1,17 @@
 /**
+ * Check is property exist in map and include with value
+ *
+ * @mixin
+ * @param {map} map - map with propertys
+ * @param property - property name
+ */
+@mixin property-from-map($map, $property) {
+    @if is-map($map) and map-has-key($map, $property) and map-get($map, $property) {
+        #{$property}: map-get($map, $property);
+    }
+}
+
+/**
  * Include single property with value. if value is null then not add anything
  *
  * @mixin

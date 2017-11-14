@@ -5,6 +5,40 @@
 @import '../../../mixins/helpers/property/property';
 
 @include test-module('Gridi Framework Core - Mixins - Helpers - Property') {
+    @include test('Test Mixin - property-from-map - correct value') {
+        @include assert {
+            @include output {
+                @include property-from-map((background: red), background);
+            }
+        
+            @include expect {
+                background: red;
+            }
+        }
+    }
+
+    @include test('Test Mixin - property-from-map - null value') {
+        @include assert {
+            @include output {
+                @include property-from-map((background: null), background);
+            }
+        
+            @include expect {
+            }
+        }
+    }
+
+    @include test('Test Mixin - property-from-map - no exist value') {
+        @include assert {
+            @include output {
+                @include property-from-map((border-color: red), background);
+            }
+        
+            @include expect {
+            }
+        }
+    }
+
     @include test('Test Mixin - not-required-property - correct value') {
         @include assert {
             @include output {
