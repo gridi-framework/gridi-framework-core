@@ -1,0 +1,29 @@
+{
+    "name": "gridi-framework-core",
+    "description": "",
+    "version": "1.0.0",
+    "author": "Przemysław Dziadek <przemyslaw.dziadek@gmail.com>",
+    "license": "MIT",
+    "keywords": [
+        "css",
+        "scss",
+        "gridi",
+        "framework",
+        "core"
+    ],
+    "homepage": "https://github.com/gridi-framework/gridi-framework-core",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/gridi-framework/gridi-framework-core.git"
+    },
+    "bugs": {
+        "url": "https://github.com/gridi-framework/gridi-framework-core/issues"
+    },
+    "scripts": {
+        "test": "mocha test/test.js"
+    },
+    "devDependencies": {
+        "mocha": "^4.0.1",
+        "sass-true": "^3.0.2"
+    }
+}

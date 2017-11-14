@@ -1,0 +1,78 @@
+/**
+ * Include outline property based on sent config
+ *
+ * outline map look (every parameters is optional):
+ *
+ * $outline: (
+ *     width: ...,
+ *     style: ...,
+ *     color: ...
+ * );
+ *
+ * @mixin
+ * @param {map} outline - outline map or single value
+ */
+@mixin outline-shorthand($outline) {
+    @if is-map($outline) {
+        $outline-width: map-get($outline, width);
+        $outline-style: map-get($outline, style);
+        $outline-color: map-get($outline, color);
+
+        @if $outline-width and $outline-style and $outline-color {
+            outline: $outline-width $outline-style $outline-color;
+        } @else {
+            @if $outline-width {
+                outline-width: $outline-width;
+            }
+
+            @if $outline-style {
+                outline-style: $outline-style;
+            }
+
+            @if $outline-color {
+                outline-color: $outline-color;
+            }
+        }
+    } @else if $outline {
+        outline: $outline;
+    }
+}
+
+/**
+ * Include outline property and outline for screens property based on sent config
+ *
+ * outline map look (every parameters is optional):
+ *
+ * $outline: (
+ *     width: ...,
+ *     style: ...,
+ *     color: ...
+ * );
+ *
+ * outline for screen map look (every parameters is optional):
+ *
+ * $outline-for-screens: (
+ *     s2: (
+ *         width: ...,
+ *         style: ...,
+ *         color: ...
+ *     )
+ * );
+ *
+ * @mixin
+ * @param outline - outline map or single value
+ * @param {map} outline-for-screens - map with screens prefixes and outline map or single value
+ */
+@mixin outline-shorthand-with-screens-support($outline, $outline-for-screens) {
+    @include outline-shorthand($outline);
+    
+    @if is-map($outline-for-screens) {
+        @each $screen-prefix, $sizes in get-screens-map() {
+            @if map-has-key($outline-for-screens, $screen-prefix) {
+                @media(min-width: get-screen-size($screen-prefix, min)) {
+                    @include outline-shorthand(map-get($outline-for-screens, $screen-prefix));
+                }
+            }
+        }
+    }
+}

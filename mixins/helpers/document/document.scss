@@ -1,0 +1,7 @@
+@mixin document-font-size() {
+    @include single-property-with-screens-support(font-size, $document-font-size, $document-font-size-for-screens);
+}
+
+@mixin document-line-height() {
+    @include single-property-with-screens-support(line-height, $document-line-height, $document-line-height-for-screens);
+}

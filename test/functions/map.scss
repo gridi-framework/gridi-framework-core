@@ -1,0 +1,218 @@
+@import 'true';
+@import '../../functions/map';
+
+@include test-module('Gridi Framework Core - Functions - Map') {
+    $test-map: (
+        test_1: (
+            test_1: 1,
+            test_2: 2
+        ),
+        test_2: 3,
+        test_3: 4
+    );
+
+    @include test('Test Function - is-map') {
+        @include assert-true(is-map(( test: 'test' )));
+        @include assert-false(is-map(()));
+        @include assert-false(is-map('test'));
+        @include assert-false(is-map(1));
+        @include assert-false(is-map(null));
+    }
+
+    @include test('Test Function - map-reverse') {
+        $expect-map: (
+            test_3: 4, 
+            test_2: 3, 
+            test_1: (
+                test_1: 1, 
+                test_2: 2
+            )
+        );
+
+        @include assert-equal(map-reverse($test-map), $expect-map);
+    }
+
+    @include test('Test Function - nested-map-levels - one level') {
+        @include assert-equal(nested-map-levels((test: 1)), 1);
+    }
+
+    @include test('Test Function - nested-map-levels - multi level') {
+        @include assert-equal(nested-map-levels((
+            test: (
+                test: (
+                    test: 1
+                )
+            )
+        )), 3);
+    }
+
+    @include test('Test Function - nested-map-has-key - true') {
+        @include assert-equal(nested-map-has-key($test-map, test_1), true);
+        @include assert-equal(nested-map-has-key($test-map, test_1 test_2), true);
+    }
+
+    @include test('Test Function - nested-map-has-key - false') {
+        @include assert-equal(nested-map-has-key($test-map, no_exist), false);
+        @include assert-equal(nested-map-has-key($test-map, no_exist test_2), false);
+    }
+
+    @include test('Test Function - nested-map-get') {
+        @include assert-equal(nested-map-get($test-map, test_1), (
+            test_1: 1,
+            test_2: 2
+        ));
+        @include assert-equal(nested-map-get($test-map, test_1 test_2), 2);
+        @include assert-equal(nested-map-get($test-map, test_2), 3);
+    }
+
+    @include test('Test Function - nested-map-set') {
+        $expect-map: (
+            test_1: 'new value',
+            test_2: 3,
+            test_3: 4
+        
+        );
+
+        @include assert-equal(nested-map-set($test-map, test_1, 'new value'), $expect-map);
+
+        $expect-map: (
+            test_1: (
+                test_1: 1,
+                test_2: 'new value'
+            ),
+            test_2: 3,
+            test_3: 4
+        
+        );
+
+        @include assert-equal(nested-map-set($test-map, test_1 test_2, 'new value'), $expect-map);
+
+        $expect-map: (
+            test_1: (
+                test_1: 1,
+                test_2: 2
+            ),
+            test_2: 'new value',
+            test_3: 4
+        
+        );
+
+        @include assert-equal(nested-map-set($test-map, test_2, 'new value'), $expect-map);
+
+        $expect-map: (
+            test_1: (
+                test_1: 1,
+                test_2: 2
+            ),
+            test_2: 3,
+            test_3: 4,
+            test_4: 'new value'
+        );
+
+        @include assert-equal(nested-map-set($test-map, test_4, 'new value'), $expect-map);
+    }
+
+    @include test('Test Function - map-extend - not deep') {
+        $test-map: (
+            test_1: (
+                test_1: 1,
+                test_2: 2
+            ),
+            test_2: 3,
+            test_3: 4
+        );
+        @include assert-equal(map-extend($test-map, (
+            test_1: 1,
+            test_3: 3
+        )), (
+            test_1: 1,
+            test_2: 3,
+            test_3: 3
+        ))
+    }
+
+    @include test('Test Function - map-extend - not deep with extent map to other map') {
+        $test-map: (
+            test_1: (
+                test_1: 1,
+                test_2: 2
+            ),
+            test_2: 3,
+            test_3: 4
+        );
+        @include assert-equal(map-extend($test-map, (
+            test_1: (
+                test_1: 2,
+            ),
+            test_3: 3
+        )), (
+            test_1: (
+                test_1: 2,
+            ),
+            test_2: 3,
+            test_3: 3
+        ))
+    }
+
+
+
+    @include test('Test Function - map-extend - deep') {
+        $test-map: (
+            test_1: (
+                test_1: 1,
+                test_2: 2
+            ),
+            test_2: 3,
+            test_3: 4
+        );
+        @include assert-equal(map-extend($test-map, (
+            test_1: 1,
+            test_3: 3
+        ), true), (
+            test_1: 1,
+            test_2: 3,
+            test_3: 3
+        ))
+    }
+
+    @include test('Test Function - map-extend - deep with extent map to other map') {
+        $test-map: (
+            test_1: (
+                test_1: 1,
+                test_2: 2
+            ),
+            test_2: 3,
+            test_3: 4
+        );
+        @include assert-equal(map-extend($test-map, (
+            test_1: (
+                test_1: 2,
+            ),
+            test_3: 3
+        ), true), (
+            test_1: (
+                test_1: 2,
+                test_2: 2
+            ),
+            test_2: 3,
+            test_3: 3
+        ))
+    }
+
+    @include test('Test Function - parse-map') {
+        $key-map: (
+            new_test_1: 'test_1',
+            new_test_2: 'test_2'
+        );
+
+        $expect-map: (
+            new_test_1: (
+                test_1: 1, 
+                test_2: 2
+            ), 
+            new_test_2: 3
+        );
+
+        @include assert-equal(parse-map($key-map, $test-map), $expect-map);
+    }
+}

@@ -1,0 +1,309 @@
+@import 'true';
+@import 'test-config/screens';
+@import '../../../functions/map';
+@import '../../../functions/screens';
+@import '../../../mixins/helpers/background/background';
+
+@include test-module('Gridi Framework Core - Mixins - Helpers - Background') {
+    @include test('Test Mixin - background-shorthand - test single value') {
+        @include assert {
+            @include output {
+                @include background-shorthand(transparent);
+            }
+        
+            @include expect {
+                background: transparent;
+            }
+        }
+    }
+
+    @include test('Test Mixin - background-shorthand - test map value') {
+        @include assert {
+            @include output {
+                @include background-shorthand((
+                    image: url('test.jpg'),
+                    position: center center,
+                    repeat: no-repeat,
+                    color: black,
+                    attachment: scroll
+                ));
+            }
+        
+            @include expect {
+                background: url('test.jpg') center center no-repeat black scroll;
+            }
+        }
+    }
+
+    @include test('Test Mixin - background-shorthand - test map value with make-shorthand set to true') {
+        @include assert {
+            @include output {
+                @include background-shorthand((
+                    image: url('test.jpg'),
+                    position: center center,
+                    repeat: no-repeat,
+                    color: black,
+                    make-shorthand: true
+                ));
+            }
+        
+            @include expect {
+                background: url('test.jpg') center center no-repeat black;
+            }
+        }
+    }
+
+    @include test('Test Mixin - background-shorthand - test map value with make-shorthand set to false') {
+        @include assert {
+            @include output {
+                @include background-shorthand((
+                    image: url('test.jpg'),
+                    position: center center,
+                    repeat: no-repeat,
+                    color: black,
+                    make-shorthand: false
+                ));
+            }
+        
+            @include expect {
+                background-image: url('test.jpg');
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-color: black;
+            }
+        }
+    }
+
+    @include test('Test Mixin - background-shorthand - test map value with make-shorthand set to false and all values is set') {
+        @include assert {
+            @include output {
+                @include background-shorthand((
+                    image: url('test.jpg'),
+                    position: center center,
+                    repeat: no-repeat,
+                    color: black,
+                    attachment: scroll,
+                    make-shorthand: false
+                ));
+            }
+        
+            @include expect {
+                background-image: url('test.jpg');
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-color: black;
+                background-attachment: scroll;
+            }
+        }
+    }
+
+    @include test('Test Mixin - background-shorthand - test map value with only image') {
+        @include assert {
+            @include output {
+                @include background-shorthand((
+                    image: url('test.jpg')
+                ));
+            }
+        
+            @include expect {
+                background-image: url('test.jpg');
+            }
+        }
+    }
+
+    @include test('Test Mixin - background-shorthand - test map value with only position, repeat, color and attachment') {
+        @include assert {
+            @include output {
+                @include background-shorthand((
+                    position: center center,
+                    repeat: no-repeat,
+                    color: black,
+                    attachment: scroll
+                ));
+            }
+        
+            @include expect {
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-color: black;
+                background-attachment: scroll;
+            }
+        }
+    }
+
+    @include test('Test Mixin - background-shorthand - test map value with make-shorthand set to true and multiple images') {
+        @include assert {
+            @include output {
+                @include background-shorthand((
+                    image: (url('test.jpg'), url('test_2.jpg')),
+                    position: center center,
+                    repeat: no-repeat,
+                    color: black,
+                    make-shorthand: true
+                ));
+            }
+        
+            @include expect {
+                background: url('test.jpg') center center no-repeat, url('test_2.jpg') center center no-repeat black;
+            }
+        }
+    }
+
+    @include test('Test Mixin - background-shorthand - test map value with make-shorthand set to true and multiple images, positions') {
+        @include assert {
+            @include output {
+                @include background-shorthand((
+                    image: (url('test.jpg'), url('test_2.jpg')),
+                    position: (center center, top left),
+                    repeat: no-repeat,
+                    color: black,
+                    make-shorthand: true
+                ));
+            }
+        
+            @include expect {
+                background: url('test.jpg') center center no-repeat, url('test_2.jpg') top left no-repeat black;
+            }
+        }
+    }
+
+    @include test('Test Mixin - background-shorthand - test map value with make-shorthand set to true and multiple images, positions, repeats') {
+        @include assert {
+            @include output {
+                @include background-shorthand((
+                    image: (url('test.jpg'), url('test_2.jpg')),
+                    position: (center center, top left),
+                    repeat: (no-repeat, repeat),
+                    color: black,
+                    make-shorthand: true
+                ));
+            }
+        
+            @include expect {
+                background: url('test.jpg') center center no-repeat, url('test_2.jpg') top left repeat black;
+            }
+        }
+    }
+
+    @include test('Test Mixin - background-shorthand - test map value with make-shorthand set to true and multiple positions, repeats - positions > repeats') {
+        @include assert {
+            @include output {
+                @include background-shorthand((
+                    image: (url('test.jpg'), url('test_2.jpg')),
+                    position: (center center, top left, bottom right),
+                    repeat: (no-repeat, repeat),
+                    color: black,
+                    make-shorthand: true
+                ));
+            }
+        
+            @include expect {
+                background: url('test.jpg') center center no-repeat, url('test_2.jpg') top left repeat, bottom right no-repeat black;
+            }
+        }
+    }
+
+    @include test('Test Mixin - background-shorthand - test map value with make-shorthand set to true and multiple positions, repeats - positions < repeats') {
+        @include assert {
+            @include output {
+                @include background-shorthand((
+                    image: (url('test.jpg'), url('test_2.jpg')),
+                    position: (center center, top left),
+                    repeat: (no-repeat, repeat, repeat-x),
+                    color: black,
+                    make-shorthand: true
+                ));
+            }
+        
+            @include expect {
+                background: url('test.jpg') center center no-repeat, url('test_2.jpg') top left repeat, center center repeat-x black;
+            }
+        }
+    }
+
+
+
+
+    @include test('Test Mixin - background-shorthand - test map value with make-shorthand set to true, multiple images, positions, repeats and default values') {
+        @include assert {
+            @include output {
+                @include background-shorthand((
+                    image: (url('test.jpg'), url('test_2.jpg')),
+                    position: center center,
+                    repeat: no-repeat,
+                    color: black,
+                    default-position: top left,
+                    default-repeat: repeat,
+                    make-shorthand: true
+                ));
+            }
+        
+            @include expect {
+                background: url('test.jpg') center center no-repeat, url('test_2.jpg') top left repeat black;
+            }
+        }
+    }
+
+    @include test('Test Mixin - background-shorthand - test map value with make-shorthand set to true, multiple images, positions, repeats and default values - positions > repeats') {
+        @include assert {
+            @include output {
+                @include background-shorthand((
+                    image: (url('test.jpg'), url('test_2.jpg')),
+                    position: (center center, null, bottom right),
+                    repeat: (no-repeat, null),
+                    color: black,
+                    default-position: top left,
+                    default-repeat: repeat,
+                    make-shorthand: true
+                ));
+            }
+        
+            @include expect {
+                background: url('test.jpg') center center no-repeat, url('test_2.jpg') top left repeat, bottom right repeat black;
+            }
+        }
+    }
+
+    @include test('Test Mixin - background-shorthand - test map value with make-shorthand set to true, multiple images, positions, repeats and default values - positions < repeats') {
+        @include assert {
+            @include output {
+                @include background-shorthand((
+                    image: (url('test.jpg'), url('test_2.jpg')),
+                    position: (center center, null),
+                    repeat: (no-repeat, null, repeat-x),
+                    color: black,
+                    default-position: top left,
+                    default-repeat: repeat,
+                    make-shorthand: true
+                ));
+            }
+        
+            @include expect {
+                background: url('test.jpg') center center no-repeat, url('test_2.jpg') top left repeat, top left repeat-x black;
+            }
+        }
+    }
+
+    @include test('Test Mixin - background-shorthand-with-screens-support') {
+        @include assert {
+            @include output {
+                @include background-shorthand-with-screens-support(transparent, (
+                    s2: (
+                        image: url('test.jpg'),
+                        position: center center,
+                        repeat: no-repeat,
+                        color: black,
+                        make-shorthand: true
+                    )
+                ));
+            }
+
+            @include expect {
+                background: transparent;
+                @media (min-width: 1024px) {
+                    background: url('test.jpg') center center no-repeat black;
+                }
+            }
+        }
+    }
+}

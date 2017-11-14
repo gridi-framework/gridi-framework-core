@@ -1,4 +1,14 @@
 /**
+ * return colors map
+ *
+ * @function
+ * @return map
+ */
+@function get-colors-map() {
+    @return map-merge($colors-map, $extra-colors-map);
+}
+
+/**
  * Retrieves a color value from the $map-colors sass map
  *
  * @function
@@ -7,7 +17,7 @@
  * @param {map} [colors-map=$map-colors]  - sass colors map
  * @return map
  */
-@function get-color($color-name, $color-variant: 500, $colors-map: $map-colors) {
+@function get-color($color-name, $color-variant: 500, $colors-map: get-colors-map()) {
     $color-map: map-get($colors-map, $color-name);
     @if $color-map == null {
         @error "=> ERROR: COLOR MAP NOT FOUND! <= | Color name: #{$color-name}, Color variant: #{$color-variant}";
@@ -70,8 +80,8 @@
 
     $generate-palette: map-merge($extra-colors-palette, $colors-palette);
 
-    @if type-of($local-extra-colors-palette) == map {
-        $generate-palette: map-merge($generate-palette, $local-extra-colors-palette);
+    @if is-map($local-extra-colors-palette) {
+        $generate-palette: map-extend($generate-palette, $local-extra-colors-palette, true);
     }
 
     @if type-of($skip-palette-colors) == string {

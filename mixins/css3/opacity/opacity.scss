@@ -1,0 +1,12 @@
+@mixin opacity($value, $support-old-browsers: false) {
+    $oldIEValue: $value * 100;
+    @if ($value * 100) > 100 {
+        $oldIEValue: $value;
+        $value: $value / 100;
+    }
+    @if $support-old-browsers {
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$oldIEValue})";
+        filter: alpha(opacity=#{$oldIEValue});
+    }
+    opacity: #{$value};
+}

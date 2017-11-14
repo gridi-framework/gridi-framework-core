@@ -1,0 +1,32 @@
+@mixin justify-content($value: flex-start, $support-old-browsers: $support-old-browsers) {
+    @if $support-old-browsers {
+        @if $value == flex-start{
+            -webkit-box-pack: start;
+            -moz-box-pack: start;
+            -webkit-flex-pack: start;
+            -moz-flex-pack: start;
+            -ms-flex-pack: start;
+        } @else if $value == flex-end {
+            -webkit-box-pack: end;
+            -moz-box-pack: end;
+            -webkit-flex-pack: end;
+            -moz-flex-pack: end;
+            -ms-flex-pack: end;
+        } @else if $value == space-between {
+            -webkit-box-pack: justify;
+            -moz-box-pack: justify;
+            -webkit-flex-pack: justify;
+            -moz-flex-pack: justify;
+            -ms-flex-pack: justify;
+        } @else if $value == space-around {
+            -ms-flex-pack: distribute;
+        } @else {
+            -webkit-box-pack: $value;
+            -moz-box-pack: $value;
+            -webkit-flex-pack: $value;
+            -moz-flex-pack: $value;
+            -ms-flex-pack: $value;
+        }
+    }
+    @include css3-property(justify-content, $value, webkit moz ms);
+}

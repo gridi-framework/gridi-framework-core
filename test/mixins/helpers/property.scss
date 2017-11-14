@@ -1,0 +1,76 @@
+@import 'true';
+@import 'test-config/screens';
+@import '../../../functions/map';
+@import '../../../functions/screens';
+@import '../../../mixins/helpers/property/property';
+
+@include test-module('Gridi Framework Core - Mixins - Helpers - Property') {
+    @include test('Test Mixin - not-required-property - correct value') {
+        @include assert {
+            @include output {
+                @include not-required-property(background, red);
+            }
+        
+            @include expect {
+                background: red;
+            }
+        }
+    }
+
+    @include test('Test Mixin - not-required-property - null value') {
+        @include assert {
+            @include output {
+                @include not-required-property(background, null);
+            }
+        
+            @include expect {
+            }
+        }
+    }
+
+    @include test('Test Mixin - single-property-with-screens-support') {
+        @include assert {
+            @include output {
+                @include single-property-with-screens-support(background, red, null);
+            }
+        
+            @include expect {
+                background: red;
+            }
+        }
+
+        @include assert {
+            @include output {
+                @include single-property-with-screens-support(background, red, (
+                    s2: blue
+                ));
+            }
+        
+            @include expect {
+                background: red;
+                @media(min-width: 1024px) {
+                    background: blue;
+                }
+            }
+        }
+
+        @include assert {
+            @include output {
+                @include single-property-with-screens-support(background, red, (
+                    s2: blue,
+                    s3: yellow
+                ));
+            }
+        
+            @include expect {
+                background: red;
+                @media(min-width: 1024px) {
+                    background: blue;
+                }
+                @media(min-width: 1280px) {
+                    background: yellow;
+                }
+            }
+        }
+    }
+}

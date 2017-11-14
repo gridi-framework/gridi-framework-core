@@ -1,0 +1,94 @@
+/**
+ * Include margin property based on sent config
+ *
+ * margins map look (every parameters is optional):
+ *
+ * $margins: (
+ *     top: ...,
+ *     bottom: ...,
+ *     left: ...,
+ *     right: ...
+ * );
+ *
+ * @mixin
+ * @param margins - margins map or single value
+ */
+@mixin margin-shorthand($margins) {
+    @if is-map($margins) {
+        $margin-top: map-get($margins, top);
+        $margin-bottom: map-get($margins, bottom);
+        $margin-left: map-get($margins, left);
+        $margin-right: map-get($margins, right);
+
+        @if $margin-top and $margin-bottom and $margin-left and $margin-right {
+            @if ($margin-top == $margin-bottom and $margin-top == $margin-left and $margin-top == $margin-right) {
+                margin: $margin-top;
+            } @else if ($margin-top == $margin-bottom and  $margin-left == $margin-right) {
+                margin: $margin-top $margin-left;
+            } @else if ($margin-top != $margin-bottom and  $margin-left == $margin-right) {
+                margin: $margin-top $margin-left $margin-bottom;
+            } @else {
+                margin: $margin-top $margin-right $margin-bottom $margin-left;
+            }
+        } @else {
+            @if $margin-top {
+                margin-top: $margin-top;
+            }
+
+            @if $margin-bottom {
+                margin-bottom: $margin-bottom;
+            }
+
+            @if $margin-left {
+                margin-left: $margin-left;
+            }
+
+            @if $margin-right {
+                margin-right: $margin-right;
+            }
+        }
+    } @else if $margins {
+        margin: $margins;
+    }
+}
+
+/**
+ * Include margin property and margin for screens property based on sent config
+ *
+ * margins map look (every parameters is optional):
+ *
+ * $margins: (
+ *     top: ...,
+ *     bottom: ...,
+ *     left: ...,
+ *     right: ...
+ * );
+ *
+ * margins for screen map look (every parameters is optional):
+ *
+ * $margins-for-screens: (
+ *     s2: (
+ *         top: ...,
+ *         bottom: ...,
+ *         left: ...,
+ *         right: ...
+ *     )
+ * );
+ *
+ * @mixin
+ * @param margins - margins map or single value
+ * @param {map} margins-for-screens - map with screens prefixes and margins map or single value
+ */
+@mixin margin-shorthand-with-screens-support($margins, $margins-for-screens) {
+    @include margin-shorthand($margins);
+    
+    @if is-map($margins-for-screens) {
+        @each $screen-prefix, $sizes in get-screens-map() {
+            @if map-has-key($margins-for-screens, $screen-prefix) {
+                @media(min-width: get-screen-size($screen-prefix, min)) {
+                    @include margin-shorthand(map-get($margins-for-screens, $screen-prefix));
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,136 @@
+/**
+ * Include font-face
+ *
+ * @mixin
+ * @param font-name
+ * @param font-file
+ * @param font-weight [font-weight=normal]
+ * @param font-style [font-style=normal]
+ */
+@mixin font-face($font-name, $font-file, $font-weight: normal, $font-style: normal) {
+    @font-face {
+        font-family: quote($font-name);
+        src: url($font-file + '.eot');
+        src: url($font-file + '.eot?#iefix') format('embedded-opentype'),
+            url($font-file + '.woff') format('woff'),
+            url($font-file + '.ttf') format('truetype'),
+            url($font-file + '.svg##{$font-name}') format('svg');
+        font-weight: $font-weight;
+        font-style: $font-style;
+    }
+}
+
+/**
+ * Include font property based on sent config
+ *
+ * font map look (every parameters is optional):
+ *
+ * $font: (
+ *      style: ...,
+ *      variant: ...,
+ *      weight: ...,
+ *      size: ...,
+ *      line-height: ...,
+ *      family: ...,
+ *      make-shorthand: true | false
+ * );
+ *
+ * @mixin
+ * @param {map} font - font map or single value
+ */
+@mixin font-shorthand($font) {
+    @if is-map($font) {
+        $font-style: map-get($font, style);
+        $font-variant: map-get($font, variant);
+        $font-weight: map-get($font, weight);
+        $font-size: map-get($font, size);
+        $line-height: map-get($font, line-height);
+        $font-family: map-get($font, family);
+        $font-make-shorthand: map-get($font, make-shorthand);
+
+        @if (true == $font-make-shorthand and $font-size and $font-family) or (null == $font-make-shorthand and $font-style and $font-variant and $font-weight and $font-size and $line-height and $font-family) {
+            $value: $font-style $font-variant $font-weight;
+
+            @if $line-height {
+                $value: $value #{$font-size}/#{$line-height}
+            } @else {
+                $value: $value $font-size;
+            }
+
+            $value: $value #{$font-family};
+            
+            font: $value;
+        } @else {
+            @if $font-style {
+                font-style: $font-style;
+            }
+
+            @if $font-variant {
+                font-variant: $font-variant;
+            }
+
+            @if $font-weight {
+                font-weight: $font-weight;
+            }
+
+            @if $font-size {
+                font-size: $font-size;
+            }
+
+            @if $line-height {
+                line-height: $line-height;
+            }
+
+            @if $font-family {
+                font-family: #{$font-family};
+            }
+        }
+    } @else if $font {
+        font: $font;
+    }
+}
+
+/**
+ * Include font property and font for screens property based on sent config
+ *
+ * font map look (every parameters is optional):
+ *
+ * $font: (
+ *      style: ...,
+ *      variant: ...,
+ *      weight: ...,
+ *      size: ...,
+ *      line-height: ...,
+ *      family: ...
+ * );
+ *
+ * font for screen map look (every parameters is optional):
+ *
+ * $font-for-screens: (
+ *     s2: (
+ *          style: ...,
+ *          variant: ...,
+ *          weight: ...,
+ *          size: ...,
+ *          line-height: ...,
+ *          family: ...
+ *      )
+ * );
+ *
+ * @mixin
+ * @param font - font map or single value
+ * @param {map} font-for-screens - map with screens prefixes and font map or single value
+ */
+@mixin font-shorthand-with-screens-support($font, $font-for-screens) {
+    @include font-shorthand($font);
+    
+    @if is-map($font-for-screens) {
+        @each $screen-prefix, $sizes in get-screens-map() {
+            @if map-has-key($font-for-screens, $screen-prefix) {
+                @media(min-width: get-screen-size($screen-prefix, min)) {
+                    @include font-shorthand(map-get($font-for-screens, $screen-prefix));
+                }
+            }
+        }
+    }
+}

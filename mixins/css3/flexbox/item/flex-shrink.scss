@@ -1,0 +1,3 @@
+@mixin flex-shrink($int: 0) {
+    @include css3-property(flex-shrink, $int, webkit moz ms);
+}

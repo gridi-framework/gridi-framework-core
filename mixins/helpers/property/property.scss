@@ -1,0 +1,34 @@
+/**
+ * Include single property with value. if value is null then not add anything
+ *
+ * @mixin
+ * @param property - property name
+ * @param value - property value | null
+ */
+@mixin not-required-property($property, $value) {
+    @if $value {
+        #{$property}: #{$value};
+    }
+}
+
+/**
+ * Include single property with value and single property with value for screens based on sent config
+ *
+ * @mixin
+ * @param property - property name
+ * @param value - property value
+ * @param {map} values-for-screens -  map with screens prefixes and property values
+ */
+@mixin single-property-with-screens-support($property, $value, $values-for-screens) {
+    @include not-required-property($property, $value);
+
+    @if is-map($values-for-screens) {
+        @each $screen-prefix, $sizes in get-screens-map() {
+            @if map-has-key($values-for-screens, $screen-prefix) {
+                @media(min-width: get-screen-size($screen-prefix, min)) {
+                    @include not-required-property($property, map-get($values-for-screens, $screen-prefix));
+                }
+            }
+        }
+    }
+}

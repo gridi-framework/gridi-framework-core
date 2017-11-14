@@ -1,0 +1,175 @@
+/**
+ * Include transition property based on sent config
+ *
+ * transition map look (every parameters is optional):
+ *
+ * $transition: (
+ *     property: ...,
+ *     duration: ...,
+ *     timing-function: ...,
+ *     delay: ...,
+ *     make-shorthand: true | false
+ * );
+ *
+ * @mixin
+ * @param {map} transition - transition map or single value
+ */
+ @mixin transition-shorthand($transition) {
+    @if is-map($transition) {
+        $transition-property: map-get($transition, property);
+        $transition-duration: map-get($transition, duration);
+        $transition-timing-function: map-get($transition, timing-function);
+        $transition-delay: map-get($transition, delay);
+        $transition-make-shorthand: map-get($transition, make-shorthand);
+
+        @if true == $transition-make-shorthand or (
+                null == $transition-make-shorthand and
+                $transition-property and 
+                $transition-duration and 
+                $transition-timing-function and 
+                $transition-delay
+        ) {
+            $value: null;
+
+            @if $transition-property and length($transition-property) > 1 {
+                $durrations-length: length($transition-duration);
+                $timing-functions-length: length($transition-timing-function);
+                $delays-length: length($transition-delay);
+
+                $default-durration: map-get($transition, default-durration);
+                @if not $default-durration {
+                    $default-durration: nth($transition-duration, 1);
+                }
+
+                $default-timing-function: map-get($transition, default-timing-function);
+                @if not $default-timing-function {
+                    $default-timing-function: nth($transition-timing-function, 1);
+                }
+                
+                $default-delay: map-get($transition, default-delay);
+                @if not $default-delay {
+                    $default-delay: nth($transition-delay, 1);
+                }
+
+                $current-property-no: 1;
+
+                @each $property in $transition-property {
+                    @if $current-property-no > 1 {
+                        $value: $value, $property;
+                    } @else {
+                        $value: $property;
+                    }
+                    
+                    @if $transition-duration {
+                        @if $durrations-length < $current-property-no {
+                            $value: $value $default-durration;
+                        } @else {
+                            $durration: nth($transition-duration, $current-property-no);
+
+                            @if $durration {
+                                $value: $value $durration;
+                            } @else {
+                                $value: $value $default-durration;
+                            }
+                        }
+                    }
+
+                    @if $transition-timing-function {
+                        @if $timing-functions-length < $current-property-no {
+                            $value: $value $default-timing-function;
+                        } @else {
+                            $timing-function: nth($transition-timing-function, $current-property-no);
+
+                            @if $timing-function {
+                                $value: $value $timing-function;
+                            } @else {
+                                $value: $value $default-timing-function;
+                            }
+                        }
+                    }
+
+                    @if $transition-delay {
+                        @if $delays-length < $current-property-no {
+                            $value: $value $default-delay;
+                        } @else {
+                            $delay: nth($transition-delay, $current-property-no);
+
+                            @if $delay {
+                                $value: $value $delay;
+                            } @else {
+                                $value: $value $default-delay;
+                            }
+                        }
+                    }
+
+                    $current-property-no: $current-property-no + 1;
+                }
+            } @else {
+                $value: $transition-property $transition-duration $transition-timing-function $transition-delay
+            }
+
+            @include transition($value);
+        } @else {
+            @if $transition-property {
+                @include transition-property($transition-property);
+            }
+
+            @if $transition-duration {
+                @include transition-duration($transition-duration);
+            }
+
+            @if $transition-timing-function {
+                @include transition-timing-function($transition-timing-function);
+            }
+
+            @if $transition-delay {
+                @include transition-delay($transition-delay);
+            }
+        }
+    } @else if $transition {
+        @include transition($transition);
+    }
+}
+
+/**
+ * Include transition property and transition for screens property based on sent config
+ *
+ * transition map look (every parameters is optional):
+ *
+ * $transition: (
+ *     property: ...,
+ *     duration: ...,
+ *     timing-function: ...,
+ *     delay: ...,
+ *     make-shorthand: true | false
+ * );
+ *
+ * transition for screen map look (every parameters is optional):
+ *
+ * $transition-for-screens: (
+ *     s2: (
+ *         property: ...,
+ *         duration: ...,
+ *         timing-function: ...,
+ *         delay: ...,
+ *         make-shorthand: true | false
+ *     )
+ * );
+ *
+ * @mixin
+ * @param transition - transition map or single value
+ * @param {map} transition-for-screens - map with screens prefixes and transition map or single value
+ */
+@mixin transition-shorthand-with-screens-support($transition, $transition-for-screens) {
+    @include transition-shorthand($transition);
+    
+    @if is-map($transition-for-screens) {
+        @each $screen-prefix, $sizes in get-screens-map() {
+            @if map-has-key($transition-for-screens, $screen-prefix) {
+                @media(min-width: get-screen-size($screen-prefix, min)) {
+                    @include transition-shorthand(map-get($transition-for-screens, $screen-prefix));
+                }
+            }
+        }
+    }
+}

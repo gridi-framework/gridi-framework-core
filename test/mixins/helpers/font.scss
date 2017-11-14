@@ -1,0 +1,175 @@
+@import 'true';
+@import 'test-config/screens';
+@import '../../../functions/map';
+@import '../../../functions/screens';
+@import '../../../mixins/helpers/font/font';
+
+@include test-module('Gridi Framework Core - Mixins - Helpers - Font') {
+    @include test('Test Mixin - font-shorthand - test single value') {
+        @include assert {
+            @include output {
+                @include font-shorthand((20px/30px Arial, Helvetica, sans-serif));
+            }
+        
+            @include expect {
+                font: 20px/30px Arial, Helvetica, sans-serif;
+            }
+        }
+    }
+
+    @include test('Test Mixin - font-shorthand - test map value') {
+        @include assert {
+            @include output {
+                @include font-shorthand((
+                    style: italic,
+                    variant: normal,
+                    weight: bold,
+                    size: 20px,
+                    line-height: 30px,
+                    family: (Arial, Helvetica, sans-serif)
+                ));
+            }
+        
+            @include expect {
+                font: italic normal bold 20px/30px Arial, Helvetica, sans-serif;
+            }
+        }
+    }
+
+    @include test('Test Mixin - font-shorthand - test map value with make-shorthand set to true') {
+        @include assert {
+            @include output {
+                @include font-shorthand((
+                    size: 20px,
+                    line-height: 30px,
+                    family: (Arial, Helvetica, sans-serif),
+                    make-shorthand: true
+                ));
+            }
+        
+            @include expect {
+                font: 20px/30px Arial, Helvetica, sans-serif;
+            }
+        }
+    }
+
+    @include test('Test Mixin - font-shorthand - test map value with make-shorthand set to false') {
+        @include assert {
+            @include output {
+                @include font-shorthand((
+                    size: 20px,
+                    line-height: 30px,
+                    family: (Arial, Helvetica, sans-serif),
+                    make-shorthand: false
+                ));
+            }
+        
+            @include expect {
+                font-size: 20px;
+                line-height: 30px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        }
+    }
+
+    @include test('Test Mixin - font-shorthand - test map value with make-shorthand set to false and set all values') {
+        @include assert {
+            @include output {
+                @include font-shorthand((
+                    style: italic,
+                    variant: normal,
+                    weight: bold,
+                    size: 20px,
+                    line-height: 30px,
+                    family: (Arial, Helvetica, sans-serif),
+                    make-shorthand: false
+                ));
+            }
+        
+            @include expect {
+                font-style: italic;
+                font-variant: normal;
+                font-weight: bold;
+                font-size: 20px;
+                line-height: 30px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        }
+    }
+
+    @include test('Test Mixin - font-shorthand - test map value with make-shorthand set to true and only size and family') {
+        @include assert {
+            @include output {
+                @include font-shorthand((
+                    size: 20px,
+                    family: (Arial, Helvetica, sans-serif),
+                    make-shorthand: true
+                ));
+            }
+        
+            @include expect {
+                font: 20px Arial, Helvetica, sans-serif;
+            }
+        }
+    }
+
+    @include test('Test Mixin - font-shorthand - test map value with only style') {
+        @include assert {
+            @include output {
+                @include font-shorthand((
+                    style: italic
+                ));
+            }
+        
+            @include expect {
+                font-style: italic;
+            }
+        }
+    }
+
+    @include test('Test Mixin - font-shorthand - test map value with only variant, weight, size, line height and family') {
+        @include assert {
+            @include output {
+                @include font-shorthand((
+                    variant: normal,
+                    weight: bold,
+                    size: 20px,
+                    line-height: 30px,
+                    family: (Arial, Helvetica, sans-serif)
+                ));
+            }
+        
+            @include expect {
+                font-variant: normal;
+                font-weight: bold;
+                font-size: 20px;
+                line-height: 30px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+        }
+    }
+
+    @include test('Test Mixin - font-shorthand-with-screens-support') {
+        @include assert {
+            @include output {
+                @include font-shorthand-with-screens-support((20px/30px Arial, Helvetica, sans-serif), (
+                    s2: (
+                        style: italic,
+                        variant: normal,
+                        weight: bold,
+                        size: 20px,
+                        line-height: 30px,
+                        family: (Arial, Helvetica, sans-serif)
+                    )
+                ));
+            }
+
+            @include expect {
+                font: 20px/30px Arial, Helvetica, sans-serif;
+                @media (min-width: 1024px) {
+                    font: italic normal bold 20px/30px Arial, Helvetica, sans-serif;
+                }
+            }
+        }
+    }
+}

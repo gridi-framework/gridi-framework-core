@@ -1,0 +1,7 @@
+@mixin gradient($value, $property: background, $set-property-prefix: false) {
+    @include css3-property($property, (
+        $value: (
+            use-browser-prefix: true
+        )
+    ), webkit moz ms o, $set-property-prefix);
+}

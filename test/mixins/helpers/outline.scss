@@ -1,0 +1,86 @@
+@import 'true';
+@import 'test-config/screens';
+@import '../../../functions/map';
+@import '../../../functions/screens';
+@import '../../../mixins/helpers/outline/outline';
+
+@include test-module('Gridi Framework Core - Mixins - Helpers - Outline') {
+    @include test('Test Mixin - outline-shorthand - test single value') {
+        @include assert {
+            @include output {
+                @include outline-shorthand(0);
+            }
+        
+            @include expect {
+                outline: 0;
+            }
+        }
+    }
+
+    @include test('Test Mixin - outline-shorthand - test map value') {
+        @include assert {
+            @include output {
+                @include outline-shorthand((
+                    width: 2px,
+                    style: solid,
+                    color: black
+                ));
+            }
+        
+            @include expect {
+                outline: 2px solid black;
+            }
+        }
+    }
+
+    @include test('Test Mixin - outline-shorthand - test map value with only width') {
+        @include assert {
+            @include output {
+                @include outline-shorthand((
+                    width: 2px
+                ));
+            }
+        
+            @include expect {
+                outline-width: 2px;
+            }
+        }
+    }
+
+    @include test('Test Mixin - outline-shorthand - test map value with only style and color') {
+        @include assert {
+            @include output {
+                @include outline-shorthand((
+                    style: solid,
+                    color: black
+                ));
+            }
+        
+            @include expect {
+                outline-style: solid;
+                outline-color: black;
+            }
+        }
+    }
+
+    @include test('Test Mixin - outline-shorthand-with-screens-support') {
+        @include assert {
+            @include output {
+                @include outline-shorthand-with-screens-support(0, (
+                    s2: (
+                        width: 2px,
+                        style: solid,
+                        color: black,
+                    )
+                ));
+            }
+
+            @include expect {
+                outline: 0;
+                @media (min-width: 1024px) {
+                    outline: 2px solid black; 
+                }
+            }
+        }
+    }
+}

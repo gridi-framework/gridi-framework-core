@@ -1,0 +1,7 @@
+@mixin flex-grow($int: 0, $support-old-browsers: $support-old-browsers) {
+    @if $support-old-browsers {
+        -webkit-box-flex: $int;
+        -moz-box-flex: $int;
+    }
+    @include css3-property(flex-grow, $int, webkit moz ms);
+}

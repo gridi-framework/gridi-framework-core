@@ -20,11 +20,7 @@
         "**/*.js",
         "**/*.json",
         "node_modules",
-        "bower_components"
-    ],
-    "dependencies": {
-        "gridi-framework-functions": "*",
-        "gridi-framework-mixins": "*",
-        "gridi-framework-css3-mixins": "*"
-    }
+        "bower_components",
+        "test"
+    ]
 }

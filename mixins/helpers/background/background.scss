@@ -1,0 +1,276 @@
+/**
+ * Include background property based on sent config
+ *
+ * background map look (every parameters is optional):
+ *
+ * $background: (
+ *     image: ...,
+ *     position: ...,
+ *     repeat: ...,
+ *     color: ...,
+ *     attachment: ...,
+ *     make-shorthand: true | false
+ * );
+ *
+ * @mixin
+ * @param {map} background - background map or single value
+ */
+@mixin background-shorthand($background) {
+    @if is-map($background) {
+        $background-image: map-get($background, image);
+        $background-position: map-get($background, position);
+        $background-repeat: map-get($background, repeat);
+        $background-color: map-get($background, color);
+        $background-attachment: map-get($background, attachment);
+        $background-make-shorthand: map-get($background, make-shorthand);
+
+
+        @if true == $background-make-shorthand or (null == $background-make-shorthand and $background-image and $background-position and $background-repeat and $background-color and $background-attachment) {
+            $value: null;
+
+            $images-lenght: length($background-image);
+            $positions-lenght: length($background-position);
+            $positions-list-separator-is-comma: list-separator($background-position) == comma;
+            @if not $positions-list-separator-is-comma {
+                $positions-lenght: 1;
+            }
+            $repeats-lenght: length($background-repeat);
+            
+            @if $images-lenght > 1 or $positions-lenght > 1 or $repeats-lenght > 1 {
+                $default-position: map-get($background, default-position);
+                @if not $default-position {
+                    @if $positions-list-separator-is-comma {
+                        $default-position: nth($background-position, 1);
+                    } @else {
+                        $default-position: $background-position;
+                    }
+                }
+    
+                $default-repeat: map-get($background, default-repeat);
+                @if not $default-repeat {
+                    $default-repeat: nth($background-repeat, 1);
+                }
+
+                $current: 1;
+
+                @if $background-image and $images-lenght >= $positions-lenght and $images-lenght >= $repeats-lenght {
+                    @each $image in $background-image {
+                        @if $current > 1 {
+                            $value: $value, $image;
+                        } @else {
+                            $value: $image;
+                        }
+
+                        @if $background-position {
+                            @if $positions-lenght < $current {
+                                $value: $value $default-position;
+                            } @else {
+                                $position: null;
+                                
+                                @if $positions-list-separator-is-comma {
+                                    $position: nth($background-position, $current);
+                                } @else {
+                                    $position: $background-position;
+                                }
+                                
+                                @if $position {
+                                    $value: $value $position;
+                                } @else {
+                                    $value: $value $default-position;
+                                }
+                            }
+                        }
+            
+                        @if $background-repeat {
+                            @if $repeats-lenght < $current {
+                                $value: $value $default-repeat;
+                            } @else {
+                                $repeat: nth($background-repeat, $current);
+                                
+                                @if $repeat {
+                                    $value: $value $repeat;
+                                } @else {
+                                    $value: $value $default-repeat;
+                                }
+                            }
+                        }
+
+                        $current: $current + 1;
+                    }
+                } @else if $positions-lenght >= $repeats-lenght {
+                    @if $positions-list-separator-is-comma {
+                        @each $position in $background-position {
+                            $image: null;
+                            $repeat: null;
+
+                            @if not $position {
+                                $position: $default-position;
+                            }
+
+                            @if $background-image and $images-lenght >= $current {
+                                $image: nth($background-image, $current);
+                            }
+
+                            @if $background-repeat {
+                                @if $repeats-lenght < $current {
+                                    $repeat: $default-repeat;
+                                } @else {
+                                    $repeat: nth($background-repeat, $current);
+                                    
+                                    @if not $repeat {
+                                        $repeat: $default-repeat;
+                                    }
+                                }
+                            }
+
+                            @if $current > 1 {
+                                $value: $value, $image $position $repeat;
+                            } @else {
+                                $value: $image $position $repeat;
+                            }
+
+                            $current: $current + 1;
+                        }
+                    } @else {
+                        $image: null;
+                        $position: $background-position;
+                        $repeat: null;
+
+                        @if not $position {
+                            $position: $default-position;
+                        }
+
+                        @if $background-image and $images-lenght >= 1 {
+                            $image: nth($background-image, 1);
+                        }
+
+                        @if $background-repeat {
+                            @if $repeats-lenght < 1 {
+                                $repeat: $default-repeat;
+                            } @else {
+                                $repeat: nth($background-repeat, 1);
+                                
+                                @if not $repeat {
+                                    $repeat: $default-repeat;
+                                }
+                            }
+                        }
+
+                        $value: $image $position $repeat;
+                    }
+                } @else {
+                    @each $repeat in $background-repeat {
+                        $image: null;
+                        $position: null;
+
+                        @if not $repeat {
+                            $repeat: $default-repeat;
+                        }
+
+                        @if $background-image and $images-lenght >= $current {
+                            $image: nth($background-image, $current);
+                        }
+
+                        @if $background-position {
+                            @if $positions-lenght < $current {
+                                $position: $default-position;
+                            } @else {
+                                $position: null;
+                                
+                                @if $positions-list-separator-is-comma {
+                                    $position: nth($background-position, $current);
+                                } @else {
+                                    $position: $background-position;
+                                }
+
+                                @if not $position {
+                                    $position: $default-position;
+                                }
+                            }
+                        }
+
+                        @if $current > 1 {
+                            $value: $value, $image $position $repeat;
+                        } @else {
+                            $value: $image $position $repeat;
+                        }
+
+                        $current: $current + 1;
+                    }
+                }
+
+            } @else {
+                $value: $background-image $background-position $background-repeat;
+            }
+
+            $value: $value $background-color $background-attachment;
+            
+            background: $value;
+        } @else {
+            @if $background-image {
+                background-image: $background-image;
+            }
+
+            @if $background-position {
+                background-position: $background-position;
+            }
+
+            @if $background-repeat {
+                background-repeat: $background-repeat
+            }
+
+            @if $background-color {
+                background-color: $background-color;
+            }
+
+            @if $background-attachment {
+                background-attachment: $background-attachment;
+            }
+        }
+    } @else if $background {
+        background: $background;
+    }
+}
+
+/**
+ * Include background property and background for screens property based on sent config
+ *
+ * background map look (every parameters is optional):
+ *
+ * $background: (
+ *     image: ...,
+ *     position: ...,
+ *     repeat: ...
+ *     color: ...
+ *     attachment: ...
+ * );
+ *
+ * background for screen map look (every parameters is optional):
+ *
+ * $background-for-screens: (
+ *     s2: (
+ *         image: ...,
+ *         position: ...,
+ *         repeat: ...,
+ *         color: ...,
+ *         attachment: ...
+ *     )
+ * );
+ *
+ * @mixin
+ * @param background - background map or single value
+ * @param {map} background-for-screens - map with screens prefixes and background map or single value
+ */
+@mixin background-shorthand-with-screens-support($background, $background-for-screens) {
+    @include background-shorthand($background);
+    
+    @if is-map($background-for-screens) {
+        @each $screen-prefix, $sizes in get-screens-map() {
+            @if map-has-key($background-for-screens, $screen-prefix) {
+                @media(min-width: get-screen-size($screen-prefix, min)) {
+                    @include background-shorthand(map-get($background-for-screens, $screen-prefix));
+                }
+            }
+        }
+    }
+}

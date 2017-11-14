@@ -1,0 +1,260 @@
+@import 'true';
+@import 'test-config/screens';
+@import 'test-config/old-browsers';
+@import '../../../functions/map';
+@import '../../../functions/screens';
+@import '../../../mixins/css3/css3';
+@import '../../../mixins/helpers/transition/transition';
+
+@include test-module('Gridi Framework Core - Mixins - Helpers - Transition') {
+    @include test('Test Mixin - transition-shorthand - test single value') {
+        @include assert {
+            @include output {
+                @include transition-shorthand(width 5s ease);
+            }
+        
+            @include expect {
+                transition: width 5s ease;
+            }
+        }
+    }
+
+    @include test('Test Mixin - transition-shorthand - test map value') {
+        @include assert {
+            @include output {
+                @include transition-shorthand((
+                    property: width,
+                    duration: 0.3s,
+                    timing-function: ease,
+                    delay: 0.2s
+                ));
+            }
+        
+            @include expect {
+                transition: width 0.3s ease 0.2s;
+            }
+        }
+    }
+
+    @include test('Test Mixin - transition-shorthand - test map value with make-shorthand set to true') {
+        @include assert {
+            @include output {
+                @include transition-shorthand((
+                    property: width,
+                    duration: 0.3s,
+                    timing-function: ease,
+                    make-shorthand: true
+                ));
+            }
+        
+            @include expect {
+                transition: width 0.3s ease;
+            }
+        }
+    }
+
+    @include test('Test Mixin - transition-shorthand - test map value with make-shorthand set to false') {
+        @include assert {
+            @include output {
+                @include transition-shorthand((
+                    property: width,
+                    duration: 0.3s,
+                    timing-function: ease,
+                    make-shorthand: false
+                ));
+            }
+        
+            @include expect {
+                transition-property: width;
+                transition-duration: 0.3s;
+                transition-timing-function: ease;
+            }
+        }
+    }
+
+    @include test('Test Mixin - transition-shorthand - test map value with make-shorthand set to false and set all values') {
+        @include assert {
+            @include output {
+                @include transition-shorthand((
+                    property: width,
+                    duration: 0.3s,
+                    timing-function: ease,
+                    delay: 0.2s,
+                    make-shorthand: false
+                ));
+            }
+        
+            @include expect {
+                transition-property: width;
+                transition-duration: 0.3s;
+                transition-timing-function: ease;
+                transition-delay: 0.2s;
+            }
+        }
+    }
+
+    @include test('Test Mixin - transition-shorthand - test map value with only property') {
+        @include assert {
+            @include output {
+                @include transition-shorthand((
+                    property: width
+                ));
+            }
+        
+            @include expect {
+                transition-property: width;
+            }
+        }
+    }
+
+    @include test('Test Mixin - transition-shorthand - test map value with only duration, timing-function, delay') {
+        @include assert {
+            @include output {
+                @include transition-shorthand((
+                    duration: 0.3s,
+                    timing-function: ease,
+                    delay: 0.2s
+                ));
+            }
+        
+            @include expect {
+                transition-duration: 0.3s;
+                transition-timing-function: ease;
+                transition-delay: 0.2s;
+            }
+        }
+    }
+
+    @include test('Test Mixin - transition-shorthand - test map value with multiple propertys and single rest') {
+        @include assert {
+            @include output {
+                @include transition-shorthand((
+                    property: (width, height),
+                    duration: 0.3s,
+                    timing-function: ease,
+                    delay: 0.2s
+                ));
+            }
+        
+            @include expect {
+                transition: width 0.3s ease 0.2s, height 0.3s ease 0.2s;
+            }
+        }
+    }
+
+    @include test('Test Mixin - transition-shorthand - test map value with multiple propertys and multiple rest') {
+        @include assert {
+            @include output {
+                @include transition-shorthand((
+                    property: (width, height, opacity),
+                    duration: (0.3s, 0.2s),
+                    timing-function: (ease, linear),
+                    delay: (0.2s, 0.1s)
+                ));
+            }
+        
+            @include expect {
+                transition: width 0.3s ease 0.2s, height 0.2s linear 0.1s, opacity 0.3s ease 0.2s;
+            }
+        }
+    }
+
+    @include test('Test Mixin - transition-shorthand - test map value with multiple propertys, multiple rest and one is null') {
+        @include assert {
+            @include output {
+                @include transition-shorthand((
+                    property: (width, height, opacity),
+                    duration: (0.3s, null, 0.2s),
+                    timing-function: (ease, null, linear),
+                    delay: (0.2s, null, 0.1s)
+                ));
+            }
+        
+            @include expect {
+                transition: width 0.3s ease 0.2s, height 0.3s ease 0.2s, opacity 0.2s linear 0.1s;
+            }
+        }
+    }
+
+    @include test('Test Mixin - transition-shorthand - test map value with multiple propertys, single rest and default') {
+        @include assert {
+            @include output {
+                @include transition-shorthand((
+                    property: (width, height),
+                    duration: 0.3s,
+                    timing-function: ease,
+                    delay: 0.2s,
+                    default-durration: 0.5s,
+                    default-timing-function: linear,
+                    default-delay: 0.1s
+                ));
+            }
+        
+            @include expect {
+                transition: width 0.3s ease 0.2s, height 0.5s linear 0.1s;
+            }
+        }
+    }
+
+    @include test('Test Mixin - transition-shorthand - test map value with multiple propertys, multiple rest and default') {
+        @include assert {
+            @include output {
+                @include transition-shorthand((
+                    property: (width, height, opacity),
+                    duration: (0.3s, 0.2s),
+                    timing-function: (ease, linear),
+                    delay: (0.2s, 0.1s),
+                    default-durration: 0.5s,
+                    default-timing-function: ease-in,
+                    default-delay: 0.4s
+                ));
+            }
+        
+            @include expect {
+                transition: width 0.3s ease 0.2s, height 0.2s linear 0.1s, opacity 0.5s ease-in 0.4s;
+            }
+        }
+    }
+
+    @include test('Test Mixin - transition-shorthand - test map value with multiple propertys, multiple rest, default and one is null') {
+        @include assert {
+            @include output {
+                @include transition-shorthand((
+                    property: (width, height, opacity),
+                    duration: (0.3s, null, 0.2s),
+                    timing-function: (ease, null, linear),
+                    delay: (0.2s, null, 0.1s),
+                    default-durration: 0.5s,
+                    default-timing-function: ease-in,
+                    default-delay: 0.4s
+                ));
+            }
+        
+            @include expect {
+                transition: width 0.3s ease 0.2s, height 0.5s ease-in 0.4s, opacity 0.2s linear 0.1s;
+            }
+        }
+    }
+
+    @include test('Test Mixin - transition-shorthand-with-screens-support') {
+        @include assert {
+            @include output {
+                @include transition-shorthand-with-screens-support(width 5s infinite, (
+                    s2: (
+                        property: width,
+                        duration: 0.3s,
+                        timing-function: ease,
+                        make-shorthand: true
+                    )
+                ));
+            }
+
+            @include expect {
+                transition: width 5s infinite;
+                @media (min-width: 1024px) {
+                    transition: width 0.3s ease; 
+                }
+            }
+        }
+    }
+}

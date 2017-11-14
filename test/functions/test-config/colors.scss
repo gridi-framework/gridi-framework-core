@@ -1,0 +1,92 @@
+//Colors map
+$colors-map: (
+    red: (
+        400: #EF5350,
+        500: #F44336,
+        600: #E53935
+    ),
+    blue: (
+        400: #42A5F5,
+        500: #2196F3,
+        600: #1E88E5
+    )
+);
+
+$extra-colors-map: (
+    blue: (
+        400: #29B6F6,
+        500: #03A9F4,
+        600: #039BE5
+    ),
+    yellow: (
+        400: #FFEE58,
+        500: #FFEB3B,
+        600: #FDD835
+    )
+);
+
+//Colors Palette
+
+$primary-color: #2196F3;
+$hover-primary-color: #42A5F5;
+//Text colors for usage primary color like a background for element
+$primary-color-background-inner-color: #ffffff;
+$hover-primary-color-background-inner-color: #ffffff;
+
+//Secondary color
+$secondary-color: #000000;
+$hover-secondary-color: #212121;
+//Text colors for usage secondary color like a background for element
+$secondary-color-background-inner-color: #ffffff;
+$hover-secondary-color-background-inner-color: #ffffff;
+
+//Info color
+$info-color: #03A9F4;
+$hover-info-color: #29B6F6;
+//Text colors for usage info color like a background for element
+$info-color-background-inner-color: #ffffff;
+$hover-info-color-background-inner-color: #ffffff;
+
+//Success color
+$success-color: #4CAF50;
+$hover-success-color: #66BB6A;
+//Text colors for usage success color like a background for element
+$success-color-background-inner-color: #ffffff;
+$hover-success-color-background-inner-color: #ffffff;
+
+//Warning color
+$warning-color: #FFEB3B;
+$hover-warning-color: #FFEE58;
+//Text colors for usage warning color like a background for element
+$warning-color-background-inner-color: #ffffff;
+$hover-warning-color-background-inner-color: #ffffff;
+
+//Danger color
+$danger-color: #F44336;
+$hover-danger-color: #EF5350;
+//Text colors for usage danger color like a background for element
+$danger-color-background-inner-color: #ffffff;
+$hover-danger-color-background-inner-color: #ffffff;
+
+$extra-colors-palette: (
+    my-palette-color-name: (
+        color: #E91E63,
+        hover-color: #EC407A,
+        background-inner-color: #ffffff,
+        hover-background-inner-color: #ffffff
+    ),
+    secondary: (
+        color: #E91E63,
+        hover-color: #EC407A,
+        background-inner-color: #ffffff,
+        hover-background-inner-color: #ffffff
+    ),
+    danger: (
+        color: $danger-color,
+        hover-color: $hover-danger-color,
+        background-inner-color: $danger-color-background-inner-color,
+        hover-background-inner-color: $hover-danger-color-background-inner-color
+    )
+);
+
+$skip-palette-colors: danger;

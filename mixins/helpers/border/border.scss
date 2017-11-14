@@ -1,0 +1,185 @@
+/**
+ * Create property based on sent config
+ *
+ * border values map look (every parameters is optional):
+ *
+ * $border-values: (
+ *     width: ...,
+ *     style: ...,
+ *     color: ...
+ * );
+ *
+ * @mixin
+ * @param border-property - name of border property (border | border-top | border-bottom | border-left | border-right)
+ * @param {map} border-values - border values map or single value
+ * @param {map} parent-border-values - parent border values looks like border-values - based on this values mixin calculate with values must be add to property
+ */
+@mixin _create_border_property($border-property, $border-values, $parent-border-values: null) {
+    @if is-map($border-values) {
+        @if false == is-map($parent-border-values) {
+            $parent-border-values: ();
+        }
+
+        $parent-border-width: map-get($parent-border-values, width);
+        $parent-border-style: map-get($parent-border-values, style);
+        $parent-border-color: map-get($parent-border-values, color);
+
+        $border-width: map-get($border-values, width);
+        $border-style: map-get($border-values, style);
+        $border-color: map-get($border-values, color);
+
+        @if (
+            $border-width 
+            and $border-width != $parent-border-width
+            and $border-style 
+            and $border-style != $parent-border-style
+            and $border-color
+            and $border-color != $parent-border-color
+        ) {
+            #{$border-property}: $border-width $border-style $border-color;
+        } @else {
+            @if $border-width and $border-width != $parent-border-width {
+                #{$border-property}-width: $border-width;
+            }
+
+            @if $border-style and $border-style != $parent-border-style {
+                #{$border-property}-style: $border-style;
+            }
+
+            @if $border-color and $border-color != $parent-border-color {
+                #{$border-property}-color: $border-color;
+            }
+        }
+    } @else {
+        #{$border-property}: $border-values;
+    }
+}
+
+/**
+ * Include border property based on sent config
+ *
+ * borders map look (every parameters is optional):
+ *
+ * $borders: (
+ *      border: (
+ *          width: ...,
+ *          style: ...,
+ *          color: ...
+ *      ),
+ *      border-top: (
+ *          width: ...,
+ *          style: ...,
+ *          color: ...
+ *      ),
+ *      border-bottom: (
+ *          width: ...,
+ *          style: ...,
+ *          color: ...
+ *      ),
+ *      border-left: (
+ *          width: ...,
+ *          style: ...,
+ *          color: ...
+ *      ),
+ *      border-right: (
+ *          width: ...,
+ *          style: ...,
+ *          color: ...
+ *      )
+ * );
+ *
+ * @mixin
+ * @param {map} borders - borders map
+ */
+@mixin border-shorthand($borders) {
+    $border: map-get($borders, border);
+    @include _create_border_property(border, $border);
+    @include _create_border_property(border-top, map-get($borders, border-top), $border);
+    @include _create_border_property(border-bottom, map-get($borders, border-bottom), $border);
+    @include _create_border_property(border-left, map-get($borders, border-left), $border);
+    @include _create_border_property(border-right, map-get($borders, border-right), $border);
+}
+
+/**
+ * Include border property and border for screens property based on sent config
+ *
+ * borders map look (every parameters is optional):
+ *
+ * $borders: (
+ *      border: (
+ *          width: ...,
+ *          style: ...,
+ *          color: ...
+ *      ),
+ *      border-top: (
+ *          width: ...,
+ *          style: ...,
+ *          color: ...
+ *      ),
+ *      border-bottom: (
+ *          width: ...,
+ *          style: ...,
+ *          color: ...
+ *      ),
+ *      border-left: (
+ *          width: ...,
+ *          style: ...,
+ *          color: ...
+ *      ),
+ *      border-right: (
+ *          width: ...,
+ *          style: ...,
+ *          color: ...
+ *      )
+ * );
+ *
+ * borders for screen map look (every parameters is optional):
+ *
+ * $borders: (
+ *      s2: (
+ *          border: (
+ *              width: ...,
+ *              style: ...,
+ *              color: ...
+ *          ),
+ *          border-top: (
+ *              width: ...,
+ *              style: ...,
+ *              color: ...
+ *          ),
+ *          border-bottom: (
+ *              width: ...,
+ *              style: ...,
+ *              color: ...
+ *          ),
+ *          border-left: (
+ *              width: ...,
+ *              style: ...,
+ *              color: ...
+ *          ),
+ *          border-right: (
+ *              width: ...,
+ *              style: ...,
+ *              color: ...
+ *          ),
+ *      )
+ * );
+ *
+ * @mixin
+ * @param {map} borders - borders map or single value
+ * @param {map} borders-for-screens - map with screens prefixes and borders map or single value
+ */
+
+@mixin border-shorthand-with-screens-support($borders, $borders-for-screens) {
+    @include border-shorthand($borders);
+    
+    @if is-map($borders-for-screens) {
+        @each $screen-prefix, $sizes in get-screens-map() {
+            @if map-has-key($borders-for-screens, $screen-prefix) {
+                @media(min-width: get-screen-size($screen-prefix, min)) {
+                    @include border-shorthand(map-get($borders-for-screens, $screen-prefix));
+                }
+            }
+        }
+    }
+}

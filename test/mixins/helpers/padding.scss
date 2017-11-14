@@ -1,0 +1,201 @@
+@import 'true';
+@import 'test-config/screens';
+@import '../../../functions/map';
+@import '../../../functions/screens';
+@import '../../../mixins/helpers/padding/padding';
+
+@include test-module('Gridi Framework Core - Mixins - Helpers - Padding') {
+    @include test('Test Mixin - padding-shorthand - test single value') {
+        @include assert {
+            @include output {
+                @include padding-shorthand(20px 20px);
+            }
+        
+            @include expect {
+                padding: 20px 20px;
+            }
+        }
+    }
+
+    @include test('Test Mixin - padding-shorthand - test map value with all the same paddings values') {
+        @include assert {
+            @include output {
+                @include padding-shorthand((
+                    top: 20px,
+                    bottom: 20px,
+                    left: 20px,
+                    right: 20px
+                ));
+            }
+        
+            @include expect {
+                padding: 20px;
+            }
+        }
+    }
+
+    @include test('Test Mixin - padding-shorthand - test map value with all the same vertical and horizontal paddings values') {
+        @include assert {
+            @include output {
+                @include padding-shorthand((
+                    top: 10px,
+                    bottom: 10px,
+                    left: 20px,
+                    right: 20px
+                ));
+            }
+        
+            @include expect {
+                padding: 10px 20px;
+            }
+        }
+    }
+
+    @include test('Test Mixin - padding-shorthand - test map value with different vertical and the same horizontal paddings values') {
+        @include assert {
+            @include output {
+                @include padding-shorthand((
+                    top: 10px,
+                    bottom: 30px,
+                    left: 20px,
+                    right: 20px
+                ));
+            }
+        
+            @include expect {
+                padding: 10px 20px 30px;
+            }
+        }
+    }
+
+    @include test('Test Mixin - padding-shorthand - test map value with different paddings values') {
+        @include assert {
+            @include output {
+                @include padding-shorthand((
+                    top: 10px,
+                    bottom: 20px,
+                    left: 30px,
+                    right: 40px
+                ));
+            }
+        
+            @include expect {
+                padding: 10px 40px 20px 30px;
+            }
+        }
+    }
+
+    @include test('Test Mixin - padding-shorthand - test map value with include only vertical paddings values') {
+        @include assert {
+            @include output {
+                @include padding-shorthand((
+                    top: 10px,
+                    bottom: 10px
+                ));
+            }
+        
+            @include expect {
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+        }
+    }
+
+    @include test('Test Mixin - padding-shorthand - test map value with include only horizontal paddings values') {
+        @include assert {
+            @include output {
+                @include padding-shorthand((
+                    right: 10px,
+                    left: 10px
+                ));
+            }
+        
+            @include expect {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        }
+    }
+
+    @include test('Test Mixin - padding-shorthand-with-screens-support') {
+        @include assert {
+            @include output {
+                @include padding-shorthand-with-screens-support((
+                    top: 20px,
+                    bottom: 20px,
+                    left: 20px,
+                    right: 20px
+                ), ());
+            }
+        
+            @include expect {
+                padding: 20px;
+            }
+        }
+
+        @include assert {
+            @include output {
+                @include padding-shorthand-with-screens-support((
+                    top: 20px,
+                    bottom: 20px,
+                    left: 20px,
+                    right: 20px
+                ), (
+                    s2: (
+                        top: 30px
+                    )
+                ));
+            }
+        
+            @include expect {
+                padding: 20px;
+                @media(min-width: 1024px) {
+                    padding-top: 30px;
+                }
+            }
+        }
+
+        @include assert {
+            @include output {
+                @include padding-shorthand-with-screens-support((
+                    top: 20px,
+                    bottom: 20px,
+                    left: 20px,
+                    right: 20px
+                ), (
+                    s2: (
+                        top: 30px
+                    ),
+                    s3: (
+                        left: 30px
+                    )
+                ));
+            }
+        
+            @include expect {
+                padding: 20px;
+                @media(min-width: 1024px) {
+                    padding-top: 30px;
+                }
+                @media(min-width: 1280px) {
+                    padding-left: 30px;
+                }
+            }
+        }
+
+        @include assert {
+            @include output {
+                @include padding-shorthand-with-screens-support(20px, (
+                    s2: 30px
+                ));
+            }
+        
+            @include expect {
+                padding: 20px;
+                @media(min-width: 1024px) {
+                    padding: 30px;
+                }
+            }
+        }
+    }
+}

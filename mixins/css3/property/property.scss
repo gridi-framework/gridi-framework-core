@@ -1,0 +1,116 @@
+/*
+USAGE: 
+
+.my-class {
+    @include css3-property(property-name, value, webkit moz ms o, true);
+}
+
+return: 
+
+.my-class {
+    -webkit-property-name: value;
+    -moz-property-name: value;
+    -ms-property-name: value;
+    -o-property-name: value;
+    property-name: value; 
+}
+
+OR:
+
+.my-class {
+    @include css3-property(transition-property, (
+        transform: (
+            use-browser-prefix: true
+        ),
+        width: (
+            use-browser-prefix: false
+        ),
+        height: ()
+    ), webkit moz ms o, true);
+}
+
+return:
+
+.my-class {
+    -webkit-transition-property: -webkit-transform, width, height;
+    -moz-transition-property: -moz-transform, width, height;
+    -ms-transition-property: -ms-transform, width, height;
+    -o-transition-property: -o-transform, width, height;
+    transition-property: transform, width, height; 
+}
+
+OR:
+
+.my-class {
+    @include css3-property(background, (
+        'linear-gradient(red, yellow)': (
+            use-browser-prefix: true
+        )
+    ), webkit moz ms o, false);
+}
+
+return:
+
+.my-class {
+    background: -webkit-linear-gradient(red, yellow);
+    background: -moz-linear-gradient(red, yellow);
+    background: -ms-linear-gradient(red, yellow);
+    background: -o-linear-gradient(red, yellow);
+    background: linear-gradient(red, yellow); 
+}
+*/
+@mixin css3-property($property, $value, $browsers-prefixes: webkit moz ms o, $set-property-prefix: true, $use-prefixes: $css3-use-prefixes) {
+    @if type-of($value) == 'map' {
+        @if true == $use-prefixes {
+            $value-to-set: '';
+
+            @each $prefix in $browsers-prefixes {
+                $value-to-set: '';
+                @each $v, $value-setting in $value {
+                    @if map-has-key($value-setting, use-browser-prefix) and true == map-get($value-setting, use-browser-prefix) {
+                        $value-to-set: '#{$value-to-set}, -#{$prefix}-#{$v}';
+                    } @else {
+                        $value-to-set: '#{$value-to-set}, #{$v}';
+                    }
+                }
+                $value-to-set: str-slice($value-to-set, 3); //Remove first comma
+                @if true == $set-property-prefix {
+                    -#{$prefix}-#{$property}: #{$value-to-set};
+                } @else {
+                    #{$property}: #{$value-to-set};   
+                }
+            }
+        }
+
+        $value-to-set: '';
+        @each $v, $value-setting in $value {
+            $value-to-set: '#{$value-to-set}, #{$v}';
+        }
+        $value-to-set: str-slice($value-to-set, 3); //Remove first comma
+        #{$property}: #{$value-to-set};
+
+    } @else {
+        @if true == $set-property-prefix and true == $use-prefixes {
+            @each $prefix in $browsers-prefixes {
+                -#{$prefix}-#{$property}: #{$value};
+            }
+        }
+        #{$property}: #{$value};
+    }
+}
+
+@mixin css3-webkit-property($property, $value) {
+    @include css3-property($property, $value, webkit);
+}
+
+@mixin css3-moz-property($property, $value) {
+    @include css3-property($property, $value, moz);
+}
+
+@mixin css3-ms-property($property, $value) {
+    @include css3-property($property, $value, ms);
+}
+
+@mixin css3-o-property($property, $value) {
+    @include css3-property($property, $value, o);
+}

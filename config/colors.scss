@@ -1,3 +1,31 @@
+//Colors map
+$extra-colors-map: () !default;
+//Define your own colors map
+//This colors map will be conect with default colors map (look on variables/colors)
+//You can also override the default colors here
+/*
+Example: 
+
+$extra-colors-map: (
+    my-color: (
+        50: #FFEBEE,
+        100: #FFCDD2,
+        200: #EF9A9A,
+        300: #E57373,
+        400: #EF5350,
+        500: #F44336,
+        600: #E53935,
+        700: #D32F2F,
+        800: #C62828,
+        900: #B71C1C,
+        a100: #FF8A80,
+        a200: #FF5252,
+        a400: #FF1744,
+        a700: #D50000,
+    )
+);
+*/
+
 //Primary color
 $primary-color: get-color(blue) !default;
 $hover-primary-color: get-color(blue, 400) !default;
@@ -41,7 +69,7 @@ $danger-color-background-inner-color: get-color(white) !default;
 $hover-danger-color-background-inner-color: get-color(white) !default;
 
 /*
-Fro get color palete use function "get-colors-palette". Default looks like this:
+Fro get colors palete use function "get-colors-palette". Default looks like this:
 $colors-palette: (
     primary: (
         color: $primary-color,
@@ -83,4 +111,25 @@ $colors-palette: (
 */
 
 $extra-colors-palette: () !default;
-$skip-palette-colors: null !default; //list: success, danger
+//Define your own colors palette
+//This palette will be conect with default colors palete (look higher)
+/*
+Example:
+
+$extra-colors-palette: (
+    my-palette-color-name: (
+        color: get-color(yellow),
+        hover-color: get-color(yellow),
+        background-inner-color: get-color(white),
+        hover-background-inner-color: get-color(white)
+    ),
+);
+*/
+$skip-palette-colors: null !default;
+//Define which colour palette to skip - make sass list
+/*
+Examples:
+
+$skip-palette-colors: success;
+$skip-palette-colors: success, danger;
+*/

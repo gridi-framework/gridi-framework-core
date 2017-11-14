@@ -1,0 +1,7 @@
+@mixin flex-flow($direction: row, $wrap: nowrap, $support-old-browsers: $support-old-browsers) {
+    @if $support-old-browsers {
+        @include flex-direction-old-browser($direction);
+        @include flex-wrap-old-browser($wrap);
+    }
+    @include css3-property(flex-flow, $direction $wrap, webkit moz ms);
+}

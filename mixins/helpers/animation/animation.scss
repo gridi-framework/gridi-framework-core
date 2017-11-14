@@ -1,0 +1,133 @@
+/**
+ * Include animation property based on sent config
+ *
+ * animation map look (every parameters is optional):
+ *
+ * $animation: (
+ *     name: ...,
+ *     duration: ...,
+ *     timing-function: ...,
+ *     delay: ...,
+ *     iteration-count: ...,
+ *     direction: ...,
+ *     fill-mode: ...,
+ *     play-state: ...,
+ *     make-shorthand: true | false
+ * );
+ *
+ * @mixin
+ * @param {map} animation - animation map or single value
+ */
+ @mixin animation-shorthand($animation) {
+    @if is-map($animation) {
+        $animation-name: map-get($animation, name);
+        $animation-duration: map-get($animation, duration);
+        $animation-timing-function: map-get($animation, timing-function);
+        $animation-delay: map-get($animation, delay);
+        $animation-iteration-count: map-get($animation, iteration-count);
+        $animation-direction: map-get($animation, direction);
+        $animation-fill-mode: map-get($animation, fill-mode);
+        $animation-play-state: map-get($animation, play-state);
+        $animation-make-shorthand: map-get($animation, make-shorthand);
+
+        @if true == $animation-make-shorthand or 
+            (
+                null == $animation-make-shorthand and
+                $animation-name and 
+                $animation-duration and 
+                $animation-timing-function and 
+                $animation-delay and
+                $animation-iteration-count and 
+                $animation-direction and
+                $animation-fill-mode and
+                $animation-play-state
+            ) {
+            @include animation($animation-name $animation-duration $animation-timing-function $animation-delay $animation-iteration-count $animation-direction $animation-fill-mode $animation-play-state);
+        } @else {
+            @if $animation-name {
+                @include animation-name($animation-name);
+            }
+
+            @if $animation-duration {
+                @include animation-duration($animation-duration);
+            }
+
+            @if $animation-timing-function {
+                @include animation-timing-function($animation-timing-function);
+            }
+
+            @if $animation-delay {
+                @include animation-delay($animation-delay);
+            }
+
+            @if $animation-iteration-count {
+                @include animation-iteration-count($animation-iteration-count);
+            }
+
+            @if $animation-direction {
+                @include animation-direction($animation-direction);
+            }
+
+            @if $animation-fill-mode {
+                @include animation-fill-mode($animation-fill-mode);
+            }
+
+            @if $animation-play-state {
+                @include animation-play-state($animation-play-state);
+            }
+        }
+    } @else if $animation {
+        @include animation($animation);
+    }
+}
+
+/**
+ * Include animation property and animation for screens property based on sent config
+ *
+ * animation map look (every parameters is optional):
+ *
+ * $animation: (
+ *     name: ...,
+ *     duration: ...,
+ *     timing-function: ...,
+ *     delay: ...,
+ *     iteration-count: ...,
+ *     direction: ...,
+ *     fill-mode: ...,
+ *     play-state: ...,
+ *     make-shorthand: true | false
+ * );
+ *
+ * animation for screen map look (every parameters is optional):
+ *
+ * $animation-for-screens: (
+ *     s2: (
+ *         name: ...,
+ *         duration: ...,
+ *         timing-function: ...,
+ *         delay: ...,
+ *         iteration-count: ...,
+ *         direction: ...,
+ *         fill-mode: ...,
+ *         play-state: ...,
+ *         make-shorthand: true | false
+ *     )
+ * );
+ *
+ * @mixin
+ * @param animation - animation map or single value
+ * @param {map} animation-for-screens - map with screens prefixes and animation map or single value
+ */
+@mixin animation-shorthand-with-screens-support($animation, $animation-for-screens) {
+    @include animation-shorthand($animation);
+    
+    @if is-map($animation-for-screens) {
+        @each $screen-prefix, $sizes in get-screens-map() {
+            @if map-has-key($animation-for-screens, $screen-prefix) {
+                @media(min-width: get-screen-size($screen-prefix, min)) {
+                    @include animation-shorthand(map-get($animation-for-screens, $screen-prefix));
+                }
+            }
+        }
+    }
+}

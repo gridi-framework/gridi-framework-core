@@ -1,0 +1,282 @@
+@import 'true';
+@import 'test-config/screens';
+@import '../../../functions/map';
+@import '../../../functions/screens';
+@import '../../../mixins/helpers/border/border';
+
+@include test-module('Gridi Framework Core - Mixins - Helpers - Border') {
+    @include test('Test Mixin - _create_border_property - test single value') {
+        @include assert {
+            @include output {
+                @include _create_border_property(border, 0);
+            }
+        
+            @include expect {
+                border: 0;
+            }
+        }
+    }
+
+    @include test('Test Mixin - _create_border_property - test map value') {
+        @include assert {
+            @include output {
+                @include _create_border_property(border, (
+                    width: 2px,
+                    style: solid,
+                    color: black
+                ));
+            }
+        
+            @include expect {
+                border: 2px solid black;
+            }
+        }
+    }
+
+    @include test('Test Mixin - _create_border_property - test map value with only width') {
+        @include assert {
+            @include output {
+                @include _create_border_property(border, (
+                    width: 2px
+                ));
+            }
+        
+            @include expect {
+                border-width: 2px;
+            }
+        }
+    }
+
+    @include test('Test Mixin - _create_border_property - test map value with only style and color') {
+        @include assert {
+            @include output {
+                @include _create_border_property(border, (
+                    style: solid,
+                    color: black
+                ));
+            }
+        
+            @include expect {
+                border-style: solid;
+                border-color: black;
+            }
+        }
+    }
+
+    @include test('Test Mixin - _create_border_property - test map value with parent border values and the same border values') {
+        @include assert {
+            @include output {
+                @include _create_border_property(border-top, (
+                    width: 2px,
+                    style: solid,
+                    color: black
+                ), (
+                    width: 2px,
+                    style: solid,
+                    color: black
+                ));
+            }
+        
+            @include expect {
+            }
+        }
+    }
+
+    @include test('Test Mixin - _create_border_property - test map value with parent border values and different border values') {
+        @include assert {
+            @include output {
+                @include _create_border_property(border-top, (
+                    width: 3px,
+                    style: dotted,
+                    color: blue
+                ), (
+                    width: 2px,
+                    style: solid,
+                    color: black
+                ));
+            }
+        
+            @include expect {
+                border-top: 3px dotted blue;
+            }
+        }
+    }
+
+    @include test('Test Mixin - _create_border_property - test map value with parent border values and different width') {
+        @include assert {
+            @include output {
+                @include _create_border_property(border-top, (
+                    width: 3px,
+                ), (
+                    width: 2px,
+                    style: solid,
+                    color: black
+                ));
+            }
+        
+            @include expect {
+                border-top-width: 3px;
+            }
+        }
+    }
+
+    @include test('Test Mixin - _create_border_property - test map value with parent border values and different style and color') {
+        @include assert {
+            @include output {
+                @include _create_border_property(border-top, (
+                    style: dotted,
+                    color: blue
+                ), (
+                    width: 2px,
+                    style: solid,
+                    color: black
+                ));
+            }
+        
+            @include expect {
+                border-top-style: dotted;
+                border-top-color: blue;
+            }
+        }
+    }
+
+    @include test('Test Mixin - _create_border_property - test map value with parent border values and the same width') {
+        @include assert {
+            @include output {
+                @include _create_border_property(border-top, (
+                    width: 3px,
+                ), (
+                    width: 3px,
+                    style: solid,
+                    color: black
+                ));
+            }
+        
+            @include expect {
+            }
+        }
+    }
+
+    @include test('Test Mixin - _create_border_property - test map value with parent border values and the same style') {
+        @include assert {
+            @include output {
+                @include _create_border_property(border-top, (
+                    style: solid,
+                ), (
+                    width: 3px,
+                    style: solid,
+                    color: black
+                ));
+            }
+        
+            @include expect {
+            }
+        }
+    }
+
+    @include test('Test Mixin - _create_border_property - test map value with parent border values and the same color') {
+        @include assert {
+            @include output {
+                @include _create_border_property(border-top, (
+                    color: black
+                ), (
+                    width: 3px,
+                    style: solid,
+                    color: black
+                ));
+            }
+        
+            @include expect {
+            }
+        }
+    }
+
+    @include test('Test Mixin - border-shorthand') {
+        @include assert {
+            @include output {
+                @include border-shorthand((
+                    border: (
+                        width: 2px,
+                        style: solid,
+                        color: black
+                    )
+                ));
+            }
+        
+            @include expect {
+                border: 2px solid black;
+            }
+        }
+
+        @include assert {
+            @include output {
+                @include border-shorthand((
+                    border: (
+                        width: 2px,
+                        style: solid,
+                        color: black
+                    ),
+                    border-top: (
+                        width: 3px,
+                        style: dotted,
+                        color: blue
+                    ),
+                    border-bottom: (
+                        width: 4px,
+                        style: solid,
+                        color: black
+                    ),
+                    border-left: (
+                        width: 5px,
+                        style: dotted,
+                        color: blue
+                    ),
+                    border-right: (
+                        width: 6px,
+                        style: dotted,
+                        color: blue
+                    )
+                ));
+            }
+        
+            @include expect {
+                border: 2px solid black;
+                border-top: 3px dotted blue;
+                border-bottom-width: 4px;
+                border-left: 5px dotted blue;
+                border-right: 6px dotted blue;
+            }
+        }
+    }
+
+    @include test('Test Mixin - border-shorthand-with-screens-support') {
+        @include assert {
+            @include output {
+                @include border-shorthand-with-screens-support((
+                    border: 0,
+                    border-top: (
+                        width: 2px,
+                        style: dotted,
+                        color: blue
+                    )
+                ), (
+                    s2: (
+                        border: (
+                            width: 2px,
+                            style: solid,
+                            color: black,
+                        )
+                    )
+                ));
+            }
+
+            @include expect {
+                border: 0;
+                border-top: 2px dotted blue;
+                @media (min-width: 1024px) {
+                    border: 2px solid black; 
+                }
+            }
+        }
+    }
+}

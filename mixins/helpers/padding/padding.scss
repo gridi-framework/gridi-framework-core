@@ -1,0 +1,94 @@
+/**
+ * Include padding property based on sent config
+ *
+ * paddings map look (every parameters is optional):
+ *
+ * $paddings: (
+ *     top: ...,
+ *     bottom: ...,
+ *     left: ...,
+ *     right: ...
+ * );
+ *
+ * @mixin
+ * @param paddings - paddings map or single value
+ */
+ @mixin padding-shorthand($paddings) {
+    @if is-map($paddings) {
+        $padding-top: map-get($paddings, top);
+        $padding-bottom: map-get($paddings, bottom);
+        $padding-left: map-get($paddings, left);
+        $padding-right: map-get($paddings, right);
+
+        @if $padding-top and $padding-bottom and $padding-left and $padding-right {
+            @if ($padding-top == $padding-bottom and $padding-top == $padding-left and $padding-top == $padding-right) {
+                padding: $padding-top;
+            } @else if ($padding-top == $padding-bottom and  $padding-left == $padding-right) {
+                padding: $padding-top $padding-left;
+            } @else if ($padding-top != $padding-bottom and  $padding-left == $padding-right) {
+                padding: $padding-top $padding-left $padding-bottom;
+            } @else {
+                padding: $padding-top $padding-right $padding-bottom $padding-left;
+            }
+        } @else {
+            @if $padding-top {
+                padding-top: $padding-top;
+            }
+
+            @if $padding-bottom {
+                padding-bottom: $padding-bottom;
+            }
+
+            @if $padding-left {
+                padding-left: $padding-left;
+            }
+
+            @if $padding-right {
+                padding-right: $padding-right;
+            }
+        }
+    } @else if $paddings {
+        padding: $paddings;
+    }
+}
+
+/**
+ * Include padding property and padding for screens property based on sent config
+ *
+ * paddings map look (every parameters is optional):
+ *
+ * $paddings: (
+ *     top: ...,
+ *     bottom: ...,
+ *     left: ...,
+ *     right: ...
+ * );
+ *
+ * paddings for screen map look (every parameters is optional):
+ *
+ * $paddings-for-screens: (
+ *     s2: (
+ *         top: ...,
+ *         bottom: ...,
+ *         left: ...,
+ *         right: ...
+ *     )
+ * );
+ *
+ * @mixin
+ * @param paddings - paddings map or single value
+ * @param {map} paddings-for-screens - map with screens prefixes and paddings map or single value
+ */
+@mixin padding-shorthand-with-screens-support($paddings, $paddings-for-screens) {
+    @include padding-shorthand($paddings);
+    
+    @if is-map($paddings-for-screens) {
+        @each $screen-prefix, $sizes in get-screens-map() {
+            @if map-has-key($paddings-for-screens, $screen-prefix) {
+                @media(min-width: get-screen-size($screen-prefix, min)) {
+                    @include padding-shorthand(map-get($paddings-for-screens, $screen-prefix));
+                }
+            }
+        }
+    }
+}

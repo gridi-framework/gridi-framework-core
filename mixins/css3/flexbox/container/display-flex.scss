@@ -1,0 +1,29 @@
+@mixin display-flex($support-old-browsers: $support-old-browsers) {
+    @if $support-old-browsers {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -webkit-flexbox;
+        display: -moz-flexbox;
+        display: -ms-flexbox;
+    }
+    @include css3-property(display, (
+        flex: (
+            use-browser-prefix: true
+        )
+    ), webkit moz ms, false);
+}
+
+@mixin display-inline-flex($support-old-browsers: $support-old-browsers) {
+    @if $support-old-browsers {
+        display: -webkit-inline-box;
+        display: -moz-inline-box;
+        display: -webkit-inline-flexbox;
+        display: -moz-inline-flexbox;
+        display: -ms-inline-flexbox;
+    }
+    @include css3-property(display, (
+        inline-flex: (
+            use-browser-prefix: true
+        )
+    ), webkit moz ms, false);
+}

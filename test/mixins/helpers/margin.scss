@@ -1,0 +1,201 @@
+@import 'true';
+@import 'test-config/screens';
+@import '../../../functions/map';
+@import '../../../functions/screens';
+@import '../../../mixins/helpers/margin/margin';
+
+@include test-module('Gridi Framework Core - Mixins - Helpers - Margin') {
+    @include test('Test Mixin - margin-shorthand - test single value') {
+        @include assert {
+            @include output {
+                @include margin-shorthand(20px 20px);
+            }
+        
+            @include expect {
+                margin: 20px 20px;
+            }
+        }
+    }
+
+    @include test('Test Mixin - margin-shorthand - test map value with all the same margins values') {
+        @include assert {
+            @include output {
+                @include margin-shorthand((
+                    top: 20px,
+                    bottom: 20px,
+                    left: 20px,
+                    right: 20px
+                ));
+            }
+        
+            @include expect {
+                margin: 20px;
+            }
+        }
+    }
+
+    @include test('Test Mixin - margin-shorthand - test map value with all the same vertical and horizontal margins values') {
+        @include assert {
+            @include output {
+                @include margin-shorthand((
+                    top: 10px,
+                    bottom: 10px,
+                    left: 20px,
+                    right: 20px
+                ));
+            }
+        
+            @include expect {
+                margin: 10px 20px;
+            }
+        }
+    }
+
+    @include test('Test Mixin - margin-shorthand - test map value with different vertical and the same horizontal margins values') {
+        @include assert {
+            @include output {
+                @include margin-shorthand((
+                    top: 10px,
+                    bottom: 30px,
+                    left: 20px,
+                    right: 20px
+                ));
+            }
+        
+            @include expect {
+                margin: 10px 20px 30px;
+            }
+        }
+    }
+
+    @include test('Test Mixin - margin-shorthand - test map value with different margins values') {
+        @include assert {
+            @include output {
+                @include margin-shorthand((
+                    top: 10px,
+                    bottom: 20px,
+                    left: 30px,
+                    right: 40px
+                ));
+            }
+        
+            @include expect {
+                margin: 10px 40px 20px 30px;
+            }
+        }
+    }
+
+    @include test('Test Mixin - margin-shorthand - test map value with include only vertical margins values') {
+        @include assert {
+            @include output {
+                @include margin-shorthand((
+                    top: 10px,
+                    bottom: 10px
+                ));
+            }
+        
+            @include expect {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+
+    @include test('Test Mixin - margin-shorthand - test map value with include only horizontal margins values') {
+        @include assert {
+            @include output {
+                @include margin-shorthand((
+                    right: 10px,
+                    left: 10px
+                ));
+            }
+        
+            @include expect {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+        }
+    }
+
+    @include test('Test Mixin - margin-shorthand-with-screens-support') {
+        @include assert {
+            @include output {
+                @include margin-shorthand-with-screens-support((
+                    top: 20px,
+                    bottom: 20px,
+                    left: 20px,
+                    right: 20px
+                ), ());
+            }
+        
+            @include expect {
+                margin: 20px;
+            }
+        }
+
+        @include assert {
+            @include output {
+                @include margin-shorthand-with-screens-support((
+                    top: 20px,
+                    bottom: 20px,
+                    left: 20px,
+                    right: 20px
+                ), (
+                    s2: (
+                        top: 30px
+                    )
+                ));
+            }
+        
+            @include expect {
+                margin: 20px;
+                @media(min-width: 1024px) {
+                    margin-top: 30px;
+                }
+            }
+        }
+
+        @include assert {
+            @include output {
+                @include margin-shorthand-with-screens-support((
+                    top: 20px,
+                    bottom: 20px,
+                    left: 20px,
+                    right: 20px
+                ), (
+                    s2: (
+                        top: 30px
+                    ),
+                    s3: (
+                        left: 30px
+                    )
+                ));
+            }
+        
+            @include expect {
+                margin: 20px;
+                @media(min-width: 1024px) {
+                    margin-top: 30px;
+                }
+                @media(min-width: 1280px) {
+                    margin-left: 30px;
+                }
+            }
+        }
+
+        @include assert {
+            @include output {
+                @include margin-shorthand-with-screens-support(20px, (
+                    s2: 30px
+                ));
+            }
+        
+            @include expect {
+                margin: 20px;
+                @media(min-width: 1024px) {
+                    margin: 30px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,48 @@
+@import 'true';
+@import 'test-config/screens';
+@import '../../functions/screens';
+
+@include test-module('Gridi Framework Core - Functions - Screens') {
+    @include test('Test Function - get-screens-map') {
+        @include assert-equal(get-screens-map(), (
+            s1: (
+                min: 568px,
+                max: 567px
+            ),
+            s2: (
+                min: 1024px,
+                max: 1023px
+            ),
+            s3: (
+                min: 1280px,
+                max: 1279px
+            )
+        ));
+
+        @include assert-equal(get-screens-map(s1 s3), (
+            s2: (
+                min: 1024px,
+                max: 1023px
+            )
+        ));
+    }
+
+    @include test('Test Function - get-screens-prefixes') {
+        $expect: s1, s2, s3;
+        @include assert-equal(get-screens-prefixes(), $expect);
+
+        $expect: s2,;
+        @include assert-equal(get-screens-prefixes(s1 s3), $expect);
+    }
+
+    @include test('Test Function - get-screen-size') {
+        @include assert-equal(get-screen-size(s1), 568px);
+        @include assert-equal(get-screen-size(s1, max), 567px);
+        @include assert-equal(get-screen-size(s3), 1280px);
+        @include assert-equal(get-screen-size(test, min, (
+            test: (
+                min: 1000px
+            )
+        )), 1000px);
+    }
+}

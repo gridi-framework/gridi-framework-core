@@ -1,0 +1,234 @@
+@import 'true';
+@import 'test-config/colors';
+@import '../../functions/map';
+@import '../../functions/colors';
+
+@include test-module('Gridi Framework Core - Functions - Colors') {
+    @include test('Test Function - get-colors-map') {
+        @include assert-equal(get-colors-map(), (
+            red: (
+                400: #EF5350,
+                500: #F44336,
+                600: #E53935
+            ),
+            blue: (
+                400: #29B6F6,
+                500: #03A9F4,
+                600: #039BE5
+            ),
+            yellow: (
+                400: #FFEE58,
+                500: #FFEB3B,
+                600: #FDD835
+            )
+        ));
+    }
+
+    @include test('Test Function - get-color') {
+        @include assert-equal(get-color(red), #F44336);
+        @include assert-equal(get-color(red, 400), #EF5350);
+        @include assert-equal(get-color(blue), #03A9F4);
+        @include assert-equal(get-color(yellow), #FFEB3B);
+        @include assert-equal(get-color(green, 400, (
+            green: (
+                400: #66BB6A,
+                500: #4CAF50,
+                600: #43A047
+            )
+        )), #66BB6A);
+    }
+
+    @include test('Test Function - get-colors-palette') {
+        @include assert-equal(get-colors-palette(),(
+            my-palette-color-name: (
+                color: #E91E63,
+                hover-color: #EC407A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            primary: (
+                color: #2196F3,
+                hover-color: #42A5F5,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            secondary: (
+                color: #000000,
+                hover-color: #212121,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            info: (
+                color: #03A9F4,
+                hover-color: #29B6F6,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            success: (
+                color: #4CAF50,
+                hover-color: #66BB6A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            warning: (
+                color: #FFEB3B,
+                hover-color: #FFEE58,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            )
+        ));
+    }
+
+    @include test('Test Function - get-colors-palette - with local-skip-palette-colors') {
+        @include assert-equal(get-colors-palette(null, primary secondary info warning),(
+            my-palette-color-name: (
+                color: #E91E63,
+                hover-color: #EC407A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            success: (
+                color: #4CAF50,
+                hover-color: #66BB6A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            )
+        ));
+    }
+
+    @include test('Test Function - get-colors-palette - with local-extra-colors-palette') {
+        @include assert-equal(get-colors-palette((
+            my-second-palette-color-name: (
+                color: #4CAF50,
+                hover-color: #66BB6A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            secondary: (
+                color: #E91E63,
+                hover-color: #EC407A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            )
+        )),(
+            my-palette-color-name: (
+                color: #E91E63,
+                hover-color: #EC407A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            primary: (
+                color: #2196F3,
+                hover-color: #42A5F5,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            secondary: (
+                color: #E91E63,
+                hover-color: #EC407A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            info: (
+                color: #03A9F4,
+                hover-color: #29B6F6,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            success: (
+                color: #4CAF50,
+                hover-color: #66BB6A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            warning: (
+                color: #FFEB3B,
+                hover-color: #FFEE58,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            my-second-palette-color-name: (
+                color: #4CAF50,
+                hover-color: #66BB6A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            )
+        ));
+    }
+
+    @include test('Test Function - get-colors-palette - with local-extra-colors-palette and local-skip-palette-colors') {
+        @include assert-equal(get-colors-palette((
+            my-second-palette-color-name: (
+                color: #4CAF50,
+                hover-color: #66BB6A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            secondary: (
+                color: #E91E63,
+                hover-color: #EC407A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            )
+        ), primary secondary info warning),(
+            my-palette-color-name: (
+                color: #E91E63,
+                hover-color: #EC407A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            success: (
+                color: #4CAF50,
+                hover-color: #66BB6A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            my-second-palette-color-name: (
+                color: #4CAF50,
+                hover-color: #66BB6A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            )
+        ));
+    }
+
+    @include test('Test Function - get-colors-palette - with local-extra-colors-palette overwriting single values and local-skip-palette-colors') {
+        @include assert-equal(get-colors-palette((
+            my-second-palette-color-name: (
+                color: #4CAF50,
+                hover-color: #66BB6A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            secondary: (
+                color: #E91E63,
+                hover-background-inner-color: #EC407A
+            )
+        ), primary info warning),(
+            my-palette-color-name: (
+                color: #E91E63,
+                hover-color: #EC407A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            secondary: (
+                color: #E91E63,
+                hover-color: #212121,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #EC407A
+            ),
+            success: (
+                color: #4CAF50,
+                hover-color: #66BB6A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            ),
+            my-second-palette-color-name: (
+                color: #4CAF50,
+                hover-color: #66BB6A,
+                background-inner-color: #ffffff,
+                hover-background-inner-color: #ffffff
+            )
+        ));
+    }
+}

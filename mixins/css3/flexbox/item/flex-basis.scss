@@ -1,0 +1,4 @@
+@mixin flex-basis($value: auto) {
+    -ms-flex-preferred-size: $value;
+    @include css3-property(flex-basis, $value, webkit moz ms);
+}

@@ -1,0 +1,169 @@
+@import 'true';
+@import 'test-config/screens';
+@import 'test-config/old-browsers';
+@import '../../../functions/map';
+@import '../../../functions/screens';
+@import '../../../mixins/css3/css3';
+@import '../../../mixins/helpers/animation/animation';
+
+@include test-module('Gridi Framework Core - Mixins - Helpers - Animation') {
+    @include test('Test Mixin - animation-shorthand - test single value') {
+        @include assert {
+            @include output {
+                @include animation-shorthand(mymove 5s infinite);
+            }
+        
+            @include expect {
+                animation: mymove 5s infinite;
+            }
+        }
+    }
+
+    @include test('Test Mixin - animation-shorthand - test map value') {
+        @include assert {
+            @include output {
+                @include animation-shorthand((
+                    name: mymove,
+                    duration: 0.3s,
+                    timing-function: ease,
+                    delay: 0.2s,
+                    iteration-count: 3,
+                    direction: normal,
+                    fill-mode: forwards,
+                    play-state: running
+                ));
+            }
+        
+            @include expect {
+                animation: mymove 0.3s ease 0.2s 3 normal forwards running;
+            }
+        }
+    }
+
+    @include test('Test Mixin - animation-shorthand - test map value with make-shorthand set to true') {
+        @include assert {
+            @include output {
+                @include animation-shorthand((
+                    name: mymove,
+                    duration: 0.3s,
+                    timing-function: ease,
+                    make-shorthand: true
+                ));
+            }
+        
+            @include expect {
+                animation: mymove 0.3s ease;
+            }
+        }
+    }
+
+    @include test('Test Mixin - animation-shorthand - test map value with make-shorthand set to false') {
+        @include assert {
+            @include output {
+                @include animation-shorthand((
+                    name: mymove,
+                    duration: 0.3s,
+                    timing-function: ease,
+                    make-shorthand: false
+                ));
+            }
+        
+            @include expect {
+                animation-name: mymove;
+                animation-duration: 0.3s;
+                animation-timing-function: ease;
+            }
+        }
+    }
+
+    @include test('Test Mixin - animation-shorthand - test map value with make-shorthand set to false and set all values') {
+        @include assert {
+            @include output {
+                @include animation-shorthand((
+                    name: mymove,
+                    duration: 0.3s,
+                    timing-function: ease,
+                    delay: 0.2s,
+                    iteration-count: 3,
+                    direction: normal,
+                    fill-mode: forwards,
+                    play-state: running,
+                    make-shorthand: false
+                ));
+            }
+        
+            @include expect {
+                animation-name: mymove;
+                animation-duration: 0.3s;
+                animation-timing-function: ease;
+                animation-delay: 0.2s;
+                animation-iteration-count: 3;
+                animation-direction: normal;
+                animation-fill-mode: forwards;
+                animation-play-state: running;
+            }
+        }
+    }
+
+    @include test('Test Mixin - animation-shorthand - test map value with only name') {
+        @include assert {
+            @include output {
+                @include animation-shorthand((
+                    name: mymove
+                ));
+            }
+        
+            @include expect {
+                animation-name: mymove;
+            }
+        }
+    }
+
+    @include test('Test Mixin - animation-shorthand - test map value with only duration, timing-function, delay, iteration-count, direction, fill-mode, play-state') {
+        @include assert {
+            @include output {
+                @include animation-shorthand((
+                    duration: 0.3s,
+                    timing-function: ease,
+                    delay: 0.2s,
+                    iteration-count: 3,
+                    direction: normal,
+                    fill-mode: forwards,
+                    play-state: running
+                ));
+            }
+        
+            @include expect {
+                animation-duration: 0.3s;
+                animation-timing-function: ease;
+                animation-delay: 0.2s;
+                animation-iteration-count: 3;
+                animation-direction: normal;
+                animation-fill-mode: forwards;
+                animation-play-state: running;
+            }
+        }
+    }
+
+    @include test('Test Mixin - animation-shorthand-with-screens-support') {
+        @include assert {
+            @include output {
+                @include animation-shorthand-with-screens-support(mymove 5s infinite, (
+                    s2: (
+                        name: mymove,
+                        duration: 0.3s,
+                        timing-function: ease,
+                        make-shorthand: true
+                    )
+                ));
+            }
+
+            @include expect {
+                animation: mymove 5s infinite;
+                @media (min-width: 1024px) {
+                    animation: mymove 0.3s ease; 
+                }
+            }
+        }
+    }
+}
