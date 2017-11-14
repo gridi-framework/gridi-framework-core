@@ -50,7 +50,7 @@
                 #{$border-property}-color: $border-color;
             }
         }
-    } @else {
+    } @else if $border-values {
         #{$border-property}: $border-values;
     }
 }
