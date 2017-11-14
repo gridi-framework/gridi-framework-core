@@ -6,7 +6,8 @@
  * $border-values: (
  *     width: ...,
  *     style: ...,
- *     color: ...
+ *     color: ...,
+ *     make-shorthand: true | false
  * );
  *
  * @mixin
@@ -27,15 +28,18 @@
         $border-width: map-get($border-values, width);
         $border-style: map-get($border-values, style);
         $border-color: map-get($border-values, color);
+        $border-make-shorthand: map-get($border-values, make-shorthand);
 
         @if (
-            $border-width 
-            and $border-width != $parent-border-width
-            and $border-style 
-            and $border-style != $parent-border-style
-            and $border-color
-            and $border-color != $parent-border-color
-        ) {
+            true == $border-make-shorthand or (
+                null == $border-make-shorthand
+                and $border-width 
+                and $border-width != $parent-border-width
+                and $border-style 
+                and $border-style != $parent-border-style
+                and $border-color
+                and $border-color != $parent-border-color
+        )) {
             #{$border-property}: $border-width $border-style $border-color;
         } @else {
             @if $border-width and $border-width != $parent-border-width {

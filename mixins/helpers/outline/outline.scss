@@ -7,6 +7,7 @@
  *     width: ...,
  *     style: ...,
  *     color: ...
+ *     make-shorthand: true | false
  * );
  *
  * @mixin
@@ -17,8 +18,9 @@
         $outline-width: map-get($outline, width);
         $outline-style: map-get($outline, style);
         $outline-color: map-get($outline, color);
+        $outline-make-shorthand: map-get($outline, make-shorthand);
 
-        @if $outline-width and $outline-style and $outline-color {
+        @if true == $outline-make-shorthand or (null == $outline-make-shorthand and $outline-width and $outline-style and $outline-color) {
             outline: $outline-width $outline-style $outline-color;
         } @else {
             @if $outline-width {
