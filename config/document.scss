@@ -9,9 +9,9 @@ $document-font-variant: null !default;
 $document-font-weight: normal !default;
 $document-font-size: 1em !default;
 $document-line-height: 1.6em !default;
-$document-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$document-font-family: ("Helvetica Neue", Helvetica, Arial, sans-serif) !default;
 
-$document-monospace-font-family: Consolas, "Liberation Mono", Courier, monospace !default;
+$document-monospace-font-family: (Consolas, "Liberation Mono", Courier, monospace) !default;
 
 //Defined font for each screens.
 $document-font-for-screens: () !default;
