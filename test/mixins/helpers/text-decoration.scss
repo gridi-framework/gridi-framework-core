@@ -1,7 +1,9 @@
 @import 'true';
 @import 'test-config/screens';
+@import 'test-config/old-browsers';
 @import '../../../functions/map';
 @import '../../../functions/screens';
+@import '../../../mixins/css3/css3';
 @import '../../../mixins/helpers/text-decoration/text-decoration';
 
 @include test-module('Gridi Framework Core - Mixins - Helpers - Text Decoration') {

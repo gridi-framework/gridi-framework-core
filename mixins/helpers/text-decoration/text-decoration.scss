@@ -24,15 +24,15 @@
             text-decoration: $text-decoration-line $text-decoration-style $text-decoration-color;
         } @else {
             @if $text-decoration-line {
-                text-decoration-line: $text-decoration-line;
+                @include text-decoration-line($text-decoration-line);
             }
 
             @if $text-decoration-style {
-                text-decoration-style: $text-decoration-style;
+                @include text-decoration-style($text-decoration-style);
             }
 
             @if $text-decoration-color {
-                text-decoration-color: $text-decoration-color;
+                @include text-decoration-color($text-decoration-color);
             }
         }
     } @else if $text-decoration {
