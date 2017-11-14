@@ -1,0 +1,11 @@
+@mixin text-decoration-color($value) {
+    @include css3-property(text-decoration-color, $value, webkit moz);
+}
+
+@mixin text-decoration-line($value: none) {
+    @include css3-property(text-decoration-line, $value, webkit moz);
+}
+
+@mixin text-decoration-style($value: solid) {
+    @include css3-property(text-decoration-style, $value, moz);
+}

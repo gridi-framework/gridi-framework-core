@@ -1,0 +1,80 @@
+/**
+ * Include text-decoration property based on sent config
+ *
+ * text-decoration map look (every parameters is optional):
+ *
+ * $text-decoration: (
+ *     line: ...,
+ *     style: ...,
+ *     color: ...
+ *     make-shorthand: true | false
+ * );
+ *
+ * @mixin
+ * @param {map} text-decoration - text-decoration map or single value
+ */
+@mixin text-decoration-shorthand($text-decoration) {
+    @if is-map($text-decoration) {
+        $text-decoration-line: map-get($text-decoration, line);
+        $text-decoration-style: map-get($text-decoration, style);
+        $text-decoration-color: map-get($text-decoration, color);
+        $text-decoration-make-shorthand: map-get($text-decoration, make-shorthand);
+
+        @if true == $text-decoration-make-shorthand or (null == $text-decoration-make-shorthand and $text-decoration-line and $text-decoration-style and $text-decoration-color) {
+            text-decoration: $text-decoration-line $text-decoration-style $text-decoration-color;
+        } @else {
+            @if $text-decoration-line {
+                text-decoration-line: $text-decoration-line;
+            }
+
+            @if $text-decoration-style {
+                text-decoration-style: $text-decoration-style;
+            }
+
+            @if $text-decoration-color {
+                text-decoration-color: $text-decoration-color;
+            }
+        }
+    } @else if $text-decoration {
+        text-decoration: $text-decoration;
+    }
+}
+
+/**
+ * Include text-decoration property and text-decoration for screens property based on sent config
+ *
+ * text-decoration map look (every parameters is optional):
+ *
+ * $text-decoration: (
+ *     line: ...,
+ *     style: ...,
+ *     color: ...
+ * );
+ *
+ * text-decoration for screen map look (every parameters is optional):
+ *
+ * $text-decoration-for-screens: (
+ *     s2: (
+ *         line: ...,
+ *         style: ...,
+ *         color: ...
+ *     )
+ * );
+ *
+ * @mixin
+ * @param text-decoration - text-decoration map or single value
+ * @param {map} text-decoration-for-screens - map with screens prefixes and text-decoration map or single value
+ */
+@mixin text-decoration-shorthand-with-screens-support($text-decoration, $text-decoration-for-screens) {
+    @include text-decoration-shorthand($text-decoration);
+    
+    @if is-map($text-decoration-for-screens) {
+        @each $screen-prefix, $sizes in get-screens-map() {
+            @if map-has-key($text-decoration-for-screens, $screen-prefix) {
+                @media(min-width: get-screen-size($screen-prefix, min)) {
+                    @include text-decoration-shorthand(map-get($text-decoration-for-screens, $screen-prefix));
+                }
+            }
+        }
+    }
+}

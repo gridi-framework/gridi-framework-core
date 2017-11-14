@@ -191,6 +191,55 @@
         }
     }
 
+    @include test('Test Mixin - _create_border_property - test map value with make-shorthand set to true') {
+        @include assert {
+            @include output {
+                @include _create_border_property(border, (
+                    width: 0,
+                    make-shorthand: true
+                ));
+            }
+        
+            @include expect {
+                border: 0;
+            }
+        }
+    }
+
+    @include test('Test Mixin - _create_border_property - test map value with make-shorthand set to false') {
+        @include assert {
+            @include output {
+                @include _create_border_property(border, (
+                    width: 0,
+                    make-shorthand: false
+                ));
+            }
+        
+            @include expect {
+                border-width: 0;
+            }
+        }
+    }
+
+    @include test('Test Mixin - _create_border_property - test map value with make-shorthand set to false and set all values') {
+        @include assert {
+            @include output {
+                @include _create_border_property(border, (
+                    width: 2px,
+                    style: solid,
+                    color: black,
+                    make-shorthand: false
+                ));
+            }
+        
+            @include expect {
+                border-width: 2px;
+                border-style: solid;
+                border-color: black;
+            }
+        }
+    }
+
     @include test('Test Mixin - border-shorthand') {
         @include assert {
             @include output {

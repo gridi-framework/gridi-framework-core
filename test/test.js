@@ -19,4 +19,5 @@ sassTrue.runSass({file: path.join(__dirname, 'mixins/helpers/padding.scss')}, de
 sassTrue.runSass({file: path.join(__dirname, 'mixins/helpers/font.scss')}, describe, it);
 
 sassTrue.runSass({file: path.join(__dirname, 'mixins/helpers/animation.scss')}, describe, it);
+sassTrue.runSass({file: path.join(__dirname, 'mixins/helpers/text-decoration.scss')}, describe, it);
 sassTrue.runSass({file: path.join(__dirname, 'mixins/helpers/transition.scss')}, describe, it);
