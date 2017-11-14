@@ -33,7 +33,10 @@ $bold-elements-font-weight: 600 !default;
 $thin-elements-font-weight: 300 !default;
 
 //Inline backgrounds
-$inline-background-elements-padding: 0.15em 0.35em !default;
+$inline-background-elements-padding-top: 0.15em !default;
+$inline-background-elements-padding-bottom: 0.15em !default;
+$inline-background-elements-padding-left: 0.35em !default;
+$inline-background-elements-padding-right: 0.35em !default;
 
 //Transitions
 $elements-transition-duration: 0.2s !default;
