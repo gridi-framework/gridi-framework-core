@@ -26,14 +26,14 @@ $elements-gutter-for-screens: (
 ) !default;
 */
 
-//List elements
+//List item elements
 //Margin
-$list-elements-item-margin-top: 0.3em !default;
-$list-elements-item-margin-bottom: $list-elements-item-margin-top !default;
-$list-elements-item-margin-left: 0 !default;
-$list-elements-item-margin-right: $list-elements-item-margin-left !default;
+$list-item-elements-margin-top: 0.3em !default;
+$list-item-elements-margin-bottom: $list-item-elements-margin-top !default;
+$list-item-elements-margin-left: 0 !default;
+$list-item-elements-margin-right: $list-item-elements-margin-left !default;
 //Defined margins for each screens.
-$list-elements-item-margin-for-screens: () !default;
+$list-item-elements-margin-for-screens: () !default;
 /*$elements-margin-for-screens: (
     s1: (
         top: 20px, //Not required. Define only the margins values you want to change. Example - s2: ( top: 20px ) - change only top margin for screens greater than s2
