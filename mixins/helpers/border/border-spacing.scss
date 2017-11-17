@@ -1,0 +1,66 @@
+/**
+ * Include border- pacing property based on sent config
+ *
+ * border-spacings map look (every parameters is optional):
+ *
+ * $border-spacings: (
+ *     horizontal: ...,
+ *     vertical: ...,
+ * );
+ *
+ * @mixin
+ * @param border-spacings - border-spacings map or single value
+ */
+ @mixin border-spacing-shorthand($border-spacings) {
+    @if is-map($border-spacings) {
+        $border-spacing-horizontal: map-get($border-spacings, horizontal);
+        $border-spacing-vertical: map-get($border-spacings, vertical);
+
+        @if $border-spacing-horizontal and $border-spacing-vertical {
+            @if $border-spacing-horizontal == $border-spacing-vertical {
+                border-spacing: $border-spacing-horizontal;
+            } @else {
+                border-spacing: $border-spacing-horizontal $border-spacing-vertical;
+            }
+        }
+    } @else if $border-spacings {
+        border-spacing: $border-spacings;
+    }
+}
+
+/**
+ * Include border spacing property and border spacing for screens property based on sent config
+ *
+ * border-spacings map look (every parameters is optional):
+ *
+ * $border-spacings: (
+ *     horizontal: ...,
+ *     vertical: ...,
+ * );
+ *
+ * border-spacings for screen map look (every parameters is optional):
+ *
+ * $border-spacings-for-screens: (
+ *     s2: (
+ *         horizontal: ...,
+ *         vertical: ...,
+ *     )
+ * );
+ *
+ * @mixin
+ * @param border-spacings - border-spacings map or single value
+ * @param {map} border-spacings-for-screens - map with screens prefixes and border-spacings map or single value
+ */
+@mixin border-spacing-shorthand-with-screens-support($border-spacings, $border-spacings-for-screens) {
+    @include border-spacing-shorthand($border-spacings);
+    
+    @if is-map($border-spacings-for-screens) {
+        @each $screen-prefix, $sizes in get-screens-map() {
+            @if map-has-key($border-spacings-for-screens, $screen-prefix) {
+                @media(min-width: get-screen-size($screen-prefix, min)) {
+                    @include border-spacing-shorthand(map-get($border-spacings-for-screens, $screen-prefix));
+                }
+            }
+        }
+    }
+}
