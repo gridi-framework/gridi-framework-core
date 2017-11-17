@@ -1,39 +1,10 @@
 //Margin
-$elements-margin-top: 20px !default;
+$elements-margin-top: 1.4rem !default;
 $elements-margin-bottom: $elements-margin-top !default;
 $elements-margin-left: 0 !default;
 $elements-margin-right: $elements-margin-left !default;
 //Defined margins for each screens.
 $elements-margin-for-screens: () !default;
-/*$elements-margin-for-screens: (
-    s1: (
-        top: 20px, //Not required. Define only the margins values you want to change. Example - s2: ( top: 20px ) - change only top margin for screens greater than s2
-        bottom: 20px,
-        left: 20px,
-        right: 20px,
-    ),
-    ...
-) !default;*/
-
-//Gutter
-$elements-gutter: 30px !default;
-$elements-gutter-for-screens: () !default;
-//Defined gutter for each screens.
-/*
-$elements-gutter-for-screens: (
-    s1: 40px,
-    ...
-) !default;
-*/
-
-//List item elements
-//Margin
-$list-item-elements-margin-top: 0.3em !default;
-$list-item-elements-margin-bottom: $list-item-elements-margin-top !default;
-$list-item-elements-margin-left: 0 !default;
-$list-item-elements-margin-right: $list-item-elements-margin-left !default;
-//Defined margins for each screens.
-$list-item-elements-margin-for-screens: () !default;
 /*$elements-margin-for-screens: (
     s1: (
         top: 20px, //Not required. Define only the margins values you want to change. Example - s2: ( top: 20px ) - change only top margin for screens greater than s2
@@ -50,12 +21,59 @@ $bold-elements-font-weight: 600 !default;
 //Thin elements
 $thin-elements-font-weight: 300 !default;
 
+//Transitions
+$elements-transition-duration: 0.2s !default;
+$elements-transition-function: linear !default;
+
 //Inline backgrounds
 $inline-background-elements-padding-top: 0.15em !default;
 $inline-background-elements-padding-bottom: 0.15em !default;
 $inline-background-elements-padding-left: 0.35em !default;
 $inline-background-elements-padding-right: 0.35em !default;
 
-//Transitions
-$elements-transition-duration: 0.2s !default;
-$elements-transition-function: linear !default;
+//Gutter
+$elements-gutter: 30px !default;
+$elements-gutter-for-screens: () !default;
+//Defined gutter for each screens.
+/*
+$elements-gutter-for-screens: (
+    s1: 40px,
+    ...
+) !default;
+*/
+
+//List item elements
+//Margin
+$list-item-elements-margin-top: 0.3rem !default;
+$list-item-elements-margin-bottom: $list-item-elements-margin-top !default;
+$list-item-elements-margin-left: 0 !default;
+$list-item-elements-margin-right: $list-item-elements-margin-left !default;
+//Defined margins for each screens.
+$list-item-elements-margin-for-screens: () !default;
+/*$elements-margin-for-screens: (
+    s1: (
+        top: 20px, //Not required. Define only the margins values you want to change. Example - s2: ( top: 20px ) - change only top margin for screens greater than s2
+        bottom: 20px,
+        left: 20px,
+        right: 20px,
+    ),
+    ...
+) !default;*/
+
+//Form item elements
+//Margin
+$form-item-elements-margin-top: 0.5rem !default;
+$form-item-elements-margin-bottom: $form-item-elements-margin-top !default;
+$form-item-elements-margin-left: 0 !default;
+$form-item-elements-margin-right: $form-item-elements-margin-left !default;
+//Defined margins for each screens.
+$form-item-elements-margin-for-screens: () !default;
+/*$elements-margin-for-screens: (
+    s1: (
+        top: 20px, //Not required. Define only the margins values you want to change. Example - s2: ( top: 20px ) - change only top margin for screens greater than s2
+        bottom: 20px,
+        left: 20px,
+        right: 20px,
+    ),
+    ...
+) !default;*/
