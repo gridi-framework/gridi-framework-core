@@ -1,18 +1,44 @@
-@mixin align-self($value: auto, $support-old-browsers: $support-old-browsers) {
-    @if $support-old-browsers {
+@mixin align-self($value: auto, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-flexbox-browsers-prefixes,
+        use-prefixes: $css3-flexbox-use-prefixes,
+        support-old-browsers: $css3-flexbox-support-old-browsers
+    ), $settings);
+
+    @if map-get($settings, support-old-browsers) and map-get($settings, use-prefixes) {
+        $browsers-prefixes: map-get($settings, browsers-prefixes);
+        
         @if $value == flex-start {
-            -webkit-flex-item-align: start;
-            -moz-flex-item-align: start;
-            -ms-flex-item-align: start;
+            @if index($browsers-prefixes, webkit) {
+                -webkit-flex-item-align: start;
+            }
+            @if index($browsers-prefixes, moz) {
+                -moz-flex-item-align: start;
+            }
+            @if index($browsers-prefixes, ms) {
+                -ms-flex-item-align: start;
+            }
         } @else if $value == flex-end {
-            -webkit-flex-item-align: end;
-            -moz-flex-item-align: end;
-            -ms-flex-item-align: end;
+            @if index($browsers-prefixes, webkit) {
+                -webkit-flex-item-align: end;
+            }
+            @if index($browsers-prefixes, moz) {
+                -moz-flex-item-align: end;
+            }
+            @if index($browsers-prefixes, ms) {
+                -ms-flex-item-align: end;
+            }
         } @else {
-            -webkit-flex-item-align: $value;
-            -moz-flex-item-align: $value;
-            -ms-flex-item-align: $value;
+            @if index($browsers-prefixes, webkit) {
+                -webkit-flex-item-align: $value;
+            }
+            @if index($browsers-prefixes, moz) {
+                -moz-flex-item-align: $value;
+            }
+            @if index($browsers-prefixes, ms) {
+                -ms-flex-item-align: $value;
+            }
         }
     }
-    @include css3-property(align-self, $value, webkit moz ms);
+    @include property-with-browsers-prefixes(align-self, $value, $settings);
 }

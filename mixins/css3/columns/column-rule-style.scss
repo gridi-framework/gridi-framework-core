@@ -1,3 +1,7 @@
-@mixin column-rule-style($value) {
-    @include css3-property(column-rule-style, $value, webkit moz);
+@mixin column-rule-style($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-columns-browsers-prefixes,
+        use-prefixes: $css3-columns-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(column-rule-style, $value, $settings);
 }

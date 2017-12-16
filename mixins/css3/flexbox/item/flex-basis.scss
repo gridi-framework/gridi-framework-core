@@ -1,4 +1,11 @@
-@mixin flex-basis($value: auto) {
-    -ms-flex-preferred-size: $value;
-    @include css3-property(flex-basis, $value, webkit moz ms);
+@mixin flex-basis($value: auto, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-flexbox-browsers-prefixes,
+        use-prefixes: $css3-flexbox-use-prefixes,
+    ), $settings);
+
+    @if index(map-get($settings, browsers-prefixes), ms) and map-get($settings, use-prefixes) {
+        -ms-flex-preferred-size: $value;
+    }
+    @include property-with-browsers-prefixes(flex-basis, $value, $settings);
 }

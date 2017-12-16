@@ -1,3 +1,8 @@
-@mixin object-position($value) {
-    @include css3-property(object-position, $value, o);
+@mixin object-position($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-object-position-browsers-prefixes,
+        use-prefixes: $css3-object-position-use-prefixes
+    ), $settings);
+
+    @include property-with-browsers-prefixes(object-position, $value, $settings);
 }

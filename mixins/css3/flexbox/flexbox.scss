@@ -1,8 +1,18 @@
-@mixin supports-flex {
-    @supports ( (display: -webkit-flex) or (display: -moz-flex) or (display: -ms-flex) or (display: flex) ) {
-        @content;
+@mixin supports-flex($settings: ()) {
+    $settings: map-merge((
+        use-prefixes: $css3-flexbox-use-prefixes
+    ), $settings);
+
+    @if map-get($settings, use-prefixes) {
+        @supports ( (display: -webkit-flex) or (display: -moz-flex) or (display: -ms-flex) or (display: flex) ) {
+            @content;
+        }
+    } @else {
+        @supports (display: flex) {
+            @content;
+        }
     }
- }
+}
  
 //Mixins for the Parent
 @import 'container/display-flex';

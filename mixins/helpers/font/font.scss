@@ -48,7 +48,7 @@
         $font-family: map-get($font, family);
         $font-make-shorthand: map-get($font, make-shorthand);
 
-        @if (true == $font-make-shorthand and $font-size and $font-family) or (null == $font-make-shorthand and $font-style and $font-variant and $font-weight and $font-size and $line-height and $font-family) {
+        @if true == $font-make-shorthand or (null == $font-make-shorthand and $font-style and $font-variant and $font-weight and $font-size and $line-height and $font-family) {
             $value: $font-style $font-variant $font-weight;
 
             @if $line-height {

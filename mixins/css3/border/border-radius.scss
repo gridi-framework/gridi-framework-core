@@ -1,19 +1,39 @@
-@mixin border-radius($value: 0) {
-    @include css3-property(border-radius, $value, webkit moz);
+@mixin border-radius($value: 0, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-border-radius-browsers-prefixes,
+        use-prefixes: $css3-border-radius-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(border-radius, $value, $settings);
 }
 
-@mixin border-top-left-radius($value: 0) {
-    @include css3-property(border-top-left-radius, $value, webkit moz);
+@mixin border-top-left-radius($value: 0, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-border-radius-browsers-prefixes,
+        use-prefixes: $css3-border-radius-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(border-top-left-radius, $value, $settings);
 }
 
-@mixin border-top-right-radius($value: 0) {
-    @include css3-property(border-top-right-radius, $value, webkit moz);
+@mixin border-top-right-radius($value: 0, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-border-radius-browsers-prefixes,
+        use-prefixes: $css3-border-radius-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(border-top-right-radius, $value, $settings);
 }
 
-@mixin border-bottom-right-radius($value: 0) {
-    @include css3-property(border-bottom-right-radius, $value, webkit moz);
+@mixin border-bottom-right-radius($value: 0, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-border-radius-browsers-prefixes,
+        use-prefixes: $css3-border-radius-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(border-bottom-right-radius, $value, $settings);
 }
 
-@mixin border-bottom-left-radius($value: 0) {
-    @include css3-property(border-bottom-left-radius, $value, webkit moz);
+@mixin border-bottom-left-radius($value: 0, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-border-radius-browsers-prefixes,
+        use-prefixes: $css3-border-radius-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(border-bottom-left-radius, $value, $settings);
 }

@@ -1,51 +1,55 @@
-@mixin filter($value) {
-    @include css3-property(filter, $value, webkit);
+@mixin filter($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-filter-browsers-prefixes,
+        use-prefixes: $css3-filter-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(filter, $value, $settings);
 }
 
-@mixin filter-none {
-    @include filter(none);
+@mixin filter-none($settings: ()) {
+    @include filter(none, $settings);
 }
 
-@mixin filter-blur($value) {
-    @include filter("blur(#{$value})");
+@mixin filter-blur($value, $settings: ()) {
+    @include filter("blur(#{$value})", $settings);
 }
 
-@mixin filter-brightness($value) {
-    @include filter("brightness(#{$value})");
+@mixin filter-brightness($value, $settings: ()) {
+    @include filter("brightness(#{$value})", $settings);
 }
 
-@mixin filter-contrast($value) {
-    @include filter("contrast(#{$value})");
+@mixin filter-contrast($value, $settings: ()) {
+    @include filter("contrast(#{$value})", $settings);
 }
 
-@mixin filter-drop-shadow($value) {
-    @include filter("drop-shadow(#{$value})");
+@mixin filter-drop-shadow($value, $settings: ()) {
+    @include filter("drop-shadow(#{$value})", $settings);
 }
 
-@mixin filter-grayscale($value) {
-    @include filter("grayscale(#{$value})");
+@mixin filter-grayscale($value, $settings: ()) {
+    @include filter("grayscale(#{$value})", $settings);
 }
 
-@mixin filter-hue-rotate($value) {
-    @include filter("hue-rotate(#{$value})");
+@mixin filter-hue-rotate($value, $settings: ()) {
+    @include filter("hue-rotate(#{$value})", $settings);
 }
 
-@mixin filter-invert($value) {
-    @include filter("invert(#{$value})");
+@mixin filter-invert($value, $settings: ()) {
+    @include filter("invert(#{$value})", $settings);
 }
 
-@mixin filter-opacity($value) {
-    @include filter("opacity(#{$value})");
+@mixin filter-opacity($value, $settings: ()) {
+    @include filter("opacity(#{$value})", $settings);
 }
 
-@mixin filter-saturate($value) {
-    @include filter("saturate(#{$value})");
+@mixin filter-saturate($value, $settings: ()) {
+    @include filter("saturate(#{$value})", $settings);
 }
 
-@mixin filter-sepia($value) {
-    @include filter("sepia(#{$value})");
+@mixin filter-sepia($value, $settings: ()) {
+    @include filter("sepia(#{$value})", $settings);
 }
 
-@mixin filter-url($value) {
-    @include filter("url(#{$value})");
+@mixin filter-url($value, $settings: ()) {
+    @include filter("url(#{$value})", $settings);
 }

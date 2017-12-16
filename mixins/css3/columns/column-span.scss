@@ -1,3 +1,7 @@
-@mixin column-span($value) {
-    @include css3-property(column-span, $value, webkit moz);
+@mixin column-span($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-columns-browsers-prefixes,
+        use-prefixes: $css3-columns-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(column-span, $value, $settings);
 }

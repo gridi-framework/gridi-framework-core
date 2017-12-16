@@ -3,10 +3,10 @@
 @import '../../../mixins/css3/property/property';
 
 @include test-module('Gridi Framework Core - Mixins - CSS3 - Property') {
-    @include test('Test Mixin - css3-property') {
+    @include test('Test Mixin - property-with-browsers-prefixes') {
         @include assert {
             @include output {
-                @include css3-property(border-radius, 50%)
+                @include property-with-browsers-prefixes(border-radius, 50%)
             }
         
             @include expect {
@@ -19,10 +19,10 @@
         }
     }
 
-    @include test('Test Mixin - css3-property - test browser prefixes') {
+    @include test('Test Mixin - property-with-browsers-prefixes - test browser prefixes') {
         @include assert {
             @include output {
-                @include css3-property(border-radius, 50%, webkit moz)
+                @include property-with-browsers-prefixes(border-radius, 50%, (browsers-prefixes: webkit moz))
             }
         
             @include expect {
@@ -33,10 +33,13 @@
         }
     }
 
-    @include test('Test Mixin - css3-property - test not set browser prefixes to property') {
+    @include test('Test Mixin - property-with-browsers-prefixes - test not set browser prefixes to property') {
         @include assert {
             @include output {
-                @include css3-property(border-radius, 50%, webkit moz, false)
+                @include property-with-browsers-prefixes(border-radius, 50%, (
+                    browsers-prefixes: webkit moz,
+                    set-property-prefix: false
+                ))
             }
         
             @include expect {
@@ -45,10 +48,14 @@
         }
     }
 
-    @include test('Test Mixin - css3-property - test not use browser prefixes') {
+    @include test('Test Mixin - property-with-browsers-prefixes - test not use browser prefixes') {
         @include assert {
             @include output {
-                @include css3-property(border-radius, 50%, webkit moz, true, false)
+                @include property-with-browsers-prefixes(border-radius, 50%, (
+                    browsers-prefixes: webkit moz,
+                    set-property-prefix: true,
+                    use-prefixes: false
+                ))
             }
         
             @include expect {
@@ -57,10 +64,10 @@
         }
     }
 
-    @include test('Test Mixin - css3-property - when value is map') {
+    @include test('Test Mixin - property-with-browsers-prefixes - when value is map') {
         @include assert {
             @include output {
-                @include css3-property(transition-property, (
+                @include property-with-browsers-prefixes(transition-property, (
                     transform: (
                         use-browser-prefix: true
                     ),
@@ -81,10 +88,10 @@
         }
     }
 
-    @include test('Test Mixin - css3-property - when value is map and use | not use browser prefixes or value') {
+    @include test('Test Mixin - property-with-browsers-prefixes - when value is map and use | not use browser prefixes or value') {
         @include assert {
             @include output {
-                @include css3-property(transition-property, (
+                @include property-with-browsers-prefixes(transition-property, (
                     transform: (
                         use-browser-prefix: true
                     ),
@@ -92,7 +99,7 @@
                         use-browser-prefix: false
                     ),
                     height: ()
-                ), webkit moz);
+                ), (browsers-prefixes: webkit moz));
             }
         
             @include expect {
@@ -103,14 +110,17 @@
         }
     }
 
-    @include test('Test Mixin - css3-property - when value is map and use browser prefixes or value with browser prefixes and not set browser prefixes to property') {
+    @include test('Test Mixin - property-with-browsers-prefixes - when value is map and use browser prefixes or value with browser prefixes and not set browser prefixes to property') {
         @include assert {
             @include output {
-                @include css3-property(background, (
+                @include property-with-browsers-prefixes(background, (
                     'linear-gradient(red, yellow)': (
                         use-browser-prefix: true
                     )
-                ), webkit moz, false);
+                ), (
+                    browsers-prefixes: webkit moz,
+                    set-property-prefix: false
+                ))
             }
         
             @include expect {
@@ -121,10 +131,10 @@
         }
     }
 
-    @include test('Test Mixin - css3-property - when value is map and use browser prefixes or value with browser prefixes, not set browser prefixes to property and not use browser prefixes') {
+    @include test('Test Mixin - property-with-browsers-prefixes - when value is map and use browser prefixes or value with browser prefixes, not set browser prefixes to property and not use browser prefixes') {
         @include assert {
             @include output {
-                @include css3-property(transition-property, (
+                @include property-with-browsers-prefixes(transition-property, (
                     transform: (
                         use-browser-prefix: true
                     ),
@@ -132,7 +142,11 @@
                         use-browser-prefix: false
                     ),
                     height: ()
-                ), webkit moz, true, false);
+                ), (
+                    browsers-prefixes: webkit moz,
+                    set-property-prefix: true,
+                    use-prefixes: false
+                ))
             }
         
             @include expect {

@@ -1,15 +1,33 @@
-@mixin keyframes($animation-name) {
-     @-webkit-keyframes #{$animation-name}{
-        @content;
-    }
-    @-moz-keyframes #{$animation-name} {
-         @content;
-    }
-    @-ms-keyframes #{$animation-name} {
-         @content;
-    }
-    @-o-keyframes #{$animation-name} {
-         @content;
+@mixin keyframes($animation-name, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: webkit moz ms o,
+        use-prefixes: $css3-animation-use-prefixes
+    ), $settings);
+
+    $browsers-prefixes: map-get($settings, browsers-prefixes);
+    $use-prefixes: map-get($settings, use-prefixes);
+
+    @if $use-prefixes {
+        @if index($browsers-prefixes, webkit) {
+            @-webkit-keyframes #{$animation-name}{
+                @content;
+            }
+        }
+        @if index($browsers-prefixes, moz) {
+            @-moz-keyframes #{$animation-name} {
+                @content;
+            }
+        }
+        @if index($browsers-prefixes, ms) {
+            @-ms-keyframes #{$animation-name} {
+                @content;
+            }
+        }
+        @if index($browsers-prefixes, o) {
+            @-o-keyframes #{$animation-name} {
+                @content;
+            }
+        }
     }
     @keyframes #{$animation-name} {
          @content;

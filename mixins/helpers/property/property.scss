@@ -4,10 +4,17 @@
  * @mixin
  * @param {map} map - map with propertys
  * @param property - property name
+ * @param [value-key=null] - key in map for ger value for property
  */
-@mixin property-from-map($map, $property) {
-    @if is-map($map) and map-has-key($map, $property) and map-get($map, $property) {
-        #{$property}: map-get($map, $property);
+@mixin property-from-map($map, $property, $value-key: null) {
+    $map-key: $property;
+
+    @if $value-key {
+        $map-key: $value-key;
+    }
+
+    @if is-map($map) and map-has-key($map, $map-key) and map-get($map, $map-key) {
+        #{$property}: map-get($map, $map-key);
     }
 }
 

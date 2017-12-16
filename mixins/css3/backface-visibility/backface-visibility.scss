@@ -1,3 +1,7 @@
-@mixin backface-visibility($value: visible) {
-    @include css3-property(backface-visibility, $value, webkit moz);
+@mixin backface-visibility($value: visible, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-backface-visibility-browsers-prefixes,
+        use-prefixes: $css3-backface-visibility-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(backface-visibility, $value, $settings);
 }

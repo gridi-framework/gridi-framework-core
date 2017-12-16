@@ -1,3 +1,8 @@
-@mixin transition($value) {
-    @include css3-property(transition, $value, webkit moz o);
+@mixin transition($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transition-browsers-prefixes,
+        use-prefixes: $css3-transition-use-prefixes
+    ), $settings);
+
+    @include property-with-browsers-prefixes(transition, $value, $settings);
 }

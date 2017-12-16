@@ -1,71 +1,156 @@
 //tranform-style
-@mixin transform-style($value: flat) {
-    @include css3-property(transform-style, $value);
+@mixin transform-style($value: flat, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+    @include property-with-browsers-prefixes(transform-style, $value, $settings);
 }
 
 //perspective
-@mixin perspective($value: none) {
-    @include css3-property(perspective, $value);
+@mixin perspective($value: none, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+    @include property-with-browsers-prefixes(perspective, $value, $settings);
 }
 
 //perspective-origin
-@mixin perspective-origin($value) {
-    @include css3-property(perspective-origin, $value);
+@mixin perspective-origin($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+    @include property-with-browsers-prefixes(perspective-origin, $value, $settings);
 }
 
 //transforms
-@mixin transform-3d-matrix3d($value) {
-	@include transform(matrix3d(#{$value}));
+@mixin transform-3d-matrix3d($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(matrix3d(#{$value}), $settings);
 }
 
-@mixin transform-3d-translate3d($value) {
-	@include transform(translate3d(#{$value}));
+@mixin transform-3d-translate3d($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(translate3d(#{$value}), $settings);
 }
 
-@mixin transform-3d-translateX($value) {
-	@include transform(translateX(#{$value}));
+@mixin transform-3d-translateX($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(translateX(#{$value}), $settings);
 }
 
-@mixin transform-3d-translateY($value) {
-	@include transform(translateY(#{$value}));
+@mixin transform-3d-translateY($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(translateY(#{$value}), $settings);
 }
 
-@mixin transform-3d-translateZ($value) {
-	@include transform(translateZ(#{$value}));
+@mixin transform-3d-translateZ($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(translateZ(#{$value}), $settings);
 }
 
-@mixin transform-3d-scale3d($value) {
-	@include transform(scale3d(#{$value}));
+@mixin transform-3d-scale3d($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(scale3d(#{$value}), $settings);
 }
 
-@mixin transform-3d-scaleX($value) {
-	@include transform(scaleX(#{$value}));
+@mixin transform-3d-scaleX($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(scaleX(#{$value}), $settings);
 }
 
-@mixin transform-3d-scaleY($value) {
-	@include transform(scaleY(#{$value}));
+@mixin transform-3d-scaleY($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(scaleY(#{$value}), $settings);
 }
 
-@mixin transform-3d-scaleZ($value) {
-	@include transform(scaleZ(#{$value}));
+@mixin transform-3d-scaleZ($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(scaleZ(#{$value}), $settings);
 }
 
-@mixin transform-3d-rotate3d($value) {
-	@include transform(rotate3d(#{$value}));
+@mixin transform-3d-rotate3d($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(rotate3d(#{$value}), $settings);
 }
 
-@mixin transform-3d-rotateX($value) {
-	@include transform(rotateX(#{$value}));
+@mixin transform-3d-rotateX($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(rotateX(#{$value}), $settings);
 }
 
-@mixin transform-3d-rotateY($value) {
-	@include transform(rotateY(#{$value}));
+@mixin transform-3d-rotateY($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(rotateY(#{$value}), $settings);
 }
 
-@mixin transform-3d-rotateZ($value) {
-	@include transform(rotateZ(#{$value}));
+@mixin transform-3d-rotateZ($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(rotateZ(#{$value}), $settings);
 }
 
-@mixin transform-3d-perspective($value) {
-	@include transform(perspective(#{$value}));
+@mixin transform-3d-perspective($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(perspective(#{$value}), $settings);
 }

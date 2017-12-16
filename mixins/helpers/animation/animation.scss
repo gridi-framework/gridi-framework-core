@@ -29,6 +29,11 @@
         $animation-fill-mode: map-get($animation, fill-mode);
         $animation-play-state: map-get($animation, play-state);
         $animation-make-shorthand: map-get($animation, make-shorthand);
+        $animation-css3-settings: map-get($animation, css3-settings);
+        
+        @if not is-map($animation-css3-settings) {
+            $animation-css3-settings: ();
+        }
 
         @if true == $animation-make-shorthand or 
             (
@@ -42,38 +47,38 @@
                 $animation-fill-mode and
                 $animation-play-state
             ) {
-            @include animation($animation-name $animation-duration $animation-timing-function $animation-delay $animation-iteration-count $animation-direction $animation-fill-mode $animation-play-state);
+            @include animation($animation-name $animation-duration $animation-timing-function $animation-delay $animation-iteration-count $animation-direction $animation-fill-mode $animation-play-state, $animation-css3-settings);
         } @else {
             @if $animation-name {
-                @include animation-name($animation-name);
+                @include animation-name($animation-name, $animation-css3-settings);
             }
 
             @if $animation-duration {
-                @include animation-duration($animation-duration);
+                @include animation-duration($animation-duration, $animation-css3-settings);
             }
 
             @if $animation-timing-function {
-                @include animation-timing-function($animation-timing-function);
+                @include animation-timing-function($animation-timing-function, $animation-css3-settings);
             }
 
             @if $animation-delay {
-                @include animation-delay($animation-delay);
+                @include animation-delay($animation-delay, $animation-css3-settings);
             }
 
             @if $animation-iteration-count {
-                @include animation-iteration-count($animation-iteration-count);
+                @include animation-iteration-count($animation-iteration-count, $animation-css3-settings);
             }
 
             @if $animation-direction {
-                @include animation-direction($animation-direction);
+                @include animation-direction($animation-direction, $animation-css3-settings);
             }
 
             @if $animation-fill-mode {
-                @include animation-fill-mode($animation-fill-mode);
+                @include animation-fill-mode($animation-fill-mode, $animation-css3-settings);
             }
 
             @if $animation-play-state {
-                @include animation-play-state($animation-play-state);
+                @include animation-play-state($animation-play-state, $animation-css3-settings);
             }
         }
     } @else if $animation {

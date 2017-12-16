@@ -1,24 +1,62 @@
-@mixin align-items($value: stretch, $support-old-browsers: $support-old-browsers) {
-    @if $support-old-browsers {
+@mixin align-items($value: stretch, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-flexbox-browsers-prefixes,
+        use-prefixes: $css3-flexbox-use-prefixes,
+        support-old-browsers: $css3-flexbox-support-old-browsers
+    ), $settings);
+
+    @if map-get($settings, support-old-browsers) and map-get($settings, use-prefixes) {
+        $browsers-prefixes: map-get($settings, browsers-prefixes);
+
         @if $value == flex-start{
-            -webkit-box-align: start;
-            -moz-box-align: start;
-            -webkit-flex-align: start;
-            -moz-flex-align: start;
-            -ms-flex-align: start;
+            @if index($browsers-prefixes, webkit) {
+                -webkit-box-align: start;
+            }
+            @if index($browsers-prefixes, moz) {
+                -moz-box-align: start;
+            }
+            @if index($browsers-prefixes, webkit) {
+                -webkit-flex-align: start;
+            }
+            @if index($browsers-prefixes, moz) {
+                -moz-flex-align: start;
+            }
+            @if index($browsers-prefixes, ms) {
+                -ms-flex-align: start;
+            }
         } @else if $value == flex-end {
-            -webkit-box-align: end;
-            -moz-box-align: end;
-            -webkit-flex-align: end;
-            -moz-flex-align: end;
-            -ms-flex-align: end;
+            @if index($browsers-prefixes, webkit) {
+                -webkit-box-align: end;
+            }
+            @if index($browsers-prefixes, moz) {
+                -moz-box-align: end;
+            }
+            @if index($browsers-prefixes, webkit) {
+                -webkit-flex-align: end;
+            }
+            @if index($browsers-prefixes, moz) {
+                -moz-flex-align: end;
+            }
+            @if index($browsers-prefixes, ms) {
+                -ms-flex-align: end;
+            }
         } @else {
-            -webkit-box-align: $value;
-            -moz-box-align: $value;
-            -webkit-flex-align: $value;
-            -moz-flex-align: $value;
-            -ms-flex-align: $value;
+            @if index($browsers-prefixes, webkit) {
+                -webkit-box-align: $value;
+            }
+            @if index($browsers-prefixes, moz) {
+                -moz-box-align: $value;
+            }
+            @if index($browsers-prefixes, webkit) {
+                -webkit-flex-align: $value;
+            }
+            @if index($browsers-prefixes, moz) {
+                -moz-flex-align: $value;
+            }
+            @if index($browsers-prefixes, ms) {
+                -ms-flex-align: $value;
+            }
         }
     }
-    @include css3-property(align-items, $value, webkit moz ms);
+    @include property-with-browsers-prefixes(align-items, $value, $settings);
 }

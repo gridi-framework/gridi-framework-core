@@ -1,0 +1,89 @@
+$css3-use-prefixes: true !default;
+
+//Animation
+$css3-animation-browsers-prefixes: webkit moz ms o !default;
+$css3-animation-use-prefixes: $css3-use-prefixes !default;
+
+//Appearance
+$css3-appearance-browsers-prefixes: webkit moz !default;
+$css3-appearance-use-prefixes: $css3-use-prefixes !default;
+
+//Backface visibility
+$css3-backface-visibility-browsers-prefixes: webkit moz !default;
+$css3-backface-visibility-use-prefixes: $css3-use-prefixes !default;
+
+//Background
+$css3-background-size-browsers-prefixes: webkit moz ms o !default;
+$css3-background-size-use-prefixes: $css3-use-prefixes !default;
+
+$css3-gradient-browsers-prefixes: webkit moz ms o !default;
+$css3-gradient-use-prefixes: $css3-use-prefixes !default;
+
+//Border
+$css3-border-image-browsers-prefixes: webkit moz ms o !default;
+$css3-border-image-use-prefixes: $css3-use-prefixes !default;
+
+$css3-border-radius-browsers-prefixes: webkit moz !default;
+$css3-border-radius-use-prefixes: $css3-use-prefixes !default;
+
+//Box sizing
+$css3-box-sizing-browsers-prefixes: webkit moz !default;
+$css3-box-sizing-use-prefixes: $css3-use-prefixes !default;
+
+//Columns
+$css3-columns-browsers-prefixes: webkit moz !default;
+$css3-columns-use-prefixes: $css3-use-prefixes !default;
+
+//Filter
+$css3-filter-browsers-prefixes: webkit !default;
+$css3-filter-use-prefixes: $css3-use-prefixes !default;
+
+//Flexbox
+$css3-flexbox-browsers-prefixes: webkit moz ms !default;
+$css3-flexbox-use-prefixes: $css3-use-prefixes !default;
+$css3-flexbox-support-old-browsers: $support-old-browsers !default;
+
+//Object
+$css3-object-fit-browsers-prefixes: o !default;
+$css3-object-fit-use-prefixes: $css3-use-prefixes !default;
+
+$css3-object-position-browsers-prefixes: o !default;
+$css3-object-position-use-prefixes: $css3-use-prefixes !default;
+
+//Opacity
+$css3-opacity-support-old-browsers: $support-old-browsers !default;
+
+//Resize
+$css3-resize-browsers-prefixes: moz !default;
+$css3-resize-use-prefixes: $css3-use-prefixes !default;
+
+//Box shadow
+$css3-box-shadow-browsers-prefixes: webkit moz !default;
+$css3-box-shadow-use-prefixes: $css3-use-prefixes !default;
+
+//Text
+$css3-text-align-last-browsers-prefixes: moz !default;
+$css3-text-align-last-use-prefixes: $css3-use-prefixes !default;
+
+$css3-text-decoration-color-browsers-prefixes: webkit moz !default;
+$css3-text-decoration-color-use-prefixes: $css3-use-prefixes !default;
+
+$css3-text-decoration-line-browsers-prefixes: webkit moz !default;
+$css3-text-decoration-line-use-prefixes: $css3-use-prefixes !default;
+
+$css3-text-decoration-style-browsers-prefixes: moz !default;
+$css3-text-decoration-style-use-prefixes: $css3-use-prefixes !default;
+
+$css3-text-overflow-browsers-prefixes: o !default;
+$css3-text-overflow-use-prefixes: $css3-use-prefixes !default;
+
+$css3-text-size-adjust-browsers-prefixes: webkit moz ms o !default;
+$css3-text-size-adjust-use-prefixes: $css3-use-prefixes !default;
+
+//Transform
+$css3-transform-browsers-prefixes: webkit moz ms o !default;
+$css3-transform-use-prefixes: $css3-use-prefixes !default;
+
+//Transform
+$css3-transition-browsers-prefixes: webkit moz o !default;
+$css3-transition-use-prefixes: $css3-use-prefixes !default;

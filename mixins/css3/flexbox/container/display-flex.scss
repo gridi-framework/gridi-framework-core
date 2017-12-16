@@ -1,29 +1,65 @@
-@mixin display-flex($support-old-browsers: $support-old-browsers) {
-    @if $support-old-browsers {
-        display: -webkit-box;
-        display: -moz-box;
-        display: -webkit-flexbox;
-        display: -moz-flexbox;
-        display: -ms-flexbox;
+@mixin display-flex($settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-flexbox-browsers-prefixes,
+        use-prefixes: $css3-flexbox-use-prefixes,
+        set-property-prefix: false,
+        support-old-browsers: $css3-flexbox-support-old-browsers
+    ), $settings);
+
+    @if map-get($settings, support-old-browsers) and map-get($settings, use-prefixes) {
+        $browsers-prefixes: map-get($settings, browsers-prefixes);
+        @if index($browsers-prefixes, webkit) {
+            display: -webkit-box;
+        }
+        @if index($browsers-prefixes, moz) {
+            display: -moz-box;
+        }
+        @if index($browsers-prefixes, webkit) {
+            display: -webkit-flexbox;
+        }
+        @if index($browsers-prefixes, moz) {
+            display: -moz-flexbox;
+        }
+        @if index($browsers-prefixes, ms) {
+            display: -ms-flexbox;
+        }
     }
-    @include css3-property(display, (
+    @include property-with-browsers-prefixes(display, (
         flex: (
             use-browser-prefix: true
         )
-    ), webkit moz ms, false);
+    ), $settings);
 }
 
-@mixin display-inline-flex($support-old-browsers: $support-old-browsers) {
-    @if $support-old-browsers {
-        display: -webkit-inline-box;
-        display: -moz-inline-box;
-        display: -webkit-inline-flexbox;
-        display: -moz-inline-flexbox;
-        display: -ms-inline-flexbox;
+@mixin display-inline-flex($settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-flexbox-browsers-prefixes,
+        use-prefixes: $css3-flexbox-use-prefixes,
+        set-property-prefix: false,
+        support-old-browsers: $css3-flexbox-support-old-browsers
+    ), $settings);
+
+    @if map-get($settings, support-old-browsers) and map-get($settings, use-prefixes) {
+        $browsers-prefixes: map-get($settings, browsers-prefixes);
+        @if index($browsers-prefixes, webkit) {
+            display: -webkit-inline-box;
+        }
+        @if index($browsers-prefixes, moz) {
+            display: -moz-inline-box;
+        }
+        @if index($browsers-prefixes, webkit) {
+            display: -webkit-inline-flexbox;
+        }
+        @if index($browsers-prefixes, moz) {
+            display: -moz-inline-flexbox;
+        }
+        @if index($browsers-prefixes, ms) {
+            display: -ms-inline-flexbox;
+        }
     }
-    @include css3-property(display, (
+    @include property-with-browsers-prefixes(display, (
         inline-flex: (
             use-browser-prefix: true
         )
-    ), webkit moz ms, false);
+    ), $settings);
 }

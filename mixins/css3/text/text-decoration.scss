@@ -1,11 +1,26 @@
-@mixin text-decoration-color($value) {
-    @include css3-property(text-decoration-color, $value, webkit moz);
+@mixin text-decoration-color($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-text-decoration-color-browsers-prefixes,
+        use-prefixes: $css3-text-decoration-color-use-prefixes
+    ), $settings);
+
+    @include property-with-browsers-prefixes(text-decoration-color, $value, $settings);
 }
 
-@mixin text-decoration-line($value: none) {
-    @include css3-property(text-decoration-line, $value, webkit moz);
+@mixin text-decoration-line($value: none, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-text-decoration-line-browsers-prefixes,
+        use-prefixes: $css3-text-decoration-line-use-prefixes
+    ), $settings);
+
+    @include property-with-browsers-prefixes(text-decoration-line, $value, $settings);
 }
 
-@mixin text-decoration-style($value: solid) {
-    @include css3-property(text-decoration-style, $value, moz);
+@mixin text-decoration-style($value: solid, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-text-decoration-style-browsers-prefixes,
+        use-prefixes: $css3-text-decoration-style-use-prefixes
+    ), $settings);
+
+    @include property-with-browsers-prefixes(text-decoration-style, $value, $settings);
 }

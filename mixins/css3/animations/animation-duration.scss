@@ -1,3 +1,7 @@
-@mixin animation-duration($value) {
-    @include css3-property(animation-duration, $value);
+@mixin animation-duration($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-animation-browsers-prefixes,
+        use-prefixes: $css3-animation-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(animation-duration, $value, $settings);
 }

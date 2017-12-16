@@ -1,3 +1,7 @@
-@mixin animation-direction($value) {
-    @include css3-property(animation-direction, $value);
+@mixin animation-direction($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-animation-browsers-prefixes,
+        use-prefixes: $css3-animation-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(animation-direction, $value, $settings);
 }

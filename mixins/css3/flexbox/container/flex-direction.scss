@@ -1,30 +1,52 @@
-@mixin flex-direction-old-browser($value) {
+@mixin flex-direction-old-browser($value, $browsers-prefixes: $css3-flexbox-browsers-prefixes) {
      @if $value == row-reverse{
-        -webkit-box-direction: reverse;
-        -webkit-box-orient: horizontal;
-        -moz-box-direction: reverse;
-        -moz-box-orient: horizontal;
+        @if index($browsers-prefixes, webkit) {
+            -webkit-box-direction: reverse;
+            -webkit-box-orient: horizontal;
+        }
+        @if index($browsers-prefixes, moz) {
+            -moz-box-direction: reverse;
+            -moz-box-orient: horizontal;
+        }
     } @else if $value == column {
-        -webkit-box-direction: normal;
-        -webkit-box-orient: vertical;
-        -moz-box-direction: normal;
-        -moz-box-orient: vertical;
+        @if index($browsers-prefixes, webkit) {
+            -webkit-box-direction: normal;
+            -webkit-box-orient: vertical;
+        }
+        @if index($browsers-prefixes, moz) {
+            -moz-box-direction: normal;
+            -moz-box-orient: vertical;
+        }
     } @else if $value == column-reverse {
-        -webkit-box-direction: reverse;
-        -webkit-box-orient: vertical;
-        -moz-box-direction: reverse;
-        -moz-box-orient: vertical;
+        @if index($browsers-prefixes, webkit) {
+            -webkit-box-direction: reverse;
+            -webkit-box-orient: vertical;
+        }
+        @if index($browsers-prefixes, moz) {
+            -moz-box-direction: reverse;
+            -moz-box-orient: vertical;
+        }
     } @else {
-        -webkit-box-direction: normal;
-        -webkit-box-orient: horizontal;
-        -moz-box-direction: normal;
-        -moz-box-orient: horizontal;
+        @if index($browsers-prefixes, webkit) {
+            -webkit-box-direction: normal;
+            -webkit-box-orient: horizontal;
+        }
+        @if index($browsers-prefixes, moz) {
+            -moz-box-direction: normal;
+            -moz-box-orient: horizontal;
+        }
     }
 }
 
-@mixin flex-direction($value: row, $support-old-browsers: $support-old-browsers) {
-    @if $support-old-browsers {
-        @include flex-direction-old-browser($value);
+@mixin flex-direction($value: row, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-flexbox-browsers-prefixes,
+        use-prefixes: $css3-flexbox-use-prefixes,
+        support-old-browsers: $css3-flexbox-support-old-browsers
+    ), $settings);
+
+    @if map-get($settings, support-old-browsers) and map-get($settings, use-prefixes) {
+        @include flex-direction-old-browser($value, map-get($settings, browsers-prefixes));
     }
-    @include css3-property(flex-direction, $value, webkit moz ms);
+    @include property-with-browsers-prefixes(flex-direction, $value, $settings);
 }

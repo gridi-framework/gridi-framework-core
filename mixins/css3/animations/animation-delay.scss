@@ -1,3 +1,7 @@
-@mixin animation-delay($value) {
-    @include css3-property(animation-delay, $value);
+@mixin animation-delay($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-animation-browsers-prefixes,
+        use-prefixes: $css3-animation-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(animation-delay, $value, $settings);
 }

@@ -1,3 +1,8 @@
-@mixin box-shadow($value: none) {
-    @include css3-property(box-shadow, $value, webkit moz);
+@mixin box-shadow($value: none, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-box-shadow-browsers-prefixes,
+        use-prefixes: $css3-box-shadow-use-prefixes
+    ), $settings);
+    
+    @include property-with-browsers-prefixes(box-shadow, $value, $settings);
 }

@@ -1,9 +1,24 @@
-@mixin object-fit($value: fill) {
-    @include css3-property(object-fit, $value, o);
+@mixin object-fit($value: fill, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-object-fit-browsers-prefixes,
+        use-prefixes: $css3-object-fit-use-prefixes
+    ), $settings);
+    
+    @include property-with-browsers-prefixes(object-fit, $value, $settings);
 }
 
-@mixin supports-object-fit() {
-    @supports ( (object-fit: cover) or (-o-object-fit: cover) ) {
-        @content;
+@mixin supports-object-fit($settings: ()) {
+    $settings: map-merge((
+        use-prefixes: $css3-object-fit-use-prefixes
+    ), $settings);
+
+    @if map-get($settings, use-prefixes) {
+        @supports ( (object-fit: cover) or (-o-object-fit: cover) ) {
+            @content;
+        }
+    } @else {
+        @supports (object-fit: cover) {
+            @content;
+        }
     }
 }

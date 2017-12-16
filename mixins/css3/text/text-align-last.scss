@@ -1,4 +1,8 @@
-@mixin text-align-last($value: auto) {
-    @include css3-moz-property(text-align-last, $value);
-    text-align-last: #{$value};
+@mixin text-align-last($value: auto, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-text-align-last-browsers-prefixes,
+        use-prefixes: $css3-text-align-last-use-prefixes
+    ), $settings);
+
+    @include property-with-browsers-prefixes(text-align-last, $value, $settings);
 }

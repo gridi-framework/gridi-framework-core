@@ -1,23 +1,47 @@
-@mixin border-image($value) {
-    @include css3-property(border-image, $value);
+@mixin border-image($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-border-image-browsers-prefixes,
+        use-prefixes: $css3-border-image-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(border-image, $value, $settings);
 }
 
-@mixin border-image-source($value) {
-    @include css3-property(border-image-source, $value);
+@mixin border-image-source($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-border-image-browsers-prefixes,
+        use-prefixes: $css3-border-image-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(border-image-source, $value, $settings);
 }
 
-@mixin border-image-slice($value) {
-    @include css3-property(border-image-slice, $value);
+@mixin border-image-slice($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-border-image-browsers-prefixes,
+        use-prefixes: $css3-border-image-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(border-image-slice, $value, $settings);
 }
 
-@mixin border-image-width($value) {
-    @include css3-property(border-image-width, $value);
+@mixin border-image-width($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-border-image-browsers-prefixes,
+        use-prefixes: $css3-border-image-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(border-image-width, $value, $settings);
 }
 
-@mixin border-image-outset($value) {
-    @include css3-property(border-image-outset, $value);
+@mixin border-image-outset($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-border-image-browsers-prefixes,
+        use-prefixes: $css3-border-image-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(border-image-outset, $value, $settings);
 }
 
-@mixin border-image-repeat($value) {
-    @include css3-property(border-image-repeat, $value);
+@mixin border-image-repeat($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-border-image-browsers-prefixes,
+        use-prefixes: $css3-border-image-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(border-image-repeat, $value, $settings);
 }

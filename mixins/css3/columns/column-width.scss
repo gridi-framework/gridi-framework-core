@@ -1,3 +1,7 @@
-@mixin column-width($value: auto) {
-    @include css3-property(column-width, $value, webkit moz);
+@mixin column-width($value: auto, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-columns-browsers-prefixes,
+        use-prefixes: $css3-columns-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(column-width, $value, $settings);
 }

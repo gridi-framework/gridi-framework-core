@@ -39,6 +39,18 @@
         }
     }
 
+    @include test('Test Mixin - property-from-map - value key in map is other than property name') {
+        @include assert {
+            @include output {
+                @include property-from-map((test-background: red), background, test-background);
+            }
+        
+            @include expect {
+                background: red;
+            }
+        }
+    }
+
     @include test('Test Mixin - not-required-property - correct value') {
         @include assert {
             @include output {

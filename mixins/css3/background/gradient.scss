@@ -1,7 +1,12 @@
-@mixin gradient($value, $property: background, $set-property-prefix: false) {
-    @include css3-property($property, (
+@mixin gradient($value, $property: background, $settings: ()) {
+    $settings: map-merge((
+        set-property-prefix: false,
+        browsers-prefixes: $css3-gradient-browsers-prefixes,
+        use-prefixes: $css3-gradient-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes($property, (
         $value: (
             use-browser-prefix: true
         )
-    ), webkit moz ms o, $set-property-prefix);
+    ), $settings);
 }

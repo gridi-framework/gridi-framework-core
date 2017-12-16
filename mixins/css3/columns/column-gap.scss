@@ -1,3 +1,7 @@
-@mixin column-gap($value: normal) {
-    @include css3-property(column-gap, $value, webkit moz);
+@mixin column-gap($value: normal, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-columns-browsers-prefixes,
+        use-prefixes: $css3-columns-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(column-gap, $value, $settings);
 }

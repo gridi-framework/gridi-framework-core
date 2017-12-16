@@ -1,43 +1,98 @@
-@mixin transform-2d-matrix($value) {
-	@include transform(matrix(#{$value}));
+@mixin transform-2d-matrix($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(matrix(#{$value}), $settings);
 }
 
-@mixin transform-2d-translate($value) {
-	@include transform(translate(#{$value}));
+@mixin transform-2d-translate($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(translate(#{$value}), $settings);
 }
 
-@mixin transform-2d-translateX($value) {
-	@include transform(translateX(#{$value}));
+@mixin transform-2d-translateX($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(translateX(#{$value}), $settings);
 }
 
-@mixin transform-2d-translateY($value) {
-	@include transform(translateY(#{$value}));
+@mixin transform-2d-translateY($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(translateY(#{$value}), $settings);
 }
 
-@mixin transform-2d-scale($value) {
-	@include transform(scale(#{$value}));
+@mixin transform-2d-scale($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(scale(#{$value}), $settings);
 }
 
-@mixin transform-2d-scaleX($value) {
-	@include transform(scaleX(#{$value}));
+@mixin transform-2d-scaleX($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(scaleX(#{$value}), $settings);
 }
 
-@mixin transform-2d-scaleY($value) {
-	@include transform(scaleY(#{$value}));
+@mixin transform-2d-scaleY($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(scaleY(#{$value}), $settings);
 }
 
-@mixin transform-2d-rotate($value) {
-	@include transform(rotate(#{$value}));
+@mixin transform-2d-rotate($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(rotate(#{$value}), $settings);
 }
 
-@mixin transform-2d-skew($value) {
-	@include transform(skew(#{$value}));
+@mixin transform-2d-skew($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(skew(#{$value}), $settings);
 }
 
-@mixin transform-2d-skewX($value) {
-	@include transform(skewX(#{$value}));
+@mixin transform-2d-skewX($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(skewX(#{$value}), $settings);
 }
 
-@mixin transform-2d-skewY($value) {
-	@include transform(skewY(#{$value}));
+@mixin transform-2d-skewY($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+	), $settings);
+	
+	@include transform(skewY(#{$value}), $settings);
 }

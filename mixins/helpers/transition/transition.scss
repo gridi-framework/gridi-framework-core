@@ -21,6 +21,11 @@
         $transition-timing-function: map-get($transition, timing-function);
         $transition-delay: map-get($transition, delay);
         $transition-make-shorthand: map-get($transition, make-shorthand);
+        $transition-css3-settings: map-get($transition, css3-settings);
+
+        @if not is-map($transition-css3-settings) {
+            $transition-css3-settings: ();
+        }
 
         @if true == $transition-make-shorthand or (
                 null == $transition-make-shorthand and
@@ -108,22 +113,22 @@
                 $value: $transition-property $transition-duration $transition-timing-function $transition-delay
             }
 
-            @include transition($value);
+            @include transition($value, $transition-css3-settings);
         } @else {
             @if $transition-property {
-                @include transition-property($transition-property);
+                @include transition-property($transition-property, $transition-css3-settings);
             }
 
             @if $transition-duration {
-                @include transition-duration($transition-duration);
+                @include transition-duration($transition-duration, $transition-css3-settings);
             }
 
             @if $transition-timing-function {
-                @include transition-timing-function($transition-timing-function);
+                @include transition-timing-function($transition-timing-function, $transition-css3-settings);
             }
 
             @if $transition-delay {
-                @include transition-delay($transition-delay);
+                @include transition-delay($transition-delay, $transition-css3-settings);
             }
         }
     } @else if $transition {

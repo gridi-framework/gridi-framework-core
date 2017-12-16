@@ -1,10 +1,14 @@
-@mixin opacity($value, $support-old-browsers: false) {
+@mixin opacity($value, $settings: ()) {
+    $settings: map-merge((
+        support-old-browsers: $css3-opacity-support-old-browsers
+    ), $settings);
+
     $oldIEValue: $value * 100;
     @if ($value * 100) > 100 {
         $oldIEValue: $value;
         $value: $value / 100;
     }
-    @if $support-old-browsers {
+    @if map-get($settings, support-old-browsers) {
         -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$oldIEValue})";
         filter: alpha(opacity=#{$oldIEValue});
     }

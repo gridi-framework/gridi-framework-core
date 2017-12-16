@@ -1,4 +1,8 @@
-@mixin text-overflow($value: clip) {
-    @include css3-o-property(text-overflow, $value);
-    text-overflow: #{$value};
+@mixin text-overflow($value: clip, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-text-overflow-browsers-prefixes,
+        use-prefixes: $css3-text-overflow-use-prefixes
+    ), $settings);
+
+    @include property-with-browsers-prefixes(text-overflow, $value, $settings);
 }

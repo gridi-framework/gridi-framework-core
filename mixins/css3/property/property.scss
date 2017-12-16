@@ -2,7 +2,7 @@
 USAGE: 
 
 .my-class {
-    @include css3-property(property-name, value, webkit moz ms o, true);
+    @include property-with-browsers-prefixes(property-name, value);
 }
 
 return: 
@@ -18,7 +18,7 @@ return:
 OR:
 
 .my-class {
-    @include css3-property(transition-property, (
+    @include property-with-browsers-prefixes(transition-property, (
         transform: (
             use-browser-prefix: true
         ),
@@ -26,7 +26,10 @@ OR:
             use-browser-prefix: false
         ),
         height: ()
-    ), webkit moz ms o, true);
+    ), (
+        browsers-prefixes: webkit moz ms o, 
+        set-property-prefix: true
+    ));
 }
 
 return:
@@ -42,11 +45,14 @@ return:
 OR:
 
 .my-class {
-    @include css3-property(background, (
+    @include property-with-browsers-prefixes(background, (
         'linear-gradient(red, yellow)': (
             use-browser-prefix: true
         )
-    ), webkit moz ms o, false);
+    ), (
+        browsers-prefixes: webkit moz ms o, 
+        set-property-prefix: false
+    ));
 }
 
 return:
@@ -59,7 +65,17 @@ return:
     background: linear-gradient(red, yellow); 
 }
 */
-@mixin css3-property($property, $value, $browsers-prefixes: webkit moz ms o, $set-property-prefix: true, $use-prefixes: $css3-use-prefixes) {
+@mixin property-with-browsers-prefixes($property, $value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: webkit moz ms o,
+        set-property-prefix: true,
+        use-prefixes: $css3-use-prefixes
+    ), $settings);
+
+    $browsers-prefixes: map-get($settings, browsers-prefixes);
+    $set-property-prefix: map-get($settings, set-property-prefix);
+    $use-prefixes: map-get($settings, use-prefixes);
+
     @if type-of($value) == 'map' {
         @if true == $use-prefixes {
             $value-to-set: '';
@@ -97,20 +113,4 @@ return:
         }
         #{$property}: #{$value};
     }
-}
-
-@mixin css3-webkit-property($property, $value) {
-    @include css3-property($property, $value, webkit);
-}
-
-@mixin css3-moz-property($property, $value) {
-    @include css3-property($property, $value, moz);
-}
-
-@mixin css3-ms-property($property, $value) {
-    @include css3-property($property, $value, ms);
-}
-
-@mixin css3-o-property($property, $value) {
-    @include css3-property($property, $value, o);
 }

@@ -1,3 +1,7 @@
-@mixin appearance($value: normal) {
-    @include css3-property(appearance, $value, webkit moz);
+@mixin appearance($value: normal, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-appearance-browsers-prefixes,
+        use-prefixes: $css3-appearance-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(appearance, $value, $settings);
 }

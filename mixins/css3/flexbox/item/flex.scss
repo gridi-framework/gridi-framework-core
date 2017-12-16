@@ -1,5 +1,12 @@
-@mixin flex($flex-grow: 0, $flex-shrink: 0, $flex-basis: auto, $support-old-browsers: $support-old-browsers) {
-    @if $support-old-browsers {
+@mixin flex($flex-grow: 0, $flex-shrink: 0, $flex-basis: auto, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-flexbox-browsers-prefixes,
+        use-prefixes: $css3-flexbox-use-prefixes,
+        support-old-browsers: $css3-flexbox-support-old-browsers
+    ), $settings);
+
+    @if map-get($settings, support-old-browsers) and map-get($settings, use-prefixes) {
+        $browsers-prefixes: map-get($settings, browsers-prefixes);
         // Set a variable to be used by box-flex properties
         $flex-grow-boxflex: $flex-grow;
         // Box-Flex only supports a flex-grow value so lets grab the
@@ -7,11 +14,22 @@
         @if type-of($flex-grow) == 'list' {
             $flex-grow-boxflex: nth($flex-grow, 1);
         }
-        -webkit-box: $flex-grow-boxflex;
-        -moz-box: $flex-grow-boxflex;
-        -webkit-flexbox: $flex-grow $flex-shrink $flex-basis;
-        -moz-flexbox: $flex-grow $flex-shrink $flex-basis;
-        -ms-flexbox: $flex-grow $flex-shrink $flex-basis;
+        
+        @if index($browsers-prefixes, webkit) {
+            -webkit-box: $flex-grow-boxflex;
+        }
+        @if index($browsers-prefixes, moz) {
+            -moz-box: $flex-grow-boxflex;
+        }
+        @if index($browsers-prefixes, webkit) {
+            -webkit-flexbox: $flex-grow $flex-shrink $flex-basis;
+        }
+        @if index($browsers-prefixes, moz) {
+            -moz-flexbox: $flex-grow $flex-shrink $flex-basis;
+        }
+        @if index($browsers-prefixes, ms) {
+            -ms-flexbox: $flex-grow $flex-shrink $flex-basis;
+        }
     }
-    @include css3-property(flex, $flex-grow $flex-shrink $flex-basis, webkit moz ms);
+    @include property-with-browsers-prefixes(flex, $flex-grow $flex-shrink $flex-basis, $settings);
 }

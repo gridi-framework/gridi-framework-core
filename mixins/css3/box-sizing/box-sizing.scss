@@ -1,3 +1,7 @@
-@mixin box-sizing($value: content-box) {
-    @include css3-property(box-sizing, $value, webkit moz);
+@mixin box-sizing($value: content-box, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-box-sizing-browsers-prefixes,
+        use-prefixes: $css3-box-sizing-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(box-sizing, $value, $settings);
 }

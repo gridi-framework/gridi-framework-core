@@ -1,3 +1,8 @@
-@mixin resize($value: both) {
-    @include css3-property(resize, $value, moz);
+@mixin resize($value: both, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-resize-browsers-prefixes,
+        use-prefixes: $css3-resize-use-prefixes
+    ), $settings);
+
+    @include property-with-browsers-prefixes(resize, $value, $settings);
 }

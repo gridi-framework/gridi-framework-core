@@ -1,3 +1,7 @@
-@mixin flex-shrink($int: 0) {
-    @include css3-property(flex-shrink, $int, webkit moz ms);
+@mixin flex-shrink($int: 0, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-flexbox-browsers-prefixes,
+        use-prefixes: $css3-flexbox-use-prefixes
+    ), $settings);
+    @include property-with-browsers-prefixes(flex-shrink, $int, $settings);
 }

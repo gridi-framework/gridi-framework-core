@@ -1,3 +1,8 @@
-@mixin transition-duration($value) {
-    @include css3-property(transition-duration, $value, webkit moz o);
+@mixin transition-duration($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transition-browsers-prefixes,
+        use-prefixes: $css3-transition-use-prefixes
+    ), $settings);
+
+    @include property-with-browsers-prefixes(transition-duration, $value, $settings);
 }

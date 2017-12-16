@@ -1,7 +1,17 @@
-@mixin transform($value) {
-    @include css3-property(transform, $value);
+@mixin transform($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+    ), $settings);
+
+    @include property-with-browsers-prefixes(transform, $value, $settings);
 }
 
-@mixin transform-origin($value) {
-    @include css3-property(transform-origin, $value);
+@mixin transform-origin($value, $settings: ()) {
+    $settings: map-merge((
+        browsers-prefixes: $css3-transform-browsers-prefixes,
+        use-prefixes: $css3-transform-use-prefixes
+    ), $settings);
+    
+    @include property-with-browsers-prefixes(transform-origin, $value, $settings);
 }
