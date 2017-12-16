@@ -227,7 +227,7 @@
                 background-attachment: $background-attachment;
             }
         }
-    } @else if $background {
+    } @else if $background and length($background) > 0 {
         background: $background;
     }
 }

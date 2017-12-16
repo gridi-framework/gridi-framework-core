@@ -131,7 +131,7 @@
                 @include transition-delay($transition-delay, $transition-css3-settings);
             }
         }
-    } @else if $transition {
+    } @else if $transition and length($transition) > 0 {
         @include transition($transition);
     }
 }

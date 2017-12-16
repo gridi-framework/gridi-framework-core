@@ -54,7 +54,7 @@
                 #{$border-property}-color: $border-color;
             }
         }
-    } @else if $border-values {
+    } @else if $border-values and length($border-values) > 0 {
         #{$border-property}: $border-values;
     }
 }

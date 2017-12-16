@@ -81,7 +81,7 @@
                 @include animation-play-state($animation-play-state, $animation-css3-settings);
             }
         }
-    } @else if $animation {
+    } @else if $animation and length($animation) > 0 {
         @include animation($animation);
     }
 }

@@ -85,7 +85,7 @@
                 font-family: #{$font-family};
             }
         }
-    } @else if $font {
+    } @else if $font and length($font) > 0 {
         font: $font;
     }
 }

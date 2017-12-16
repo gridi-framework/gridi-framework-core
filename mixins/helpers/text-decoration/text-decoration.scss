@@ -40,7 +40,7 @@
                 @include text-decoration-color($text-decoration-color, $text-decoration-css3-settings);
             }
         }
-    } @else if $text-decoration {
+    } @else if $text-decoration and length($text-decoration) > 0 {
         text-decoration: $text-decoration;
     }
 }

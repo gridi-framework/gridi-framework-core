@@ -35,7 +35,7 @@
                 outline-color: $outline-color;
             }
         }
-    } @else if $outline {
+    } @else if $outline and length($outline) > 0 {
         outline: $outline;
     }
 }

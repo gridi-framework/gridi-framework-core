@@ -47,7 +47,7 @@
                 margin-right: $margin-right;
             }
         }
-    } @else if $margins {
+    } @else if $margins and length($margins) > 0 {
         margin: $margins;
     }
 }

@@ -23,7 +23,7 @@
                 border-spacing: $border-spacing-horizontal $border-spacing-vertical;
             }
         }
-    } @else if $border-spacings {
+    } @else if $border-spacings and length($border-spacings) > 0 {
         border-spacing: $border-spacings;
     }
 }

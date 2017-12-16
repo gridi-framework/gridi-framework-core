@@ -47,7 +47,7 @@
                 padding-right: $padding-right;
             }
         }
-    } @else if $paddings {
+    } @else if $paddings and length($paddings) > 0 {
         padding: $paddings;
     }
 }
