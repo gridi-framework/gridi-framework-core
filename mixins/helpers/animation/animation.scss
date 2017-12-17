@@ -32,7 +32,11 @@
         $animation-css3-settings: map-get($animation, css3-settings);
         
         @if not is-map($animation-css3-settings) {
-            $animation-css3-settings: ();
+            $animation-css3-settings: (important: map-get($animation, important));
+        } @else {
+            $animation-css3-settings: map-merge((
+                important: map-get($animation, important)
+            ), $animation-css3-settings);
         }
 
         @if true == $animation-make-shorthand or 

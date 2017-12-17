@@ -20,31 +20,37 @@
         $padding-left: map-get($paddings, left);
         $padding-right: map-get($paddings, right);
 
+        $important: '';
+
+        @if true == map-get($paddings, important) {
+            $important: ' !important';
+        }
+
         @if $padding-top and $padding-bottom and $padding-left and $padding-right {
             @if ($padding-top == $padding-bottom and $padding-top == $padding-left and $padding-top == $padding-right) {
-                padding: $padding-top;
+                padding: $padding-top#{$important};
             } @else if ($padding-top == $padding-bottom and  $padding-left == $padding-right) {
-                padding: $padding-top $padding-left;
+                padding: $padding-top $padding-left#{$important};
             } @else if ($padding-top != $padding-bottom and  $padding-left == $padding-right) {
-                padding: $padding-top $padding-left $padding-bottom;
+                padding: $padding-top $padding-left $padding-bottom#{$important};
             } @else {
-                padding: $padding-top $padding-right $padding-bottom $padding-left;
+                padding: $padding-top $padding-right $padding-bottom $padding-left#{$important};
             }
         } @else {
             @if $padding-top {
-                padding-top: $padding-top;
+                padding-top: $padding-top#{$important};
             }
 
             @if $padding-bottom {
-                padding-bottom: $padding-bottom;
+                padding-bottom: $padding-bottom#{$important};
             }
 
             @if $padding-left {
-                padding-left: $padding-left;
+                padding-left: $padding-left#{$important};
             }
 
             @if $padding-right {
-                padding-right: $padding-right;
+                padding-right: $padding-right#{$important};
             }
         }
     } @else if $paddings and length($paddings) > 0 {

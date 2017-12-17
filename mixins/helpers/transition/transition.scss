@@ -24,7 +24,11 @@
         $transition-css3-settings: map-get($transition, css3-settings);
 
         @if not is-map($transition-css3-settings) {
-            $transition-css3-settings: ();
+            $transition-css3-settings: (important: map-get($transition, important));
+        } @else {
+            $transition-css3-settings: map-merge((
+                important: map-get($transition, important)
+            ), $transition-css3-settings);
         }
 
         @if true == $transition-make-shorthand or (

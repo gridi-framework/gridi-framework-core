@@ -33,6 +33,23 @@
         }
     }
 
+    @include test('Test Mixin - outline-shorthand - test map value | important') {
+        @include assert {
+            @include output {
+                @include outline-shorthand((
+                    width: 2px,
+                    style: solid,
+                    color: black,
+                    important: true
+                ));
+            }
+        
+            @include expect {
+                outline: 2px solid black !important;
+            }
+        }
+    }
+
     @include test('Test Mixin - outline-shorthand - test map value with only width') {
         @include assert {
             @include output {
@@ -108,6 +125,26 @@
                 outline-width: 2px;
                 outline-style: solid;
                 outline-color: black;
+            }
+        }
+    }
+
+    @include test('Test Mixin - outline-shorthand - test map value with make-shorthand set to false and set all values | important') {
+        @include assert {
+            @include output {
+                @include outline-shorthand((
+                    width: 2px,
+                    style: solid,
+                    color: black,
+                    make-shorthand: false,
+                    important: true
+                ));
+            }
+        
+            @include expect {
+                outline-width: 2px !important;
+                outline-style: solid !important;
+                outline-color: black !important;
             }
         }
     }

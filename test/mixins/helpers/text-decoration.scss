@@ -35,6 +35,23 @@
         }
     }
 
+    @include test('Test Mixin - text-decoration-shorthand - test map value | important') {
+        @include assert {
+            @include output {
+                @include text-decoration-shorthand((
+                    line: overline,
+                    style: solid,
+                    color: black,
+                    important: true
+                ));
+            }
+        
+            @include expect {
+                text-decoration: overline solid black !important;
+            }
+        }
+    }
+
     @include test('Test Mixin - text-decoration-shorthand - test map value with only line') {
         @include assert {
             @include output {
@@ -110,6 +127,26 @@
                 text-decoration-line: overline;
                 text-decoration-style: solid;
                 text-decoration-color: black;
+            }
+        }
+    }
+
+    @include test('Test Mixin - text-decoration-shorthand - test map value with make-shorthand set to false and set all values | important') {
+        @include assert {
+            @include output {
+                @include text-decoration-shorthand((
+                    line: overline,
+                    style: solid,
+                    color: black,
+                    make-shorthand: false,
+                    important: true
+                ));
+            }
+        
+            @include expect {
+                text-decoration-line: overline !important;
+                text-decoration-style: solid !important;
+                text-decoration-color: black !important;
             }
         }
     }

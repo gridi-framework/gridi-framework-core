@@ -24,6 +24,12 @@
         $background-attachment: map-get($background, attachment);
         $background-make-shorthand: map-get($background, make-shorthand);
 
+        $important: '';
+
+        @if true == map-get($background, important) {
+            $important: ' !important';
+        }
+
 
         @if true == $background-make-shorthand or (null == $background-make-shorthand and $background-image and $background-position and $background-repeat and $background-color and $background-attachment) {
             $value: null;
@@ -205,26 +211,26 @@
 
             $value: $value $background-color $background-attachment;
             
-            background: $value;
+            background: $value#{$important};
         } @else {
             @if $background-image {
-                background-image: $background-image;
+                background-image: $background-image#{$important};
             }
 
             @if $background-position {
-                background-position: $background-position;
+                background-position: $background-position#{$important};
             }
 
             @if $background-repeat {
-                background-repeat: $background-repeat
+                background-repeat: $background-repeat#{$important};
             }
 
             @if $background-color {
-                background-color: $background-color;
+                background-color: $background-color#{$important};
             }
 
             @if $background-attachment {
-                background-attachment: $background-attachment;
+                background-attachment: $background-attachment#{$important};
             }
         }
     } @else if $background and length($background) > 0 {

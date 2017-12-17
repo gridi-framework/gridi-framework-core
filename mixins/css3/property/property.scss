@@ -76,6 +76,13 @@ return:
     $set-property-prefix: map-get($settings, set-property-prefix);
     $use-prefixes: map-get($settings, use-prefixes);
 
+    $important: '';
+
+    @if true == map-get($settings, important) {
+        $important: ' !important';
+    }
+
+
     @if type-of($value) == 'map' {
         @if true == $use-prefixes {
             $value-to-set: '';
@@ -91,9 +98,9 @@ return:
                 }
                 $value-to-set: str-slice($value-to-set, 3); //Remove first comma
                 @if true == $set-property-prefix {
-                    -#{$prefix}-#{$property}: #{$value-to-set};
+                    -#{$prefix}-#{$property}: #{$value-to-set}#{$important};
                 } @else {
-                    #{$property}: #{$value-to-set};   
+                    #{$property}: #{$value-to-set}#{$important};   
                 }
             }
         }
@@ -103,14 +110,14 @@ return:
             $value-to-set: '#{$value-to-set}, #{$v}';
         }
         $value-to-set: str-slice($value-to-set, 3); //Remove first comma
-        #{$property}: #{$value-to-set};
+        #{$property}: #{$value-to-set}#{$important};
 
     } @else {
         @if true == $set-property-prefix and true == $use-prefixes {
             @each $prefix in $browsers-prefixes {
-                -#{$prefix}-#{$property}: #{$value};
+                -#{$prefix}-#{$property}: #{$value}#{$important};
             }
         }
-        #{$property}: #{$value};
+        #{$property}: #{$value}#{$important};
     }
 }

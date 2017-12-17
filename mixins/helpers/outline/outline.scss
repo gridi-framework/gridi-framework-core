@@ -20,19 +20,25 @@
         $outline-color: map-get($outline, color);
         $outline-make-shorthand: map-get($outline, make-shorthand);
 
+        $important: '';
+
+        @if true == map-get($outline, important) {
+            $important: ' !important';
+        }
+
         @if true == $outline-make-shorthand or (null == $outline-make-shorthand and $outline-width and $outline-style and $outline-color) {
-            outline: $outline-width $outline-style $outline-color;
+            outline: $outline-width $outline-style $outline-color#{$important};
         } @else {
             @if $outline-width {
-                outline-width: $outline-width;
+                outline-width: $outline-width#{$important};
             }
 
             @if $outline-style {
-                outline-style: $outline-style;
+                outline-style: $outline-style#{$important};
             }
 
             @if $outline-color {
-                outline-color: $outline-color;
+                outline-color: $outline-color#{$important};
             }
         }
     } @else if $outline and length($outline) > 0 {

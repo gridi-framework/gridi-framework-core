@@ -20,13 +20,27 @@
         $text-decoration-color: map-get($text-decoration, color);
         $text-decoration-make-shorthand: map-get($text-decoration, make-shorthand);
         $text-decoration-css3-settings: map-get($text-decoration, css3-settings);
+
+        $important: '';
+
+        @if true == map-get($text-decoration, important) {
+            $important: ' !important';
+        }
         
         @if not is-map($text-decoration-css3-settings) {
             $text-decoration-css3-settings: ();
         }
 
+        @if not is-map($text-decoration-css3-settings) {
+            $text-decoration-css3-settings: (important: map-get($text-decoration, important));
+        } @else {
+            $text-decoration-css3-settings: map-merge((
+                important: map-get($text-decoration, important)
+            ), $text-decoration-css3-settings);
+        }
+
         @if true == $text-decoration-make-shorthand or (null == $text-decoration-make-shorthand and $text-decoration-line and $text-decoration-style and $text-decoration-color) {
-            text-decoration: $text-decoration-line $text-decoration-style $text-decoration-color;
+            text-decoration: $text-decoration-line $text-decoration-style $text-decoration-color#{$important};
         } @else {
             @if $text-decoration-line {
                 @include text-decoration-line($text-decoration-line, $text-decoration-css3-settings);

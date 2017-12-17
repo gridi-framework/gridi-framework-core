@@ -154,4 +154,64 @@
             }
         }
     }
+
+    @include test('Test Mixin - property-with-browsers-prefixes - important value') {
+        @include assert {
+            @include output {
+                @include property-with-browsers-prefixes(border-radius, 50%, (important: true))
+            }
+        
+            @include expect {
+                -webkit-border-radius: 50% !important;
+                -moz-border-radius: 50% !important;
+                -ms-border-radius: 50% !important;
+                -o-border-radius: 50% !important;
+                border-radius: 50% !important;
+            }
+        }
+    }
+
+    @include test('Test Mixin - property-with-browsers-prefixes - when value is map and use | not use browser prefixes or value | important') {
+        @include assert {
+            @include output {
+                @include property-with-browsers-prefixes(transition-property, (
+                    transform: (
+                        use-browser-prefix: true
+                    ),
+                    width: (
+                        use-browser-prefix: false
+                    ),
+                    height: ()
+                ), (browsers-prefixes: webkit moz, important: true));
+            }
+        
+            @include expect {
+                -webkit-transition-property: -webkit-transform, width, height !important;
+                -moz-transition-property: -moz-transform, width, height !important;
+                transition-property: transform, width, height !important;
+            }
+        }
+    }
+
+    @include test('Test Mixin - property-with-browsers-prefixes - when value is map and use browser prefixes or value with browser prefixes and not set browser prefixes to property | important') {
+        @include assert {
+            @include output {
+                @include property-with-browsers-prefixes(background, (
+                    'linear-gradient(red, yellow)': (
+                        use-browser-prefix: true
+                    )
+                ), (
+                    browsers-prefixes: webkit moz,
+                    set-property-prefix: false,
+                    important: true
+                ))
+            }
+        
+            @include expect {
+                background: -webkit-linear-gradient(red, yellow) !important;
+                background: -moz-linear-gradient(red, yellow) !important;
+                background: linear-gradient(red, yellow) !important;
+            }
+        }
+    }
 }

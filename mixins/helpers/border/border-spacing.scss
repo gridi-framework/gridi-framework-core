@@ -16,11 +16,17 @@
         $border-spacing-horizontal: map-get($border-spacings, horizontal);
         $border-spacing-vertical: map-get($border-spacings, vertical);
 
+        $important: '';
+
+        @if true == map-get($border-spacings, important) {
+            $important: ' !important';
+        }
+
         @if $border-spacing-horizontal and $border-spacing-vertical {
             @if $border-spacing-horizontal == $border-spacing-vertical {
-                border-spacing: $border-spacing-horizontal;
+                border-spacing: $border-spacing-horizontal#{$important};
             } @else {
-                border-spacing: $border-spacing-horizontal $border-spacing-vertical;
+                border-spacing: $border-spacing-horizontal $border-spacing-vertical#{$important};
             }
         }
     } @else if $border-spacings and length($border-spacings) > 0 {

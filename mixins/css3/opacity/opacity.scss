@@ -3,14 +3,20 @@
         support-old-browsers: $css3-opacity-support-old-browsers
     ), $settings);
 
+    $important: '';
+
+    @if true == map-get($settings, important) {
+        $important: ' !important';
+    }
+
     $oldIEValue: $value * 100;
     @if ($value * 100) > 100 {
         $oldIEValue: $value;
         $value: $value / 100;
     }
     @if map-get($settings, support-old-browsers) {
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$oldIEValue})";
-        filter: alpha(opacity=#{$oldIEValue});
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$oldIEValue})"#{$important};
+        filter: alpha(opacity=#{$oldIEValue})#{$important};
     }
-    opacity: #{$value};
+    opacity: #{$value}#{$important};
 }

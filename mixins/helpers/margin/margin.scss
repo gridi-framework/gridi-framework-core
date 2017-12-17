@@ -20,31 +20,37 @@
         $margin-left: map-get($margins, left);
         $margin-right: map-get($margins, right);
 
+        $important: '';
+
+        @if true == map-get($margins, important) {
+            $important: ' !important';
+        }
+
         @if $margin-top and $margin-bottom and $margin-left and $margin-right {
             @if ($margin-top == $margin-bottom and $margin-top == $margin-left and $margin-top == $margin-right) {
-                margin: $margin-top;
+                margin: $margin-top#{$important};
             } @else if ($margin-top == $margin-bottom and  $margin-left == $margin-right) {
-                margin: $margin-top $margin-left;
+                margin: $margin-top $margin-left#{$important};
             } @else if ($margin-top != $margin-bottom and  $margin-left == $margin-right) {
-                margin: $margin-top $margin-left $margin-bottom;
+                margin: $margin-top $margin-left $margin-bottom#{$important};
             } @else {
-                margin: $margin-top $margin-right $margin-bottom $margin-left;
+                margin: $margin-top $margin-right $margin-bottom $margin-left#{$important};
             }
         } @else {
             @if $margin-top {
-                margin-top: $margin-top;
+                margin-top: $margin-top#{$important};
             }
 
             @if $margin-bottom {
-                margin-bottom: $margin-bottom;
+                margin-bottom: $margin-bottom#{$important};
             }
 
             @if $margin-left {
-                margin-left: $margin-left;
+                margin-left: $margin-left#{$important};
             }
 
             @if $margin-right {
-                margin-right: $margin-right;
+                margin-right: $margin-right#{$important};
             }
         }
     } @else if $margins and length($margins) > 0 {

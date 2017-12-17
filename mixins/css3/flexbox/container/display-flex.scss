@@ -8,20 +8,27 @@
 
     @if map-get($settings, support-old-browsers) and map-get($settings, use-prefixes) {
         $browsers-prefixes: map-get($settings, browsers-prefixes);
+
+        $important: '';
+
+        @if true == map-get($settings, important) {
+            $important: ' !important';
+        }
+
         @if index($browsers-prefixes, webkit) {
-            display: -webkit-box;
+            display: -webkit-box#{$important};
         }
         @if index($browsers-prefixes, moz) {
-            display: -moz-box;
+            display: -moz-box#{$important};
         }
         @if index($browsers-prefixes, webkit) {
-            display: -webkit-flexbox;
+            display: -webkit-flexbox#{$important};
         }
         @if index($browsers-prefixes, moz) {
-            display: -moz-flexbox;
+            display: -moz-flexbox#{$important};
         }
         @if index($browsers-prefixes, ms) {
-            display: -ms-flexbox;
+            display: -ms-flexbox#{$important};
         }
     }
     @include property-with-browsers-prefixes(display, (
@@ -41,20 +48,27 @@
 
     @if map-get($settings, support-old-browsers) and map-get($settings, use-prefixes) {
         $browsers-prefixes: map-get($settings, browsers-prefixes);
+
+        $important: '';
+
+        @if true == map-get($settings, important) {
+            $important: ' !important';
+        }
+
         @if index($browsers-prefixes, webkit) {
-            display: -webkit-inline-box;
+            display: -webkit-inline-box#{$important};
         }
         @if index($browsers-prefixes, moz) {
-            display: -moz-inline-box;
+            display: -moz-inline-box#{$important};
         }
         @if index($browsers-prefixes, webkit) {
-            display: -webkit-inline-flexbox;
+            display: -webkit-inline-flexbox#{$important};
         }
         @if index($browsers-prefixes, moz) {
-            display: -moz-inline-flexbox;
+            display: -moz-inline-flexbox#{$important};
         }
         @if index($browsers-prefixes, ms) {
-            display: -ms-inline-flexbox;
+            display: -ms-inline-flexbox#{$important};
         }
     }
     @include property-with-browsers-prefixes(display, (

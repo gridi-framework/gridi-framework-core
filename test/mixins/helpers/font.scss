@@ -36,6 +36,26 @@
         }
     }
 
+    @include test('Test Mixin - font-shorthand - test map value | important') {
+        @include assert {
+            @include output {
+                @include font-shorthand((
+                    style: italic,
+                    variant: normal,
+                    weight: bold,
+                    size: 20px,
+                    line-height: 30px,
+                    family: (Arial, Helvetica, sans-serif),
+                    important: true
+                ));
+            }
+        
+            @include expect {
+                font: italic normal bold 20px/30px Arial, Helvetica, sans-serif !important;
+            }
+        }
+    }
+
     @include test('Test Mixin - font-shorthand - test map value with make-shorthand set to true') {
         @include assert {
             @include output {
@@ -93,6 +113,32 @@
                 font-size: 20px;
                 line-height: 30px;
                 font-family: Arial, Helvetica, sans-serif;
+            }
+        }
+    }
+
+    @include test('Test Mixin - font-shorthand - test map value with make-shorthand set to false and set all values | important') {
+        @include assert {
+            @include output {
+                @include font-shorthand((
+                    style: italic,
+                    variant: normal,
+                    weight: bold,
+                    size: 20px,
+                    line-height: 30px,
+                    family: (Arial, Helvetica, sans-serif),
+                    make-shorthand: false,
+                    important: true
+                ));
+            }
+        
+            @include expect {
+                font-style: italic !important;
+                font-variant: normal !important;
+                font-weight: bold !important;
+                font-size: 20px !important;
+                line-height: 30px !important;
+                font-family: Arial, Helvetica, sans-serif !important;
             }
         }
     }

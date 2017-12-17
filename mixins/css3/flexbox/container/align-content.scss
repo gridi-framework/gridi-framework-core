@@ -8,36 +8,42 @@
     @if map-get($settings, support-old-browsers) and map-get($settings, use-prefixes) {
         $browsers-prefixes: map-get($settings, browsers-prefixes);
 
+        $important: '';
+
+        @if true == map-get($settings, important) {
+            $important: ' !important';
+        }
+
         @if $value == flex-start {
             @if index($browsers-prefixes, webkit) {
-                -webkit-flex-line-pack: start;
+                -webkit-flex-line-pack: start#{$important};
             }
             @if index($browsers-prefixes, moz) {
-                -moz-flex-line-pack: start;
+                -moz-flex-line-pack: start#{$important};
             }
             @if index($browsers-prefixes, ms) {
-                -ms-flex-line-pack: start;
+                -ms-flex-line-pack: start#{$important};
             }
         }
         @else if $value == flex-end {
             @if index($browsers-prefixes, webkit) {
-                -webkit-flex-line-pack: end;
+                -webkit-flex-line-pack: end#{$important};
             }
             @if index($browsers-prefixes, moz) {
-                -moz-flex-line-pack: end;
+                -moz-flex-line-pack: end#{$important};
             }
             @if index($browsers-prefixes, ms) {
-                -ms-flex-line-pack: end;
+                -ms-flex-line-pack: end#{$important};
             }
         } @else {
             @if index($browsers-prefixes, webkit) {
-                -webkit-flex-line-pack: $value;
+                -webkit-flex-line-pack: $value#{$important};
             }
             @if index($browsers-prefixes, moz) {
-                -moz-flex-line-pack: $value;
+                -moz-flex-line-pack: $value#{$important};
             }
             @if index($browsers-prefixes, ms) {
-                -ms-flex-line-pack: $value;
+                -ms-flex-line-pack: $value#{$important};
             }
         }
     }

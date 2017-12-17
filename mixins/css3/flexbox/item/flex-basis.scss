@@ -5,7 +5,12 @@
     ), $settings);
 
     @if index(map-get($settings, browsers-prefixes), ms) and map-get($settings, use-prefixes) {
-        -ms-flex-preferred-size: $value;
+        $important: '';
+
+        @if true == map-get($settings, important) {
+            $important: ' !important';
+        }
+        -ms-flex-preferred-size: $value#{$important};
     }
     @include property-with-browsers-prefixes(flex-basis, $value, $settings);
 }

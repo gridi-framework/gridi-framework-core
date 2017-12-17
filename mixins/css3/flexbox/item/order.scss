@@ -7,21 +7,27 @@
 
     @if map-get($settings, support-old-browsers) and map-get($settings, use-prefixes) {
         $browsers-prefixes: map-get($settings, browsers-prefixes);
+
+        $important: '';
+
+        @if true == map-get($settings, important) {
+            $important: ' !important';
+        }
         
         @if index($browsers-prefixes, webkit) {
-            -webkit-box-ordinal-group: $int + 1;
+            -webkit-box-ordinal-group: ($int + 1)#{$important};
         }
         @if index($browsers-prefixes, moz) {
-            -moz-box-ordinal-group: $int + 1;
+            -moz-box-ordinal-group: ($int + 1)#{$important};
         }
         @if index($browsers-prefixes, webkit) {
-            -webkit-flex-order: $int;
+            -webkit-flex-order: $int#{$important};
         }
         @if index($browsers-prefixes, moz) {
-            -moz-flex-order: $int;
+            -moz-flex-order: $int#{$important};
         }
         @if index($browsers-prefixes, ms) {
-            -ms-flex-order: $int;
+            -ms-flex-order: $int#{$important};
         }
     }
     @include property-with-browsers-prefixes(order, $int, $settings);

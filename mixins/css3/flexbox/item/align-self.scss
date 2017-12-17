@@ -7,36 +7,42 @@
 
     @if map-get($settings, support-old-browsers) and map-get($settings, use-prefixes) {
         $browsers-prefixes: map-get($settings, browsers-prefixes);
+
+        $important: '';
+
+        @if true == map-get($settings, important) {
+            $important: ' !important';
+        }
         
         @if $value == flex-start {
             @if index($browsers-prefixes, webkit) {
-                -webkit-flex-item-align: start;
+                -webkit-flex-item-align: start#{$important};
             }
             @if index($browsers-prefixes, moz) {
-                -moz-flex-item-align: start;
+                -moz-flex-item-align: start#{$important};
             }
             @if index($browsers-prefixes, ms) {
-                -ms-flex-item-align: start;
+                -ms-flex-item-align: start#{$important};
             }
         } @else if $value == flex-end {
             @if index($browsers-prefixes, webkit) {
-                -webkit-flex-item-align: end;
+                -webkit-flex-item-align: end#{$important};
             }
             @if index($browsers-prefixes, moz) {
-                -moz-flex-item-align: end;
+                -moz-flex-item-align: end#{$important};
             }
             @if index($browsers-prefixes, ms) {
-                -ms-flex-item-align: end;
+                -ms-flex-item-align: end#{$important};
             }
         } @else {
             @if index($browsers-prefixes, webkit) {
-                -webkit-flex-item-align: $value;
+                -webkit-flex-item-align: $value#{$important};
             }
             @if index($browsers-prefixes, moz) {
-                -moz-flex-item-align: $value;
+                -moz-flex-item-align: $value#{$important};
             }
             @if index($browsers-prefixes, ms) {
-                -ms-flex-item-align: $value;
+                -ms-flex-item-align: $value#{$important};
             }
         }
     }

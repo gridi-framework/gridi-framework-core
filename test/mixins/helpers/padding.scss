@@ -117,6 +117,112 @@
         }
     }
 
+    @include test('Test Mixin - padding-shorthand - test map value with all the same paddings values | important') {
+        @include assert {
+            @include output {
+                @include padding-shorthand((
+                    top: 20px,
+                    bottom: 20px,
+                    left: 20px,
+                    right: 20px,
+                    important: true
+                ));
+            }
+        
+            @include expect {
+                padding: 20px !important;
+            }
+        }
+    }
+
+    @include test('Test Mixin - padding-shorthand - test map value with all the same vertical and horizontal paddings values | important') {
+        @include assert {
+            @include output {
+                @include padding-shorthand((
+                    top: 10px,
+                    bottom: 10px,
+                    left: 20px,
+                    right: 20px,
+                    important: true
+                ));
+            }
+        
+            @include expect {
+                padding: 10px 20px !important;
+            }
+        }
+    }
+
+    @include test('Test Mixin - padding-shorthand - test map value with different vertical and the same horizontal paddings values | important') {
+        @include assert {
+            @include output {
+                @include padding-shorthand((
+                    top: 10px,
+                    bottom: 30px,
+                    left: 20px,
+                    right: 20px,
+                    important: true
+                ));
+            }
+        
+            @include expect {
+                padding: 10px 20px 30px !important;
+            }
+        }
+    }
+
+    @include test('Test Mixin - padding-shorthand - test map value with different paddings values | important') {
+        @include assert {
+            @include output {
+                @include padding-shorthand((
+                    top: 10px,
+                    bottom: 20px,
+                    left: 30px,
+                    right: 40px,
+                    important: true
+                ));
+            }
+        
+            @include expect {
+                padding: 10px 40px 20px 30px !important;
+            }
+        }
+    }
+
+    @include test('Test Mixin - padding-shorthand - test map value with include only vertical paddings values | important') {
+        @include assert {
+            @include output {
+                @include padding-shorthand((
+                    top: 10px,
+                    bottom: 10px,
+                    important: true
+                ));
+            }
+        
+            @include expect {
+                padding-top: 10px !important;
+                padding-bottom: 10px !important;
+            }
+        }
+    }
+
+    @include test('Test Mixin - padding-shorthand - test map value with include only horizontal paddings values | important') {
+        @include assert {
+            @include output {
+                @include padding-shorthand((
+                    right: 10px,
+                    left: 10px,
+                    important: true
+                ));
+            }
+        
+            @include expect {
+                padding-left: 10px !important;
+                padding-right: 10px !important;
+            }
+        }
+    }
+
     @include test('Test Mixin - padding-shorthand-with-screens-support') {
         @include assert {
             @include output {

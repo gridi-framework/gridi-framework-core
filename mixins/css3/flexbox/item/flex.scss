@@ -14,21 +14,27 @@
         @if type-of($flex-grow) == 'list' {
             $flex-grow-boxflex: nth($flex-grow, 1);
         }
+
+        $important: '';
+
+        @if true == map-get($settings, important) {
+            $important: ' !important';
+        }
         
         @if index($browsers-prefixes, webkit) {
-            -webkit-box: $flex-grow-boxflex;
+            -webkit-box: $flex-grow-boxflex#{$important};
         }
         @if index($browsers-prefixes, moz) {
-            -moz-box: $flex-grow-boxflex;
+            -moz-box: $flex-grow-boxflex#{$important};
         }
         @if index($browsers-prefixes, webkit) {
-            -webkit-flexbox: $flex-grow $flex-shrink $flex-basis;
+            -webkit-flexbox: $flex-grow $flex-shrink $flex-basis#{$important};
         }
         @if index($browsers-prefixes, moz) {
-            -moz-flexbox: $flex-grow $flex-shrink $flex-basis;
+            -moz-flexbox: $flex-grow $flex-shrink $flex-basis#{$important};
         }
         @if index($browsers-prefixes, ms) {
-            -ms-flexbox: $flex-grow $flex-shrink $flex-basis;
+            -ms-flexbox: $flex-grow $flex-shrink $flex-basis#{$important};
         }
     }
     @include property-with-browsers-prefixes(flex, $flex-grow $flex-shrink $flex-basis, $settings);

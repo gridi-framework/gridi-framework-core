@@ -33,6 +33,23 @@
         }
     }
 
+    @include test('Test Mixin - _create_border_property - test map value | important') {
+        @include assert {
+            @include output {
+                @include _create_border_property(border, (
+                    width: 2px,
+                    style: solid,
+                    color: black,
+                    important: true
+                ));
+            }
+        
+            @include expect {
+                border: 2px solid black !important;
+            }
+        }
+    }
+
     @include test('Test Mixin - _create_border_property - test map value with only width') {
         @include assert {
             @include output {
@@ -59,6 +76,38 @@
             @include expect {
                 border-style: solid;
                 border-color: black;
+            }
+        }
+    }
+
+    @include test('Test Mixin - _create_border_property - test map value with only width | important') {
+        @include assert {
+            @include output {
+                @include _create_border_property(border, (
+                    width: 2px,
+                    important: true
+                ));
+            }
+        
+            @include expect {
+                border-width: 2px !important;
+            }
+        }
+    }
+
+    @include test('Test Mixin - _create_border_property - test map value with only style and color | important') {
+        @include assert {
+            @include output {
+                @include _create_border_property(border, (
+                    style: solid,
+                    color: black,
+                    important: true
+                ));
+            }
+        
+            @include expect {
+                border-style: solid !important;
+                border-color: black !important;
             }
         }
     }

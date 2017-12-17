@@ -7,11 +7,18 @@
 
     @if map-get($settings, support-old-browsers) and map-get($settings, use-prefixes) {
         $browsers-prefixes: map-get($settings, browsers-prefixes);
+
+        $important: '';
+
+        @if true == map-get($settings, important) {
+            $important: ' !important';
+        }
+
         @if index($browsers-prefixes, webkit) {
-            -webkit-box-flex: $int;
+            -webkit-box-flex: $int#{$important};
         }
         @if index($browsers-prefixes, moz) {
-            -moz-box-flex: $int;
+            -moz-box-flex: $int#{$important};
         }
     }
     @include property-with-browsers-prefixes(flex-grow, $int, $settings);

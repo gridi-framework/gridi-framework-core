@@ -7,72 +7,78 @@
 
     @if map-get($settings, support-old-browsers) and map-get($settings, use-prefixes) {
         $browsers-prefixes: map-get($settings, browsers-prefixes);
+
+        $important: '';
+
+        @if true == map-get($settings, important) {
+            $important: ' !important';
+        }
         
         @if $value == flex-start{
             @if index($browsers-prefixes, webkit) {
-                -webkit-box-pack: start;
+                -webkit-box-pack: start#{$important};
             }
             @if index($browsers-prefixes, moz) {
-                -moz-box-pack: start;
+                -moz-box-pack: start#{$important};
             }
             @if index($browsers-prefixes, webkit) {
-                -webkit-flex-pack: start;
+                -webkit-flex-pack: start#{$important};
             }
             @if index($browsers-prefixes, moz) {
-                -moz-flex-pack: start;
+                -moz-flex-pack: start#{$important};
             }
             @if index($browsers-prefixes, ms) {
-                -ms-flex-pack: start;
+                -ms-flex-pack: start#{$important};
             }
         } @else if $value == flex-end {
             @if index($browsers-prefixes, webkit) {
-                -webkit-box-pack: end;
+                -webkit-box-pack: end#{$important};
             }
             @if index($browsers-prefixes, moz) {
-                -moz-box-pack: end;
+                -moz-box-pack: end#{$important};
             }
             @if index($browsers-prefixes, webkit) {
-                -webkit-flex-pack: end;
+                -webkit-flex-pack: end#{$important};
             }
             @if index($browsers-prefixes, moz) {
-                -moz-flex-pack: end;
+                -moz-flex-pack: end#{$important};
             }
             @if index($browsers-prefixes, ms) {
-                -ms-flex-pack: end;
+                -ms-flex-pack: end#{$important};
             }
         } @else if $value == space-between {
             @if index($browsers-prefixes, webkit) {
-                -webkit-box-pack: justify;
+                -webkit-box-pack: justify#{$important};
             }
             @if index($browsers-prefixes, moz) {
-                -moz-box-pack: justify;
+                -moz-box-pack: justify#{$important};
             }
             @if index($browsers-prefixes, webkit) {
-                -webkit-flex-pack: justify;
+                -webkit-flex-pack: justify#{$important};
             }
             @if index($browsers-prefixes, moz) {
-                -moz-flex-pack: justify;
+                -moz-flex-pack: justify#{$important};
             }
             @if index($browsers-prefixes, ms) {
-                -ms-flex-pack: justify;
+                -ms-flex-pack: justify#{$important};
             }
         } @else if $value == space-around {
-            -ms-flex-pack: distribute;
+            -ms-flex-pack: distribute#{$important};
         } @else {
             @if index($browsers-prefixes, webkit) {
-                -webkit-box-pack: $value;
+                -webkit-box-pack: $value#{$important};
             }
             @if index($browsers-prefixes, moz) {
-                -moz-box-pack: $value;
+                -moz-box-pack: $value#{$important};
             }
             @if index($browsers-prefixes, webkit) {
-                -webkit-flex-pack: $value;
+                -webkit-flex-pack: $value#{$important};
             }
             @if index($browsers-prefixes, moz) {
-                -moz-flex-pack: $value;
+                -moz-flex-pack: $value#{$important};
             }
             @if index($browsers-prefixes, ms) {
-                -ms-flex-pack: $value;
+                -ms-flex-pack: $value#{$important};
             }
         }
     }

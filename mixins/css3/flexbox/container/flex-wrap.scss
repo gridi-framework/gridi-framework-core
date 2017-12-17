@@ -1,7 +1,13 @@
 @mixin flex-wrap-old-browser($value, $browsers-prefixes: $css3-flexbox-browsers-prefixes) {
+    $important: '';
+
+    @if true == map-get($settings, important) {
+        $important: ' !important';
+    }
+
     @if $value == nowrap {
         @if index($browsers-prefixes, ms) {
-            -ms-flex-wrap: none;
+            -ms-flex-wrap: none#{$important};
         }
     }
 }

@@ -40,6 +40,28 @@
         }
     }
 
+    @include test('Test Mixin - animation-shorthand - test map value | important') {
+        @include assert {
+            @include output {
+                @include animation-shorthand((
+                    name: mymove,
+                    duration: 0.3s,
+                    timing-function: ease,
+                    delay: 0.2s,
+                    iteration-count: 3,
+                    direction: normal,
+                    fill-mode: forwards,
+                    play-state: running,
+                    important: true
+                ));
+            }
+        
+            @include expect {
+                animation: mymove 0.3s ease 0.2s 3 normal forwards running !important;
+            }
+        }
+    }
+
     @include test('Test Mixin - animation-shorthand - test map value with make-shorthand set to true') {
         @include assert {
             @include output {
@@ -101,6 +123,36 @@
                 animation-direction: normal;
                 animation-fill-mode: forwards;
                 animation-play-state: running;
+            }
+        }
+    }
+
+    @include test('Test Mixin - animation-shorthand - test map value with make-shorthand set to false and set all values | important') {
+        @include assert {
+            @include output {
+                @include animation-shorthand((
+                    name: mymove,
+                    duration: 0.3s,
+                    timing-function: ease,
+                    delay: 0.2s,
+                    iteration-count: 3,
+                    direction: normal,
+                    fill-mode: forwards,
+                    play-state: running,
+                    make-shorthand: false,
+                    important: true
+                ));
+            }
+        
+            @include expect {
+                animation-name: mymove !important;
+                animation-duration: 0.3s !important;
+                animation-timing-function: ease !important;
+                animation-delay: 0.2s !important;
+                animation-iteration-count: 3 !important;
+                animation-direction: normal !important;
+                animation-fill-mode: forwards !important;
+                animation-play-state: running !important;
             }
         }
     }

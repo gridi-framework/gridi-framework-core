@@ -30,6 +30,12 @@
         $border-color: map-get($border-values, color);
         $border-make-shorthand: map-get($border-values, make-shorthand);
 
+        $important: '';
+
+        @if true == map-get($border-values, important) {
+            $important: ' !important';
+        }
+
         @if (
             true == $border-make-shorthand or (
                 null == $border-make-shorthand
@@ -40,18 +46,18 @@
                 and $border-color
                 and $border-color != $parent-border-color
         )) {
-            #{$border-property}: $border-width $border-style $border-color;
+            #{$border-property}: $border-width $border-style $border-color#{$important};
         } @else {
             @if $border-width and $border-width != $parent-border-width {
-                #{$border-property}-width: $border-width;
+                #{$border-property}-width: $border-width#{$important};
             }
 
             @if $border-style and $border-style != $parent-border-style {
-                #{$border-property}-style: $border-style;
+                #{$border-property}-style: $border-style#{$important};
             }
 
             @if $border-color and $border-color != $parent-border-color {
-                #{$border-property}-color: $border-color;
+                #{$border-property}-color: $border-color#{$important};
             }
         }
     } @else if $border-values and length($border-values) > 0 {

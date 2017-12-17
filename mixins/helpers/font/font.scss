@@ -48,6 +48,12 @@
         $font-family: map-get($font, family);
         $font-make-shorthand: map-get($font, make-shorthand);
 
+        $important: '';
+
+        @if true == map-get($font, important) {
+            $important: ' !important';
+        }
+
         @if true == $font-make-shorthand or (null == $font-make-shorthand and $font-style and $font-variant and $font-weight and $font-size and $line-height and $font-family) {
             $value: $font-style $font-variant $font-weight;
 
@@ -59,30 +65,30 @@
 
             $value: $value #{$font-family};
             
-            font: $value;
+            font: $value#{$important};
         } @else {
             @if $font-style {
-                font-style: $font-style;
+                font-style: $font-style#{$important};
             }
 
             @if $font-variant {
-                font-variant: $font-variant;
+                font-variant: $font-variant#{$important};
             }
 
             @if $font-weight {
-                font-weight: $font-weight;
+                font-weight: $font-weight#{$important};
             }
 
             @if $font-size {
-                font-size: $font-size;
+                font-size: $font-size#{$important};
             }
 
             @if $line-height {
-                line-height: $line-height;
+                line-height: $line-height#{$important};
             }
 
             @if $font-family {
-                font-family: #{$font-family};
+                font-family: #{$font-family}#{$important};
             }
         }
     } @else if $font and length($font) > 0 {
