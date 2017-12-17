@@ -1,7 +1,7 @@
-@mixin flex-direction-old-browser($value, $browsers-prefixes: $css3-flexbox-browsers-prefixes) {
+@mixin flex-direction-old-browser($value, $browsers-prefixes: $css3-flexbox-browsers-prefixes, $is-important: false) {
     $important: '';
 
-    @if true == map-get($settings, important) {
+    @if true == $is-important {
         $important: ' !important';
     }
 
@@ -52,7 +52,7 @@
     ), $settings);
 
     @if map-get($settings, support-old-browsers) and map-get($settings, use-prefixes) {
-        @include flex-direction-old-browser($value, map-get($settings, browsers-prefixes));
+        @include flex-direction-old-browser($value, map-get($settings, browsers-prefixes), map-get($settings, important));
     }
     @include property-with-browsers-prefixes(flex-direction, $value, $settings);
 }
